@@ -9,6 +9,7 @@
     "upgrade:tamagui": "$npm_execpath up '*tamagui*' '@tamagui/*'"
   },
   "dependencies": {
+    "@shopify/flash-list": "1.4.3",
     "@tamagui/animations-react-native": "^1.49.10",
     "@tamagui/babel-plugin": "^1.49.10",
     "@tamagui/config": "^1.49.10",

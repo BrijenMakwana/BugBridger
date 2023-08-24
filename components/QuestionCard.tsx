@@ -68,6 +68,7 @@ const QuestionCard = (props) => {
     <Card
       padding={20}
       gap={12}
+      marginVertical={10}
       animation="bouncy"
       scale={0.9}
       hoverStyle={{ scale: 0.925 }}
