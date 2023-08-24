@@ -25,6 +25,7 @@ const SearchBar = () => {
         size="$4"
         backgroundColor="$green10Dark"
         marginLeft={10}
+        animation="bouncy"
       >
         Search
       </Button>
