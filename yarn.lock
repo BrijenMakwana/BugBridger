@@ -6279,6 +6279,7 @@ __metadata:
     expo-router: 2.0.0
     expo-splash-screen: ~0.20.5
     expo-status-bar: ~1.6.0
+    html-entities: ^2.4.0
     moment: ^2.29.4
     prettier: ^2.8.3
     react: 18.2.0
@@ -9408,6 +9409,13 @@ __metadata:
   dependencies:
     lru-cache: ^7.5.1
   checksum: fa35df185224adfd69141f3b2f8cc31f50e705a5ebb415ccfbfd055c5b94bd08d3e658edf1edad9e2ac7d81831ac7cf261f5d219b3adc8d744fb8cdacaaf2ead
+  languageName: node
+  linkType: hard
+
+"html-entities@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "html-entities@npm:2.4.0"
+  checksum: 25bea32642ce9ebd0eedc4d24381883ecb0335ccb8ac26379a0958b9b16652fdbaa725d70207ce54a51db24103436a698a8e454397d3ba8ad81460224751f1dc
   languageName: node
   linkType: hard
 

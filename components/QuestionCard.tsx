@@ -1,4 +1,5 @@
-import { Check, Eye, ThumbsUp } from "@tamagui/lucide-icons";
+import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
+import { decode } from "html-entities";
 import moment from "moment";
 import {
   Avatar,
@@ -12,6 +13,28 @@ import {
 } from "tamagui";
 
 import Tag from "./Tag";
+
+const IsAnswered = () => {
+  return (
+    <XStack
+      alignItems="center"
+      marginBottom={10}
+    >
+      <Verified
+        color="$green10Dark"
+        size="$3"
+      />
+      <Text
+        fontSize="$5"
+        fontWeight="bold"
+        color="$green10Dark"
+        marginLeft={10}
+      >
+        Answered
+      </Text>
+    </XStack>
+  );
+};
 
 const CustomListItem = (props) => {
   const { title, icon, count } = props;
@@ -68,34 +91,37 @@ const User = (props) => {
 
 const QuestionCard = (props) => {
   const {
-    question,
-    questionBody,
+    title,
+    is_answered,
+    body_markdown,
     tags,
-    voteCount,
-    answerCount,
-    viewCount,
-    username,
-    userAvatar,
-    creationDate
+    score,
+    view_count,
+    answer_count,
+    owner,
+    creation_date
   } = props;
   return (
     <Card
       padding={20}
+      width="98%"
       alignSelf="center"
       gap={12}
       marginVertical={10}
       animation="bouncy"
-      pressStyle={{ scale: 0.99, backgroundColor: "$green10Dark" }}
+      pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
     >
       <Card.Header padding={0}>
-        <H5>{question}</H5>
+        {is_answered && <IsAnswered />}
+        <H5>{title}</H5>
+
         <Text
           numberOfLines={5}
           fontSize="$4"
           color="$gray11Dark"
           marginTop={20}
         >
-          {questionBody}
+          {decode(body_markdown)}
         </Text>
       </Card.Header>
 
@@ -115,29 +141,29 @@ const QuestionCard = (props) => {
       >
         <CustomListItem
           title="Votes"
-          icon={ThumbsUp}
-          count={voteCount}
+          icon={TrendingUp}
+          count={score}
         />
         <CustomListItem
           title="Answers"
           icon={Check}
-          count={answerCount}
+          count={answer_count}
         />
         <CustomListItem
           title="Views"
           icon={Eye}
-          count={viewCount}
+          count={view_count}
         />
       </YGroup>
 
       <Card.Footer>
         <User
-          username={username}
-          userAvatar={userAvatar}
-          creation_date={creationDate}
+          username={owner?.display_name}
+          userAvatar={owner?.profile_image}
+          creation_date={creation_date}
         />
       </Card.Footer>
-      <Card.Background />
+      <Card.Background></Card.Background>
     </Card>
   );
 };
