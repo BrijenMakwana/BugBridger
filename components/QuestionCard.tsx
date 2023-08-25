@@ -1,4 +1,5 @@
 import { Check, Eye, ThumbsUp } from "@tamagui/lucide-icons";
+import moment from "moment";
 import {
   Avatar,
   Card,
@@ -29,17 +30,20 @@ const CustomListItem = (props) => {
 };
 
 const User = (props) => {
-  const { username } = props;
+  const { username, userAvatar, creationDate } = props;
   return (
     <XStack
       alignItems="center"
+      justifyContent="flex-end"
       gap={10}
+      flex={1}
+      flexWrap="wrap"
     >
       <Avatar
         circular
         size="$2"
       >
-        <Avatar.Image src="http://placekitten.com/200/300" />
+        <Avatar.Image src={userAvatar} />
         <Avatar.Fallback bc="$green10Dark" />
       </Avatar>
 
@@ -56,26 +60,43 @@ const User = (props) => {
         color="$gray11Dark"
         fontWeight="500"
       >
-        asked on 27 Jun, 2023
+        asked on {moment(creationDate).format("ll")}
       </Text>
     </XStack>
   );
 };
 
 const QuestionCard = (props) => {
-  const { question, tags, voteCount, answerCount, viewCount, username } = props;
+  const {
+    question,
+    questionBody,
+    tags,
+    voteCount,
+    answerCount,
+    viewCount,
+    username,
+    userAvatar,
+    creationDate
+  } = props;
   return (
     <Card
       padding={20}
+      alignSelf="center"
       gap={12}
       marginVertical={10}
       animation="bouncy"
-      scale={0.9}
-      hoverStyle={{ scale: 0.925 }}
-      pressStyle={{ scale: 0.875, backgroundColor: "$green10Dark" }}
+      pressStyle={{ scale: 0.99, backgroundColor: "$green10Dark" }}
     >
       <Card.Header padding={0}>
         <H5>{question}</H5>
+        <Text
+          numberOfLines={5}
+          fontSize="$4"
+          color="$gray11Dark"
+          marginTop={20}
+        >
+          {questionBody}
+        </Text>
       </Card.Header>
 
       <XStack
@@ -109,8 +130,12 @@ const QuestionCard = (props) => {
         />
       </YGroup>
 
-      <Card.Footer alignSelf="flex-end">
-        <User username={username} />
+      <Card.Footer>
+        <User
+          username={username}
+          userAvatar={userAvatar}
+          creation_date={creationDate}
+        />
       </Card.Footer>
       <Card.Background />
     </Card>

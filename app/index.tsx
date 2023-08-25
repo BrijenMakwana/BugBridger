@@ -17,7 +17,7 @@ export default function Home() {
     setIsSearching(true);
     try {
       const response = await axios.get(
-        `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&q=${searchQuestion}&site=stackoverflow`
+        `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&q=${searchQuestion}&site=stackoverflow&filter=!nNPvSNPI7A`
       );
 
       setQuestions(response.data.items);
@@ -47,11 +47,14 @@ export default function Home() {
         renderItem={({ item }) => (
           <QuestionCard
             question={item.title}
+            questionBody={item.body}
             tags={item.tags}
             voteCount={item.score}
             answerCount={item.answer_count}
             viewCount={item.view_count}
             username={item.owner.display_name}
+            userAvatar={item.owner.profile_image}
+            creationDate={item.creation_date}
           />
         )}
         estimatedItemSize={200}
