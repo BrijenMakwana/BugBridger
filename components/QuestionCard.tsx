@@ -140,9 +140,9 @@ const QuestionCard = (props) => {
         marginTop={10}
       >
         <CustomListItem
-          title="Votes"
-          icon={TrendingUp}
-          count={score}
+          title="Views"
+          icon={Eye}
+          count={view_count}
         />
         <CustomListItem
           title="Answers"
@@ -150,9 +150,9 @@ const QuestionCard = (props) => {
           count={answer_count}
         />
         <CustomListItem
-          title="Views"
-          icon={Eye}
-          count={view_count}
+          title="Votes"
+          icon={TrendingUp}
+          count={score}
         />
       </YGroup>
 
