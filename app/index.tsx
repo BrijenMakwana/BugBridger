@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { RefreshControl } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { FlatList, RefreshControl } from "react-native";
 import axios from "axios";
 
 import { MyStack } from "../components/MyStack";
@@ -50,10 +49,15 @@ export default function Home() {
         onClear={clearSearch}
       />
 
-      <FlashList
+      <FlatList
         data={questions}
-        renderItem={({ item }) => <QuestionCard {...item} />}
-        estimatedItemSize={200}
+        renderItem={({ item }) => (
+          <QuestionCard
+            {...item}
+            isBody
+          />
+        )}
+        keyExtractor={(item) => item.question_id}
         refreshControl={
           <RefreshControl
             refreshing={isSearching}

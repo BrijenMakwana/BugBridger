@@ -101,7 +101,8 @@ const QuestionCard = (props) => {
     view_count,
     answer_count,
     owner,
-    creation_date
+    creation_date,
+    isBody = false
   } = props;
   return (
     <Link
@@ -125,14 +126,16 @@ const QuestionCard = (props) => {
           {is_answered && <IsAnswered />}
           <H5>{decode(title)}</H5>
 
-          <Text
-            numberOfLines={5}
-            fontSize="$4"
-            color="$gray11Dark"
-            marginTop={20}
-          >
-            {decode(body_markdown)}
-          </Text>
+          {isBody && (
+            <Text
+              numberOfLines={5}
+              fontSize="$4"
+              color="$gray11Dark"
+              marginTop={20}
+            >
+              {decode(body_markdown)}
+            </Text>
+          )}
         </Card.Header>
 
         <XStack
