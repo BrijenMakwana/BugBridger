@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FlatList, RefreshControl } from "react-native";
+import { RefreshControl } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import axios from "axios";
 
 import { MyStack } from "../components/MyStack";
@@ -22,7 +23,8 @@ export default function Home() {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!nNPvSNP4(R"
+            filter: "!nNPvSNP4(R",
+            key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
       );
@@ -49,7 +51,7 @@ export default function Home() {
         onClear={clearSearch}
       />
 
-      <FlatList
+      <FlashList
         data={questions}
         renderItem={({ item }) => (
           <QuestionCard
@@ -57,7 +59,7 @@ export default function Home() {
             isBody
           />
         )}
-        keyExtractor={(item) => item.question_id}
+        estimatedItemSize={50}
         refreshControl={
           <RefreshControl
             refreshing={isSearching}
