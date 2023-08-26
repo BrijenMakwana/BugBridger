@@ -2,7 +2,6 @@ import { useState } from "react";
 import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import axios from "axios";
-import { Redirect, useRouter } from "expo-router";
 
 import { MyStack } from "../components/MyStack";
 import QuestionCard from "../components/QuestionCard";
@@ -17,7 +16,16 @@ export default function Home() {
     setIsSearching(true);
     try {
       const response = await axios.get(
-        `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&q=${searchQuestion}&site=stackoverflow&filter=!nNPvSNP4(R`
+        "https://api.stackexchange.com/2.3/search/advanced",
+        {
+          params: {
+            q: searchQuestion,
+            order: "desc",
+            sort: "activity",
+            site: "stackoverflow",
+            filter: "!nNPvSNP4(R"
+          }
+        }
       );
 
       setQuestions(response.data.items);

@@ -1,4 +1,5 @@
 import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
+import { Link } from "expo-router";
 import { decode } from "html-entities";
 import moment from "moment";
 import {
@@ -91,6 +92,7 @@ const User = (props) => {
 
 const QuestionCard = (props) => {
   const {
+    question_id,
     title,
     is_answered,
     body_markdown,
@@ -102,69 +104,78 @@ const QuestionCard = (props) => {
     creation_date
   } = props;
   return (
-    <Card
-      padding={20}
-      width="98%"
-      alignSelf="center"
-      gap={12}
-      marginVertical={10}
-      animation="bouncy"
-      pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
+    <Link
+      href={`/question/${question_id}`}
+      asChild
     >
-      <Card.Header padding={0}>
-        {is_answered && <IsAnswered />}
-        <H5>{title}</H5>
+      <Card
+        padding={20}
+        width="98%"
+        alignSelf="center"
+        gap={12}
+        marginVertical={10}
+        animation="bouncy"
+        pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
+        enterStyle={{
+          scale: 0.5,
+          opacity: 0
+        }}
+      >
+        <Card.Header padding={0}>
+          {is_answered && <IsAnswered />}
+          <H5>{decode(title)}</H5>
 
-        <Text
-          numberOfLines={5}
-          fontSize="$4"
-          color="$gray11Dark"
-          marginTop={20}
+          <Text
+            numberOfLines={5}
+            fontSize="$4"
+            color="$gray11Dark"
+            marginTop={20}
+          >
+            {decode(body_markdown)}
+          </Text>
+        </Card.Header>
+
+        <XStack
+          flexWrap="wrap"
+          gap={8}
         >
-          {decode(body_markdown)}
-        </Text>
-      </Card.Header>
+          {tags?.map((item, index) => (
+            <Tag key={index}>{item}</Tag>
+          ))}
+        </XStack>
 
-      <XStack
-        flexWrap="wrap"
-        gap={8}
-      >
-        {tags?.map((item, index) => (
-          <Tag key={index}>{item}</Tag>
-        ))}
-      </XStack>
+        <YGroup
+          bordered
+          separator={<Separator />}
+          marginTop={10}
+        >
+          <CustomListItem
+            title="Views"
+            icon={Eye}
+            count={view_count}
+          />
+          <CustomListItem
+            title="Answers"
+            icon={Check}
+            count={answer_count}
+          />
+          <CustomListItem
+            title="Votes"
+            icon={TrendingUp}
+            count={score}
+          />
+        </YGroup>
 
-      <YGroup
-        bordered
-        separator={<Separator />}
-        marginTop={10}
-      >
-        <CustomListItem
-          title="Views"
-          icon={Eye}
-          count={view_count}
-        />
-        <CustomListItem
-          title="Answers"
-          icon={Check}
-          count={answer_count}
-        />
-        <CustomListItem
-          title="Votes"
-          icon={TrendingUp}
-          count={score}
-        />
-      </YGroup>
-
-      <Card.Footer>
-        <User
-          username={owner?.display_name}
-          userAvatar={owner?.profile_image}
-          creation_date={creation_date}
-        />
-      </Card.Footer>
-      <Card.Background></Card.Background>
-    </Card>
+        <Card.Footer>
+          <User
+            username={owner?.display_name}
+            userAvatar={owner?.profile_image}
+            creation_date={creation_date}
+          />
+        </Card.Footer>
+        <Card.Background></Card.Background>
+      </Card>
+    </Link>
   );
 };
 
