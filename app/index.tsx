@@ -22,7 +22,8 @@ export default function Home() {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!nNPvSNP4(R"
+            filter: "!nNPvSNP4(R",
+            key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
       );
