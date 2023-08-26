@@ -21,6 +21,7 @@ const SearchBar = (props) => {
         }}
         value={searchQuestion}
         onChangeText={(text) => setSearchQuestion(text)}
+        onSubmitEditing={onPress}
       />
 
       {searchQuestion && (
@@ -32,6 +33,10 @@ const SearchBar = (props) => {
             marginLeft={10}
             animation="bouncy"
             onPress={onClear}
+            enterStyle={{
+              scale: 0.5,
+              opacity: 0
+            }}
           />
           <Button
             icon={Search}
@@ -40,6 +45,10 @@ const SearchBar = (props) => {
             marginLeft={10}
             animation="bouncy"
             onPress={onPress}
+            enterStyle={{
+              scale: 0.5,
+              opacity: 0
+            }}
           />
         </>
       )}

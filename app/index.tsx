@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { RefreshControl } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { FlatList, RefreshControl } from "react-native";
 import axios from "axios";
-import { Redirect, useRouter } from "expo-router";
 
 import { MyStack } from "../components/MyStack";
 import QuestionCard from "../components/QuestionCard";
@@ -17,7 +15,16 @@ export default function Home() {
     setIsSearching(true);
     try {
       const response = await axios.get(
-        `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&q=${searchQuestion}&site=stackoverflow&filter=!nNPvSNP4(R`
+        "https://api.stackexchange.com/2.3/search/advanced",
+        {
+          params: {
+            q: searchQuestion,
+            order: "desc",
+            sort: "activity",
+            site: "stackoverflow",
+            filter: "!nNPvSNP4(R"
+          }
+        }
       );
 
       setQuestions(response.data.items);
@@ -42,10 +49,15 @@ export default function Home() {
         onClear={clearSearch}
       />
 
-      <FlashList
+      <FlatList
         data={questions}
-        renderItem={({ item }) => <QuestionCard {...item} />}
-        estimatedItemSize={200}
+        renderItem={({ item }) => (
+          <QuestionCard
+            {...item}
+            isBody
+          />
+        )}
+        keyExtractor={(item) => item.question_id}
         refreshControl={
           <RefreshControl
             refreshing={isSearching}
