@@ -21,16 +21,14 @@ import PostCreationInfo from "../../components/PostCreationInfo";
 import QuestionCard from "../../components/QuestionCard";
 
 const Answers = (props) => {
-  const { answers } = props;
-
-  if (answers?.length === 0) return;
+  const { answers, answerCount } = props;
 
   return (
     <YStack
       marginTop={10}
       padding={15}
     >
-      <H3 color="$green10Dark">Answers</H3>
+      <H3 color="$green10Dark">{answerCount} Answers</H3>
 
       <Accordion
         overflow="hidden"
@@ -167,7 +165,10 @@ const Question = () => {
 
       <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
 
-      <Answers answers={answers} />
+      <Answers
+        answers={answers}
+        answerCount={question?.answer_count}
+      />
     </MyScroll>
   );
 };
