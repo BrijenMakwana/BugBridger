@@ -135,12 +135,7 @@ const QuestionCard = (props) => {
           />
         </Card.Footer>
 
-        {isExternal && (
-          <ExternalButton
-            link={link}
-            type="Question"
-          />
-        )}
+        {isExternal && <ExternalButton link={link} />}
       </Card>
     </Link>
   );

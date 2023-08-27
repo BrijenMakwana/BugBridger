@@ -3,7 +3,7 @@ import moment from "moment";
 import { Avatar, Text, XStack } from "tamagui";
 
 const PostCreationInfo = (props) => {
-  const { type, display_name, profile_image, creationDate } = props;
+  const { user_id, type, display_name, profile_image, creationDate } = props;
 
   return (
     <XStack

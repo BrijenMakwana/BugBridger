@@ -97,10 +97,7 @@ const Answer = (props) => {
             creation_date={creation_date}
             {...owner}
           />
-          <ExternalButton
-            link={link}
-            type="Answer"
-          />
+          <ExternalButton link={link} />
         </YStack>
       </Accordion.Content>
     </Accordion.Item>
