@@ -130,9 +130,8 @@ const QuestionCard = (props) => {
         <Card.Footer>
           <PostCreationInfo
             type="question"
-            username={owner?.display_name}
-            userAvatar={owner?.profile_image}
             creation_date={creation_date}
+            {...owner}
           />
         </Card.Footer>
 

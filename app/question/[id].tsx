@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ChevronDown, ExternalLink, Verified } from "@tamagui/lucide-icons";
+import { ChevronDown, Verified } from "@tamagui/lucide-icons";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import {
   Accordion,
-  Button,
   H3,
   Paragraph,
   Square,
@@ -28,7 +27,9 @@ const Answers = (props) => {
       marginTop={10}
       padding={15}
     >
-      <H3 color="$green10Dark">{answerCount} Answers</H3>
+      <H3 color="$green10Dark">
+        {answerCount} {answerCount > 1 ? "Answers" : "Answer"}
+      </H3>
 
       <Accordion
         overflow="hidden"
@@ -93,9 +94,8 @@ const Answer = (props) => {
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
           <PostCreationInfo
             type="answer"
-            username={owner?.display_name}
-            userAvatar={owner?.profile_image}
             creation_date={creation_date}
+            {...owner}
           />
           <ExternalButton
             link={link}

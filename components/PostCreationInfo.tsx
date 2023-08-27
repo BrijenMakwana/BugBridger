@@ -3,7 +3,7 @@ import moment from "moment";
 import { Avatar, Text, XStack } from "tamagui";
 
 const PostCreationInfo = (props) => {
-  const { type, username, userAvatar, creationDate } = props;
+  const { type, display_name, profile_image, creationDate } = props;
 
   return (
     <XStack
@@ -17,7 +17,7 @@ const PostCreationInfo = (props) => {
         circular
         size="$2"
       >
-        <Avatar.Image src={userAvatar} />
+        <Avatar.Image src={profile_image} />
         <Avatar.Fallback bc="$green10Dark" />
       </Avatar>
 
@@ -26,7 +26,7 @@ const PostCreationInfo = (props) => {
         color="$green10Dark"
         fontWeight="500"
       >
-        {decode(username)}
+        {decode(display_name)}
       </Text>
 
       <Text
