@@ -1,18 +1,10 @@
 import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import moment from "moment";
-import {
-  Avatar,
-  Card,
-  H5,
-  ListItem,
-  Separator,
-  Text,
-  XStack,
-  YGroup
-} from "tamagui";
+import { Card, H5, ListItem, Separator, Text, XStack, YGroup } from "tamagui";
 
+import ExternalButton from "./ExternalButton";
+import PostCreationInfo from "./PostCreationInfo";
 import Tag from "./Tag";
 
 const IsAnswered = () => {
@@ -53,43 +45,6 @@ const CustomListItem = (props) => {
   );
 };
 
-const User = (props) => {
-  const { username, userAvatar, creationDate } = props;
-  return (
-    <XStack
-      alignItems="center"
-      justifyContent="flex-end"
-      gap={10}
-      flex={1}
-      flexWrap="wrap"
-    >
-      <Avatar
-        circular
-        size="$2"
-      >
-        <Avatar.Image src={userAvatar} />
-        <Avatar.Fallback bc="$green10Dark" />
-      </Avatar>
-
-      <Text
-        fontSize="$3"
-        color="$green10Dark"
-        fontWeight="500"
-      >
-        {username}
-      </Text>
-
-      <Text
-        fontSize="$2"
-        color="$gray11Dark"
-        fontWeight="500"
-      >
-        asked on {moment(creationDate).format("ll")}
-      </Text>
-    </XStack>
-  );
-};
-
 const QuestionCard = (props) => {
   const {
     question_id,
@@ -102,8 +57,11 @@ const QuestionCard = (props) => {
     answer_count,
     owner,
     creation_date,
-    isBody = false
+    link,
+    isBody = false,
+    isExternal = false
   } = props;
+
   return (
     <Link
       href={`/question/${question_id}`}
@@ -113,7 +71,7 @@ const QuestionCard = (props) => {
         padding={20}
         width="98%"
         alignSelf="center"
-        gap={12}
+        gap={13}
         marginVertical={10}
         animation="bouncy"
         pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
@@ -170,13 +128,20 @@ const QuestionCard = (props) => {
         </YGroup>
 
         <Card.Footer>
-          <User
+          <PostCreationInfo
+            type="question"
             username={owner?.display_name}
             userAvatar={owner?.profile_image}
             creation_date={creation_date}
           />
         </Card.Footer>
-        <Card.Background></Card.Background>
+
+        {isExternal && (
+          <ExternalButton
+            link={link}
+            type="Question"
+          />
+        )}
       </Card>
     </Link>
   );

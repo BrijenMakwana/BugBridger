@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import Markdown from "react-native-markdown-display";
-import { ArrowLeft, ChevronDown, Verified } from "@tamagui/lucide-icons";
+import { ChevronDown, ExternalLink, Verified } from "@tamagui/lucide-icons";
 import axios from "axios";
-import { router, useLocalSearchParams } from "expo-router";
-import { decode } from "html-entities";
+import { useLocalSearchParams } from "expo-router";
 import {
   Accordion,
   Button,
@@ -16,56 +13,43 @@ import {
   YStack
 } from "tamagui";
 
+import CustomMarkdown from "../../components/CustomMarkdown";
+import ExternalButton from "../../components/ExternalButton";
+import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
+import PostCreationInfo from "../../components/PostCreationInfo";
 import QuestionCard from "../../components/QuestionCard";
 
-const GoBack = () => {
-  const goBack = () => {
-    router.back();
-  };
-
-  return (
-    <Button
-      icon={ArrowLeft}
-      size="$4"
-      backgroundColor="$green10Dark"
-      animation="bouncy"
-      enterStyle={{
-        scale: 0.5,
-        opacity: 0
-      }}
-      marginBottom={10}
-      marginHorizontal={5}
-      onPress={goBack}
-    >
-      Go Back
-    </Button>
-  );
-};
-
 const Answers = (props) => {
-  const { answers } = props;
+  const { answers, answerCount } = props;
+
   return (
-    <Accordion
-      overflow="hidden"
-      type="multiple"
-      marginTop={20}
+    <YStack
+      marginTop={10}
+      padding={15}
     >
-      {answers?.map((item, index) => (
-        <Answer
-          index={index}
-          key={item.answer_id}
-          isAccepted={item.is_accepted}
-        >
-          <Markdown style={styles}>{decode(item.body_markdown)}</Markdown>
-        </Answer>
-      ))}
-    </Accordion>
+      <H3 color="$green10Dark">{answerCount} Answers</H3>
+
+      <Accordion
+        overflow="hidden"
+        type="multiple"
+        marginTop={20}
+      >
+        {answers?.map((item, index) => (
+          <Answer
+            index={index}
+            key={item.answer_id}
+            {...item}
+          />
+        ))}
+      </Accordion>
+    </YStack>
   );
 };
 
 const Answer = (props) => {
-  const { index, children, isAccepted } = props;
+  const { index, body_markdown, is_accepted, owner, creation_date, link } =
+    props;
   return (
     <Accordion.Item value={`answer${index}`}>
       <Accordion.Trigger
@@ -76,7 +60,7 @@ const Answer = (props) => {
           <>
             <XStack alignItems="center">
               <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
-              {isAccepted && (
+              {is_accepted && (
                 <>
                   <Verified color="$green10Dark" />
                   <Text
@@ -100,7 +84,25 @@ const Answer = (props) => {
           </>
         )}
       </Accordion.Trigger>
-      <Accordion.Content unstyled>{children}</Accordion.Content>
+      <Accordion.Content unstyled>
+        <YStack
+          padding={10}
+          gap={10}
+          marginBottom={10}
+        >
+          <CustomMarkdown>{body_markdown}</CustomMarkdown>
+          <PostCreationInfo
+            type="answer"
+            username={owner?.display_name}
+            userAvatar={owner?.profile_image}
+            creation_date={creation_date}
+          />
+          <ExternalButton
+            link={link}
+            type="Answer"
+          />
+        </YStack>
+      </Accordion.Content>
     </Accordion.Item>
   );
 };
@@ -124,7 +126,7 @@ const Question = () => {
           }
         }
       );
-
+      console.log(id);
       setQuestion(response.data.items[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -140,7 +142,7 @@ const Question = () => {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!nNPvSNe7Gv",
+            filter: "!6WPIomp-ebb*M",
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
@@ -160,29 +162,21 @@ const Question = () => {
     <MyScroll>
       <GoBack />
 
-      <QuestionCard {...question} />
+      <QuestionCard
+        {...question}
+        isExternal
+      />
 
-      <Markdown style={styles}>{decode(question.body_markdown)}</Markdown>
-
-      <YStack
-        marginTop={10}
-        padding={15}
-      >
-        <H3 color="$green10Dark">Answers</H3>
-        <Answers answers={answers} />
+      <YStack padding={15}>
+        <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
       </YStack>
+
+      <Answers
+        answers={answers}
+        answerCount={question?.answer_count}
+      />
     </MyScroll>
   );
 };
 
 export default Question;
-
-const styles = StyleSheet.create({
-  body: {
-    padding: 15
-  },
-  text: {
-    color: "#fff",
-    fontSize: 16
-  }
-});
