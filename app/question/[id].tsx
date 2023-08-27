@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ArrowLeft, ChevronDown, Verified } from "@tamagui/lucide-icons";
+import { ChevronDown, ExternalLink, Verified } from "@tamagui/lucide-icons";
 import axios from "axios";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import {
   Accordion,
   Button,
@@ -14,6 +14,7 @@ import {
 } from "tamagui";
 
 import CustomMarkdown from "../../components/CustomMarkdown";
+import ExternalButton from "../../components/ExternalButton";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import PostCreationInfo from "../../components/PostCreationInfo";
@@ -21,25 +22,36 @@ import QuestionCard from "../../components/QuestionCard";
 
 const Answers = (props) => {
   const { answers } = props;
+
+  if (answers?.length === 0) return;
+
   return (
-    <Accordion
-      overflow="hidden"
-      type="multiple"
-      marginTop={20}
+    <YStack
+      marginTop={10}
+      padding={15}
     >
-      {answers?.map((item, index) => (
-        <Answer
-          index={index}
-          key={item.answer_id}
-          {...item}
-        />
-      ))}
-    </Accordion>
+      <H3 color="$green10Dark">Answers</H3>
+
+      <Accordion
+        overflow="hidden"
+        type="multiple"
+        marginTop={20}
+      >
+        {answers?.map((item, index) => (
+          <Answer
+            index={index}
+            key={item.answer_id}
+            {...item}
+          />
+        ))}
+      </Accordion>
+    </YStack>
   );
 };
 
 const Answer = (props) => {
-  const { index, body_markdown, is_accepted, owner, creation_date } = props;
+  const { index, body_markdown, is_accepted, owner, creation_date, link } =
+    props;
   return (
     <Accordion.Item value={`answer${index}`}>
       <Accordion.Trigger
@@ -83,6 +95,10 @@ const Answer = (props) => {
             userAvatar={owner?.profile_image}
             creation_date={creation_date}
           />
+          <ExternalButton
+            link={link}
+            type="Answer"
+          />
         </YStack>
       </Accordion.Content>
     </Accordion.Item>
@@ -124,7 +140,7 @@ const Question = () => {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!nNPvSNe7Gv",
+            filter: "!6WPIomp-ebb*M",
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
@@ -144,17 +160,14 @@ const Question = () => {
     <MyScroll>
       <GoBack />
 
-      <QuestionCard {...question} />
+      <QuestionCard
+        {...question}
+        isExternal
+      />
 
       <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
 
-      <YStack
-        marginTop={10}
-        padding={15}
-      >
-        <H3 color="$green10Dark">Answers</H3>
-        <Answers answers={answers} />
-      </YStack>
+      <Answers answers={answers} />
     </MyScroll>
   );
 };

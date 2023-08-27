@@ -1,3 +1,4 @@
+import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Text, XStack } from "tamagui";
 
@@ -25,7 +26,7 @@ const PostCreationInfo = (props) => {
         color="$green10Dark"
         fontWeight="500"
       >
-        {username}
+        {decode(username)}
       </Text>
 
       <Text

@@ -10,7 +10,7 @@ const GoBack = () => {
   return (
     <Button
       icon={ArrowLeft}
-      backgroundColor="$green10Dark"
+      theme="green"
       animation="bouncy"
       enterStyle={{
         scale: 0.5,

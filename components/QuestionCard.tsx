@@ -3,6 +3,7 @@ import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H5, ListItem, Separator, Text, XStack, YGroup } from "tamagui";
 
+import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
 import Tag from "./Tag";
 
@@ -56,8 +57,11 @@ const QuestionCard = (props) => {
     answer_count,
     owner,
     creation_date,
-    isBody = false
+    link,
+    isBody = false,
+    isExternal = false
   } = props;
+
   return (
     <Link
       href={`/question/${question_id}`}
@@ -67,7 +71,7 @@ const QuestionCard = (props) => {
         padding={20}
         width="98%"
         alignSelf="center"
-        gap={12}
+        gap={13}
         marginVertical={10}
         animation="bouncy"
         pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
@@ -131,7 +135,13 @@ const QuestionCard = (props) => {
             creation_date={creation_date}
           />
         </Card.Footer>
-        <Card.Background></Card.Background>
+
+        {isExternal && (
+          <ExternalButton
+            link={link}
+            type="Question"
+          />
+        )}
       </Card>
     </Link>
   );
