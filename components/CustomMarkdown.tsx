@@ -9,9 +9,6 @@ const CustomMarkdown = ({ children }) => {
 export default CustomMarkdown;
 
 const styles = StyleSheet.create({
-  body: {
-    padding: 15
-  },
   text: {
     color: "#fff",
     fontSize: 16

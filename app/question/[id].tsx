@@ -85,7 +85,11 @@ const Answer = (props) => {
         )}
       </Accordion.Trigger>
       <Accordion.Content unstyled>
-        <YStack marginBottom={20}>
+        <YStack
+          padding={10}
+          gap={10}
+          marginBottom={10}
+        >
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
           <PostCreationInfo
             type="answer"
@@ -163,7 +167,9 @@ const Question = () => {
         isExternal
       />
 
-      <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
+      <YStack padding={15}>
+        <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
+      </YStack>
 
       <Answers
         answers={answers}
