@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import Markdown from "react-native-markdown-display";
 import { ArrowLeft, ChevronDown, Verified } from "@tamagui/lucide-icons";
 import axios from "axios";
 import { router, useLocalSearchParams } from "expo-router";
-import { decode } from "html-entities";
 import {
   Accordion,
   Button,
@@ -16,32 +13,11 @@ import {
   YStack
 } from "tamagui";
 
+import CustomMarkdown from "../../components/CustomMarkdown";
+import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
+import PostCreationInfo from "../../components/PostCreationInfo";
 import QuestionCard from "../../components/QuestionCard";
-
-const GoBack = () => {
-  const goBack = () => {
-    router.back();
-  };
-
-  return (
-    <Button
-      icon={ArrowLeft}
-      size="$4"
-      backgroundColor="$green10Dark"
-      animation="bouncy"
-      enterStyle={{
-        scale: 0.5,
-        opacity: 0
-      }}
-      marginBottom={10}
-      marginHorizontal={5}
-      onPress={goBack}
-    >
-      Go Back
-    </Button>
-  );
-};
 
 const Answers = (props) => {
   const { answers } = props;
@@ -55,17 +31,15 @@ const Answers = (props) => {
         <Answer
           index={index}
           key={item.answer_id}
-          isAccepted={item.is_accepted}
-        >
-          <Markdown style={styles}>{decode(item.body_markdown)}</Markdown>
-        </Answer>
+          {...item}
+        />
       ))}
     </Accordion>
   );
 };
 
 const Answer = (props) => {
-  const { index, children, isAccepted } = props;
+  const { index, body_markdown, is_accepted, owner, creation_date } = props;
   return (
     <Accordion.Item value={`answer${index}`}>
       <Accordion.Trigger
@@ -76,7 +50,7 @@ const Answer = (props) => {
           <>
             <XStack alignItems="center">
               <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
-              {isAccepted && (
+              {is_accepted && (
                 <>
                   <Verified color="$green10Dark" />
                   <Text
@@ -100,7 +74,17 @@ const Answer = (props) => {
           </>
         )}
       </Accordion.Trigger>
-      <Accordion.Content unstyled>{children}</Accordion.Content>
+      <Accordion.Content unstyled>
+        <YStack marginBottom={20}>
+          <CustomMarkdown>{body_markdown}</CustomMarkdown>
+          <PostCreationInfo
+            type="answer"
+            username={owner?.display_name}
+            userAvatar={owner?.profile_image}
+            creation_date={creation_date}
+          />
+        </YStack>
+      </Accordion.Content>
     </Accordion.Item>
   );
 };
@@ -124,7 +108,7 @@ const Question = () => {
           }
         }
       );
-
+      console.log(id);
       setQuestion(response.data.items[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -162,7 +146,7 @@ const Question = () => {
 
       <QuestionCard {...question} />
 
-      <Markdown style={styles}>{decode(question.body_markdown)}</Markdown>
+      <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
 
       <YStack
         marginTop={10}
@@ -176,13 +160,3 @@ const Question = () => {
 };
 
 export default Question;
-
-const styles = StyleSheet.create({
-  body: {
-    padding: 15
-  },
-  text: {
-    color: "#fff",
-    fontSize: 16
-  }
-});

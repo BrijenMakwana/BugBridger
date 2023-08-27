@@ -1,18 +1,9 @@
 import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import moment from "moment";
-import {
-  Avatar,
-  Card,
-  H5,
-  ListItem,
-  Separator,
-  Text,
-  XStack,
-  YGroup
-} from "tamagui";
+import { Card, H5, ListItem, Separator, Text, XStack, YGroup } from "tamagui";
 
+import PostCreationInfo from "./PostCreationInfo";
 import Tag from "./Tag";
 
 const IsAnswered = () => {
@@ -50,43 +41,6 @@ const CustomListItem = (props) => {
         backgroundColor="$backgroundTransparent"
       />
     </YGroup.Item>
-  );
-};
-
-const User = (props) => {
-  const { username, userAvatar, creationDate } = props;
-  return (
-    <XStack
-      alignItems="center"
-      justifyContent="flex-end"
-      gap={10}
-      flex={1}
-      flexWrap="wrap"
-    >
-      <Avatar
-        circular
-        size="$2"
-      >
-        <Avatar.Image src={userAvatar} />
-        <Avatar.Fallback bc="$green10Dark" />
-      </Avatar>
-
-      <Text
-        fontSize="$3"
-        color="$green10Dark"
-        fontWeight="500"
-      >
-        {username}
-      </Text>
-
-      <Text
-        fontSize="$2"
-        color="$gray11Dark"
-        fontWeight="500"
-      >
-        asked on {moment(creationDate).format("ll")}
-      </Text>
-    </XStack>
   );
 };
 
@@ -170,7 +124,8 @@ const QuestionCard = (props) => {
         </YGroup>
 
         <Card.Footer>
-          <User
+          <PostCreationInfo
+            type="question"
             username={owner?.display_name}
             userAvatar={owner?.profile_image}
             creation_date={creation_date}
