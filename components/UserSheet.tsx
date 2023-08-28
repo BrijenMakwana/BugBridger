@@ -82,7 +82,7 @@ const UserCard = (props) => {
           marginTop={5}
           color="$gray11Dark"
         >
-          Member since {moment(creationDate).format("ll")}
+          Joined {moment(moment.unix(creationDate), "YYYYMMDD").fromNow()}
         </Text>
       </YStack>
     </XStack>
