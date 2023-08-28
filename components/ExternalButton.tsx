@@ -3,19 +3,20 @@ import * as Linking from "expo-linking";
 import { Button } from "tamagui";
 
 const ExternalButton = (props) => {
-  const { link, type } = props;
+  const { link } = props;
 
   const openInStackOverflow = () => {
     Linking.openURL(link);
   };
+
   return (
     <Button
       iconAfter={ExternalLink}
-      theme="green"
-      marginTop={10}
       onPress={openInStackOverflow}
+      variant="outlined"
+      color="$green10Dark"
     >
-      {`See this ${type} on StackOverflow`}
+      View on StackOverflow
     </Button>
   );
 };

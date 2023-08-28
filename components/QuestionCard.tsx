@@ -130,18 +130,12 @@ const QuestionCard = (props) => {
         <Card.Footer>
           <PostCreationInfo
             type="question"
-            username={owner?.display_name}
-            userAvatar={owner?.profile_image}
-            creation_date={creation_date}
+            creationDate={creation_date}
+            {...owner}
           />
         </Card.Footer>
 
-        {isExternal && (
-          <ExternalButton
-            link={link}
-            type="Question"
-          />
-        )}
+        {isExternal && <ExternalButton link={link} />}
       </Card>
     </Link>
   );
