@@ -94,7 +94,7 @@ const Answer = (props) => {
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
           <PostCreationInfo
             type="answer"
-            creation_date={creation_date}
+            creationDate={creation_date}
             {...owner}
           />
           <ExternalButton link={link} />
@@ -159,19 +159,21 @@ const Question = () => {
     <MyScroll>
       <GoBack />
 
-      <QuestionCard
-        {...question}
-        isExternal
-      />
+      <>
+        <QuestionCard
+          {...question}
+          isExternal
+        />
 
-      <YStack padding={15}>
-        <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
-      </YStack>
+        <YStack padding={15}>
+          <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
+        </YStack>
 
-      <Answers
-        answers={answers}
-        answerCount={question?.answer_count}
-      />
+        <Answers
+          answers={answers}
+          answerCount={question?.answer_count}
+        />
+      </>
     </MyScroll>
   );
 };
