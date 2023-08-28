@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Award } from "@tamagui/lucide-icons";
 import axios from "axios";
+import { decode } from "html-entities";
 import moment from "moment";
 import {
   Avatar,
@@ -10,23 +11,40 @@ import {
   Sheet,
   Spinner,
   Text,
+  XGroup,
   XStack,
   YGroup,
   YStack
 } from "tamagui";
+
+import ExternalButton from "./ExternalButton";
+
+const UserStat = (props) => {
+  const { count, title } = props;
+  return (
+    <XGroup.Item>
+      <ListItem
+        size="$4"
+        title={count}
+        subTitle={title}
+        flex={1}
+        backgroundColor="$backgroundTransparent"
+      />
+    </XGroup.Item>
+  );
+};
 
 const BadgeInfo = (props) => {
   const { badgeType, badgeCount, badgeColor } = props;
   return (
     <YGroup.Item>
       <ListItem
-        hoverTheme
         icon={<Award size="$2" />}
         size="$4"
         title={badgeCount}
         subTitle={`${badgeType} Badges`}
-        backgroundColor="$backgroundTransparent"
         color={badgeColor}
+        backgroundColor="$backgroundTransparent"
       />
     </YGroup.Item>
   );
@@ -35,7 +53,10 @@ const BadgeInfo = (props) => {
 const UserCard = (props) => {
   const { displayName, profileImage, creationDate } = props;
   return (
-    <XStack justifyContent="space-between">
+    <XStack
+      justifyContent="space-between"
+      alignItems="center"
+    >
       <Avatar
         circular
         size="$7"
@@ -51,8 +72,9 @@ const UserCard = (props) => {
         <Text
           color="$green10Dark"
           fontSize={30}
+          numberOfLines={2}
         >
-          {displayName}
+          {decode(displayName)}
         </Text>
 
         <Text
@@ -113,25 +135,41 @@ const UserSheet = (props) => {
         exitStyle={{ opacity: 0 }}
       />
       <Sheet.Handle />
-      <Sheet.Frame
-        flex={1}
-        padding={20}
-      >
+      <Sheet.Frame>
         {!user ? (
           <Spinner
-            size="small"
+            size="large"
             color="$green10Dark"
           />
         ) : (
-          <YStack gap={20}>
+          <YStack
+            gap={20}
+            padding={20}
+            flex={1}
+          >
             <UserCard
               displayName={user?.display_name}
               profileImage={user?.profile_image}
               creationDate={user?.creation_date}
             />
 
-            <H3 textTransform="capitalize">Badges</H3>
+            <H3 textTransform="capitalize">stats</H3>
+            <XGroup bordered>
+              <UserStat
+                count={user?.reputation}
+                title="Reputation"
+              />
+              <UserStat
+                count={user?.answer_count}
+                title="Answers"
+              />
+              <UserStat
+                count={user?.question_count}
+                title="Questions"
+              />
+            </XGroup>
 
+            <H3 textTransform="capitalize">badges</H3>
             <YGroup
               bordered
               separator={<Separator />}
@@ -152,6 +190,8 @@ const UserSheet = (props) => {
                 badgeColor="#CD7F32"
               />
             </YGroup>
+
+            <ExternalButton link={user?.link} />
           </YStack>
         )}
       </Sheet.Frame>
