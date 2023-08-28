@@ -48,7 +48,7 @@ const PostCreationInfo = (props) => {
           fontWeight="500"
         >
           {type === "question" ? "asked" : "answered"} on{" "}
-          {moment(creationDate).format("ll")}
+          {moment(moment.unix(creationDate)).format("ll")}
         </Text>
       </XStack>
 

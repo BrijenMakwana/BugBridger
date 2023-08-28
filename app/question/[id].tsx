@@ -159,21 +159,19 @@ const Question = () => {
     <MyScroll>
       <GoBack />
 
-      <>
-        <QuestionCard
-          {...question}
-          isExternal
-        />
+      <QuestionCard
+        {...question}
+        isExternal
+      />
 
-        <YStack padding={15}>
-          <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
-        </YStack>
+      <YStack padding={15}>
+        <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
+      </YStack>
 
-        <Answers
-          answers={answers}
-          answerCount={question?.answer_count}
-        />
-      </>
+      <Answers
+        answers={answers}
+        answerCount={question?.answer_count}
+      />
     </MyScroll>
   );
 };
