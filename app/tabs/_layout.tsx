@@ -9,6 +9,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: darkColors.green10,
         tabBarInactiveTintColor: darkColors.gray11,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: darkColors.gray2
+        },
         tabBarLabelStyle: {
           textTransform: "capitalize"
         }
