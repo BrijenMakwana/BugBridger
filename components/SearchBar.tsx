@@ -31,7 +31,7 @@ const SearchBar = (props) => {
             size="$4"
             backgroundColor="$red10Dark"
             marginLeft={10}
-            animation="bouncy"
+            animation="quick"
             onPress={onClear}
             enterStyle={{
               scale: 0.5,
@@ -43,7 +43,7 @@ const SearchBar = (props) => {
             size="$4"
             backgroundColor="$green10Dark"
             marginLeft={10}
-            animation="bouncy"
+            animation="quick"
             onPress={onPress}
             enterStyle={{
               scale: 0.5,

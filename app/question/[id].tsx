@@ -103,6 +103,7 @@ const Question = () => {
           <Tabs.Tab value="tab1">
             <H5>Question</H5>
           </Tabs.Tab>
+
           <Tabs.Tab
             value="tab2"
             flex={1}
