@@ -1,111 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
-import { ChevronDown, Verified } from "@tamagui/lucide-icons";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import {
-  Accordion,
-  H5,
-  Paragraph,
-  Square,
-  Tabs,
-  Text,
-  XStack,
-  YStack
-} from "tamagui";
+import { H5, Tabs, YStack } from "tamagui";
 
+import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
-import ExternalButton from "../../components/ExternalButton";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
-import PostCreationInfo from "../../components/PostCreationInfo";
 import QuestionCard from "../../components/QuestionCard";
 import RelatedQuestion from "../../components/RelatedQuestion";
-
-const Answers = (props) => {
-  const { answers } = props;
-
-  return (
-    <YStack
-      paddingHorizontal={15}
-      animation="quick"
-      enterStyle={{
-        scale: 0.5,
-        opacity: 0
-      }}
-    >
-      <Accordion
-        overflow="hidden"
-        type="multiple"
-        marginTop={20}
-      >
-        {answers?.map((item, index) => (
-          <Answer
-            index={index}
-            key={item.answer_id}
-            {...item}
-          />
-        ))}
-      </Accordion>
-    </YStack>
-  );
-};
-
-const Answer = (props) => {
-  const { index, body_markdown, is_accepted, owner, creation_date, link } =
-    props;
-  return (
-    <Accordion.Item value={`answer${index}`}>
-      <Accordion.Trigger
-        flexDirection="row"
-        justifyContent="space-between"
-      >
-        {({ open }) => (
-          <>
-            <XStack alignItems="center">
-              <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
-              {is_accepted && (
-                <>
-                  <Verified color="$green10Dark" />
-                  <Text
-                    fontSize="$4"
-                    fontWeight="bold"
-                    color="$green10Dark"
-                    marginLeft={5}
-                  >
-                    Accepted
-                  </Text>
-                </>
-              )}
-            </XStack>
-
-            <Square
-              animation="quick"
-              rotate={open ? "180deg" : "0deg"}
-            >
-              <ChevronDown size="$1" />
-            </Square>
-          </>
-        )}
-      </Accordion.Trigger>
-      <Accordion.Content unstyled>
-        <YStack
-          padding={10}
-          gap={10}
-          marginBottom={10}
-        >
-          <CustomMarkdown>{body_markdown}</CustomMarkdown>
-          <PostCreationInfo
-            type="answer"
-            creationDate={creation_date}
-            {...owner}
-          />
-          <ExternalButton link={link} />
-        </YStack>
-      </Accordion.Content>
-    </Accordion.Item>
-  );
-};
 
 const Question = () => {
   const { id } = useLocalSearchParams();
@@ -203,7 +107,7 @@ const Question = () => {
             value="tab2"
             flex={1}
           >
-            <H5>Answers({question?.answer_count})</H5>
+            <H5>Answers({question?.answer_count || 0})</H5>
           </Tabs.Tab>
 
           <Tabs.Tab value="tab3">
@@ -231,12 +135,7 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
-          <MyScroll>
-            <Answers
-              answers={answers}
-              answerCount={question?.answer_count}
-            />
-          </MyScroll>
+          <AnswersTab answers={answers} />
         </Tabs.Content>
 
         <Tabs.Content
