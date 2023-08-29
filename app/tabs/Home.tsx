@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { H2 } from "tamagui";
 
@@ -61,8 +62,8 @@ const Home = () => {
         refreshControl={
           <RefreshControl
             refreshing={isSearching}
-            colors={["green"]}
-            progressBackgroundColor="#333333"
+            colors={[darkColors.green11]}
+            progressBackgroundColor={darkColors.gray5}
             onRefresh={getFeaturedQuestions}
           />
         }

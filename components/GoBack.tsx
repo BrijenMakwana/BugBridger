@@ -16,7 +16,6 @@ const GoBack = () => {
         scale: 0.5,
         opacity: 0
       }}
-      marginBottom={15}
       marginLeft={5}
       onPress={goBack}
       borderRadius={25}
