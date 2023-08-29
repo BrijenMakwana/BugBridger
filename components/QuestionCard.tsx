@@ -73,7 +73,7 @@ const QuestionCard = (props) => {
         alignSelf="center"
         gap={13}
         marginVertical={10}
-        animation="bouncy"
+        animation="quick"
         pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
         enterStyle={{
           scale: 0.5,

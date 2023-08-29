@@ -42,7 +42,10 @@ export default function Layout() {
                 screenOptions={{
                   headerShown: false
                 }}
-              />
+              >
+                <Stack.Screen name="tabs" />
+                <Stack.Screen name="question/[id]" />
+              </Stack>
             </MySafeAreaView>
           </ThemeProvider>
         </Theme>
