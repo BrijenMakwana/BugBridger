@@ -69,9 +69,8 @@ const QuestionCard = (props) => {
     >
       <Card
         padding={20}
-        width="98%"
-        alignSelf="center"
         gap={13}
+        marginHorizontal={5}
         marginVertical={10}
         animation="quick"
         pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}

@@ -12,8 +12,6 @@ const RelatedQuestion = (props) => {
       asChild
     >
       <Card
-        width="98%"
-        alignSelf="center"
         padding={10}
         marginVertical={7}
         animation="quick"
@@ -22,6 +20,7 @@ const RelatedQuestion = (props) => {
           scale: 0.5,
           opacity: 0
         }}
+        backgroundColor="$backgroundTransparent"
       >
         <Card.Header
           padding={0}
