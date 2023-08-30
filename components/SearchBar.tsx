@@ -7,7 +7,7 @@ const SearchBar = (props) => {
     <XStack
       alignItems="center"
       justifyContent="space-between"
-      padding={10}
+      marginHorizontal={5}
     >
       <Input
         size="$4"
@@ -29,7 +29,7 @@ const SearchBar = (props) => {
           <Button
             icon={Delete}
             size="$4"
-            backgroundColor="$red10Dark"
+            theme="red"
             marginLeft={10}
             animation="quick"
             onPress={onClear}

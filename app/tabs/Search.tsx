@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
+import { XStack } from "tamagui";
 
+import {
+  questionsSortingOptions,
+  questionsSortingOrders
+} from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import QuestionCard from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
+import SortingOptions from "../../components/SortingOptions";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState("");
   const [questions, setQuestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [sort, setSort] = useState(questionsSortingOptions[0]);
+  const [sortingOrder, setSortingOrder] = useState(questionsSortingOrders[0]);
 
   const getQuestions = async () => {
     setIsSearching(true);
@@ -21,8 +29,8 @@ const Search = () => {
         {
           params: {
             q: searchQuestion,
-            order: "desc",
-            sort: "activity",
+            order: sortingOrder,
+            sort: sort,
             site: "stackoverflow",
             filter: "!nNPvSNP4(R",
             key: process.env.EXPO_PUBLIC_API_KEY
@@ -43,6 +51,12 @@ const Search = () => {
     setQuestions([]);
   };
 
+  useEffect(() => {
+    if (!searchQuestion) return;
+
+    getQuestions();
+  }, [sort, sortingOrder]);
+
   return (
     <MyStack>
       <SearchBar
@@ -51,6 +65,34 @@ const Search = () => {
         onPress={getQuestions}
         onClear={clearSearch}
       />
+
+      {searchQuestion && (
+        <XStack
+          gap={20}
+          alignItems="center"
+          justifyContent="space-between"
+          marginVertical={15}
+          marginHorizontal={5}
+          animation="quick"
+          enterStyle={{
+            scale: 0.5,
+            opacity: 0
+          }}
+        >
+          <SortingOptions
+            sort={sort}
+            setSort={setSort}
+            data={questionsSortingOptions}
+            title="Sort"
+          />
+          <SortingOptions
+            sort={sortingOrder}
+            setSort={setSortingOrder}
+            data={questionsSortingOrders}
+            title="Order"
+          />
+        </XStack>
+      )}
 
       <FlashList
         data={questions}
