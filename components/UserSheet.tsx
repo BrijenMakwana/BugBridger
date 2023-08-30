@@ -154,7 +154,10 @@ const UserSheet = (props) => {
             />
 
             <H3 textTransform="capitalize">stats</H3>
-            <XGroup bordered>
+            <XGroup
+              bordered
+              separator={<Separator vertical />}
+            >
               <UserStat
                 count={user?.reputation}
                 title="Reputation"
