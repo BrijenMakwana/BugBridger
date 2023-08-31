@@ -1,28 +1,42 @@
 import { useState } from "react";
 import { decode } from "html-entities";
 import moment from "moment";
-import { Avatar, Button, Text, XStack } from "tamagui";
+import { Avatar, Button, Text, YStack } from "tamagui";
+
+import { formatNumber } from "../utils/utils";
 
 import UserSheet from "./UserSheet";
 
+const postType = {
+  question: "asked",
+  answer: "answered",
+  article: "posted"
+};
+
 const PostCreationInfo = (props) => {
-  const { user_id, type, display_name, profile_image, creationDate } = props;
+  const {
+    user_id,
+    type,
+    display_name,
+    profile_image,
+    reputation,
+    creationDate
+  } = props;
 
   const [userSheetIsOpen, setUserSheetIsOpen] = useState(false);
 
   return (
     <>
-      <XStack
-        alignItems="center"
-        justifyContent="flex-end"
+      <YStack
+        alignItems="flex-end"
         gap={10}
         flex={1}
-        flexWrap="wrap"
       >
         <Button
           unstyled
           flexDirection="row"
           alignItems="center"
+          justifyContent="space-between"
           onPress={() => setUserSheetIsOpen(true)}
         >
           <Avatar
@@ -40,17 +54,23 @@ const PostCreationInfo = (props) => {
           >
             {decode(display_name)}
           </Text>
+
+          <Text
+            fontSize="$2"
+            color="$gray11Dark"
+            fontWeight="500"
+          >
+            {formatNumber(reputation)}
+          </Text>
         </Button>
 
         <Text
           fontSize="$2"
           color="$gray11Dark"
-          fontWeight="500"
         >
-          {type === "question" ? "asked" : "answered"} on{" "}
-          {moment(moment.unix(creationDate)).format("ll")}
+          {postType[type]} on {moment(moment.unix(creationDate)).format("lll")}
         </Text>
-      </XStack>
+      </YStack>
 
       {userSheetIsOpen && (
         <UserSheet

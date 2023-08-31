@@ -7,7 +7,6 @@ const RelatedQuestion = (props) => {
 
   return (
     <Link
-      replace
       href={`/question/${question_id}`}
       asChild
     >

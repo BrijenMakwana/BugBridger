@@ -44,7 +44,14 @@ export default function Layout() {
                 }}
               >
                 <Stack.Screen name="tabs" />
-                <Stack.Screen name="question/[id]" />
+                <Stack.Screen
+                  getId={({ params }) => params.id}
+                  name="question/[id]"
+                />
+                <Stack.Screen
+                  getId={({ params }) => params.id}
+                  name="article/[id]"
+                />
               </Stack>
             </MySafeAreaView>
           </ThemeProvider>

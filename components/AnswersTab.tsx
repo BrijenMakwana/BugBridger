@@ -43,6 +43,7 @@ const Answer = (props) => {
           </>
         )}
       </Accordion.Trigger>
+
       <Accordion.Content unstyled>
         <YStack
           padding={10}
