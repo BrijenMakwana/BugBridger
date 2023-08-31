@@ -7,6 +7,12 @@ import { formatNumber } from "../utils/utils";
 
 import UserSheet from "./UserSheet";
 
+const postType = {
+  question: "asked",
+  answer: "answered",
+  article: "posted"
+};
+
 const PostCreationInfo = (props) => {
   const {
     user_id,
@@ -30,6 +36,7 @@ const PostCreationInfo = (props) => {
           unstyled
           flexDirection="row"
           alignItems="center"
+          justifyContent="space-between"
           onPress={() => setUserSheetIsOpen(true)}
         >
           <Avatar
@@ -61,8 +68,7 @@ const PostCreationInfo = (props) => {
           fontSize="$2"
           color="$gray11Dark"
         >
-          {type === "question" ? "asked" : "answered"} on{" "}
-          {moment(moment.unix(creationDate)).format("lll")}
+          {postType[type]} on {moment(moment.unix(creationDate)).format("lll")}
         </Text>
       </YStack>
 

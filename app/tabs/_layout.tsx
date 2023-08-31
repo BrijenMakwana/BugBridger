@@ -1,4 +1,4 @@
-import { Home, Search } from "@tamagui/lucide-icons";
+import { Home, Newspaper, Search } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import { Tabs } from "expo-router";
 
@@ -35,6 +35,18 @@ export default function TabLayout() {
           title: "Ask Question",
           tabBarIcon: ({ color }) => (
             <Search
+              size="$1.5"
+              color={color}
+            />
+          )
+        }}
+      />
+      <Tabs.Screen
+        name="Articles"
+        options={{
+          title: "Articles",
+          tabBarIcon: ({ color }) => (
+            <Newspaper
               size="$1.5"
               color={color}
             />
