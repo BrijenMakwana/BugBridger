@@ -17,6 +17,8 @@ import {
   YStack
 } from "tamagui";
 
+import { formatNumber } from "../utils/utils";
+
 import ExternalButton from "./ExternalButton";
 
 const UserStat = (props) => {
@@ -25,7 +27,7 @@ const UserStat = (props) => {
     <XGroup.Item>
       <ListItem
         size="$4"
-        title={count?.toLocaleString()}
+        title={formatNumber(count)}
         subTitle={title}
         flex={1}
         backgroundColor="$backgroundTransparent"
@@ -41,7 +43,7 @@ const BadgeInfo = (props) => {
       <ListItem
         icon={<Award size="$2" />}
         size="$4"
-        title={badgeCount?.toLocaleString()}
+        title={badgeCount}
         subTitle={`${badgeType} Badges`}
         color={badgeColor}
         backgroundColor="$backgroundTransparent"

@@ -3,6 +3,8 @@ import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H5, ListItem, Separator, Text, XStack, YGroup } from "tamagui";
 
+import { formatNumber } from "../utils/utils";
+
 import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
 import Tag from "./Tag";
@@ -37,7 +39,7 @@ const CustomListItem = (props) => {
         hoverTheme
         icon={icon}
         size="$4"
-        title={count?.toLocaleString()}
+        title={formatNumber(count)}
         subTitle={title}
         backgroundColor="$backgroundTransparent"
       />
