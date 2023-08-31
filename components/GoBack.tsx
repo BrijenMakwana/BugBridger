@@ -1,4 +1,4 @@
-import { ArrowLeft } from "@tamagui/lucide-icons";
+import { ChevronLeft } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { Button } from "tamagui";
 
@@ -9,8 +9,9 @@ const GoBack = () => {
 
   return (
     <Button
-      icon={ArrowLeft}
-      theme="green"
+      icon={ChevronLeft}
+      color="$green10Dark"
+      scaleIcon={1.3}
       animation="bouncy"
       enterStyle={{
         scale: 0.5,
@@ -18,9 +19,7 @@ const GoBack = () => {
       }}
       marginLeft={5}
       onPress={goBack}
-      borderRadius={25}
-      width={50}
-      height={50}
+      alignSelf="flex-start"
     />
   );
 };

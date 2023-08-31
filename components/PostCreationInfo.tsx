@@ -50,7 +50,7 @@ const PostCreationInfo = (props) => {
 
           <Text
             fontSize="$2"
-            color="$gray11sDark"
+            color="$gray11Dark"
             fontWeight="500"
           >
             {formatNumber(reputation)}
