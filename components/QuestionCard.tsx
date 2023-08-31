@@ -37,7 +37,7 @@ const CustomListItem = (props) => {
         hoverTheme
         icon={icon}
         size="$4"
-        title={count}
+        title={count?.toLocaleString()}
         subTitle={title}
         backgroundColor="$backgroundTransparent"
       />
@@ -99,9 +99,7 @@ const QuestionCard = (props) => {
           flexWrap="wrap"
           gap={8}
         >
-          {tags?.map((item, index) => (
-            <Tag key={index}>{item}</Tag>
-          ))}
+          {tags?.map((item, index) => <Tag key={index}>{item}</Tag>)}
         </XStack>
 
         <YGroup

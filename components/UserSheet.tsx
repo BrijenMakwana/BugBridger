@@ -25,7 +25,7 @@ const UserStat = (props) => {
     <XGroup.Item>
       <ListItem
         size="$4"
-        title={count}
+        title={count?.toLocaleString()}
         subTitle={title}
         flex={1}
         backgroundColor="$backgroundTransparent"
@@ -41,7 +41,7 @@ const BadgeInfo = (props) => {
       <ListItem
         icon={<Award size="$2" />}
         size="$4"
-        title={badgeCount}
+        title={badgeCount?.toLocaleString()}
         subTitle={`${badgeType} Badges`}
         color={badgeColor}
         backgroundColor="$backgroundTransparent"
