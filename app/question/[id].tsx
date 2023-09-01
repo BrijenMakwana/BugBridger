@@ -148,7 +148,7 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
-          {answers?.length > 0 && (
+          {answers?.length > 1 && (
             <XStack
               gap={20}
               alignItems="center"
