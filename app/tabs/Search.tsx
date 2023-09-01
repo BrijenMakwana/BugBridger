@@ -5,10 +5,7 @@ import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { XStack } from "tamagui";
 
-import {
-  questionsSortingOptions,
-  questionsSortingOrders
-} from "../../assets/data";
+import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
@@ -19,7 +16,7 @@ const Search = () => {
   const [questions, setQuestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [sort, setSort] = useState(questionsSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(questionsSortingOrders[0]);
+  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
   const getQuestions = async () => {
     setIsSearching(true);
@@ -90,7 +87,7 @@ const Search = () => {
           <SortingOptions
             sort={sortingOrder}
             setSort={setSortingOrder}
-            data={questionsSortingOrders}
+            data={sortingOrders}
             title="Order"
           />
         </XStack>

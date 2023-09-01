@@ -2,20 +2,25 @@ import React, { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Tabs, YStack } from "tamagui";
+import { H5, Tabs, XStack, YStack } from "tamagui";
 
+import { answersSortingOptions, sortingOrders } from "../../assets/data";
 import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import Post from "../../components/Post";
 import RelatedQuestion from "../../components/RelatedQuestion";
+import SortingOptions from "../../components/SortingOptions";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
   const [relatedQuestions, setRelatedQuestions] = useState([]);
+
+  const [answerSort, setAnswerSort] = useState(answersSortingOptions[0]);
+  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
   const getQuestion = async () => {
     try {
@@ -44,8 +49,8 @@ const Question = () => {
         `https://api.stackexchange.com/2.3/questions/${id}/answers?`,
         {
           params: {
-            order: "desc",
-            sort: "activity",
+            order: sortingOrder,
+            sort: answerSort,
             site: "stackoverflow",
             filter: "!3vIo5M6G45qJ8_tw-",
             pageSize: 100,
@@ -86,6 +91,11 @@ const Question = () => {
     getAnswers();
     getRelatedQuestions();
   }, []);
+
+  useEffect(() => {
+    getAnswers();
+  }, [answerSort, sortingOrder]);
+
   return (
     <>
       <GoBack />
@@ -138,6 +148,34 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
+          {answers?.length > 0 && (
+            <XStack
+              gap={20}
+              alignItems="center"
+              justifyContent="space-between"
+              marginVertical={15}
+              marginHorizontal={10}
+              animation="quick"
+              enterStyle={{
+                scale: 0.5,
+                opacity: 0
+              }}
+            >
+              <SortingOptions
+                sort={answerSort}
+                setSort={setAnswerSort}
+                data={answersSortingOptions}
+                title="Sort"
+              />
+              <SortingOptions
+                sort={sortingOrder}
+                setSort={setSortingOrder}
+                data={sortingOrders}
+                title="Order"
+              />
+            </XStack>
+          )}
+
           <AnswersTab answers={answers} />
         </Tabs.Content>
 
