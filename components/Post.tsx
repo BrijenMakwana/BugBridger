@@ -1,29 +1,61 @@
-import { Eye, TrendingUp } from "@tamagui/lucide-icons";
+import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import { Card, H5, Separator, XStack, YGroup } from "tamagui";
+import { Card, H5, Separator, Text, XStack, YGroup } from "tamagui";
 
 import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
 import PostStats from "./PostStats";
 import Tag from "./Tag";
 
-const ArticleCard = (props) => {
+const IsAnswered = () => {
+  return (
+    <XStack
+      alignItems="center"
+      marginBottom={10}
+    >
+      <Verified
+        color="$green10Dark"
+        size="$3"
+      />
+      <Text
+        fontSize="$5"
+        fontWeight="bold"
+        color="$green10Dark"
+        marginLeft={10}
+      >
+        Answered
+      </Text>
+    </XStack>
+  );
+};
+
+const Post = (props) => {
   const {
-    article_id,
+    question_id,
     title,
+    is_answered,
+    body_markdown,
     tags,
     score,
     view_count,
+    answer_count,
     owner,
     creation_date,
     link,
-    isExternal = false
+    isBody = false,
+    isExternal = false,
+    article_id,
+    type
   } = props;
 
   return (
     <Link
-      href={`/article/${article_id}`}
+      href={
+        type === "question"
+          ? `/question/${question_id}`
+          : `/article/${article_id}`
+      }
       asChild
     >
       <Card
@@ -39,7 +71,19 @@ const ArticleCard = (props) => {
         }}
       >
         <Card.Header padding={0}>
+          {is_answered && <IsAnswered />}
           <H5>{decode(title)}</H5>
+
+          {isBody && (
+            <Text
+              numberOfLines={5}
+              fontSize="$4"
+              color="$gray11Dark"
+              marginTop={20}
+            >
+              {decode(body_markdown)}
+            </Text>
+          )}
         </Card.Header>
 
         <XStack
@@ -60,6 +104,14 @@ const ArticleCard = (props) => {
             count={view_count}
           />
 
+          {type === "question" && (
+            <PostStats
+              title="Answers"
+              icon={Check}
+              count={answer_count}
+            />
+          )}
+
           <PostStats
             title="Votes"
             icon={TrendingUp}
@@ -69,7 +121,7 @@ const ArticleCard = (props) => {
 
         <Card.Footer>
           <PostCreationInfo
-            type="article"
+            type="question"
             creationDate={creation_date}
             {...owner}
           />
@@ -81,4 +133,4 @@ const ArticleCard = (props) => {
   );
 };
 
-export default ArticleCard;
+export default Post;

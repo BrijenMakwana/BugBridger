@@ -6,7 +6,7 @@ import axios from "axios";
 import { H2 } from "tamagui";
 
 import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
+import Post from "../../components/Post";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
@@ -53,7 +53,8 @@ const Home = () => {
       <FlashList
         data={questions}
         renderItem={({ item }) => (
-          <QuestionCard
+          <Post
+            type="question"
             {...item}
             isBody
           />

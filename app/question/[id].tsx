@@ -8,7 +8,7 @@ import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
-import QuestionCard from "../../components/QuestionCard";
+import Post from "../../components/Post";
 import RelatedQuestion from "../../components/RelatedQuestion";
 
 const Question = () => {
@@ -121,7 +121,8 @@ const Question = () => {
           flex={1}
         >
           <MyScroll>
-            <QuestionCard
+            <Post
+              type="question"
               {...question}
               isExternal
             />

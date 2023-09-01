@@ -5,8 +5,8 @@ import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { H2 } from "tamagui";
 
-import ArticleCard from "../../components/ArticleCard";
 import { MyStack } from "../../components/MyStack";
+import Post from "../../components/Post";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -53,7 +53,12 @@ const Home = () => {
 
       <FlashList
         data={articles}
-        renderItem={({ item }) => <ArticleCard {...item} />}
+        renderItem={({ item }) => (
+          <Post
+            type="article"
+            {...item}
+          />
+        )}
         estimatedItemSize={50}
         refreshControl={
           <RefreshControl

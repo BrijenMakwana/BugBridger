@@ -10,7 +10,7 @@ import {
   questionsSortingOrders
 } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
+import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
 import SortingOptions from "../../components/SortingOptions";
 
@@ -97,7 +97,8 @@ const Search = () => {
       <FlashList
         data={questions}
         renderItem={({ item }) => (
-          <QuestionCard
+          <Post
+            type="question"
             {...item}
             isBody
           />
