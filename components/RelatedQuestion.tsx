@@ -2,6 +2,8 @@ import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H6 } from "tamagui";
 
+import VoteCount from "./VoteCount";
+
 const RelatedQuestion = (props) => {
   const { question_id, up_vote_count, title, is_answered } = props;
 
@@ -27,19 +29,14 @@ const RelatedQuestion = (props) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <H6
-            backgroundColor={is_answered ? "$green10Dark" : "$backgroundPress"}
-            width={70}
-            paddingVertical={3}
-            textAlign="center"
-            borderRadius="$2"
-          >
-            {up_vote_count}
-          </H6>
+          <VoteCount
+            isAccepted={is_answered}
+            vote={up_vote_count}
+          />
 
           <H6
             flex={1}
-            marginLeft={20}
+            marginLeft={25}
           >
             {decode(title)}
           </H6>
