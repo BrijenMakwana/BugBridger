@@ -33,12 +33,14 @@ const Search = () => {
             sort: sort,
             site: "stackoverflow",
             filter: "!nNPvSNP4(R",
+            pageSize: 100,
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
       );
 
       setQuestions(response.data.items);
+      console.log(response.data.items.length);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
