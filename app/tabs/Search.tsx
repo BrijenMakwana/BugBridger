@@ -5,12 +5,9 @@ import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { XStack } from "tamagui";
 
-import {
-  questionsSortingOptions,
-  questionsSortingOrders
-} from "../../assets/data";
+import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
+import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
 import SortingOptions from "../../components/SortingOptions";
 
@@ -19,7 +16,7 @@ const Search = () => {
   const [questions, setQuestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [sort, setSort] = useState(questionsSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(questionsSortingOrders[0]);
+  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
   const getQuestions = async () => {
     setIsSearching(true);
@@ -33,12 +30,14 @@ const Search = () => {
             sort: sort,
             site: "stackoverflow",
             filter: "!nNPvSNP4(R",
+            pageSize: 100,
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
       );
 
       setQuestions(response.data.items);
+      console.log(response.data.items.length);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -88,7 +87,7 @@ const Search = () => {
           <SortingOptions
             sort={sortingOrder}
             setSort={setSortingOrder}
-            data={questionsSortingOrders}
+            data={sortingOrders}
             title="Order"
           />
         </XStack>
@@ -97,7 +96,8 @@ const Search = () => {
       <FlashList
         data={questions}
         renderItem={({ item }) => (
-          <QuestionCard
+          <Post
+            type="question"
             {...item}
             isBody
           />

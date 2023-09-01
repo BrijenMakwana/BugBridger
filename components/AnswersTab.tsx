@@ -1,5 +1,5 @@
 import { FlashList } from "@shopify/flash-list";
-import { ChevronDown, Verified } from "@tamagui/lucide-icons";
+import { ChevronDown, TrendingUp, Verified } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, Text, XStack, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
@@ -7,8 +7,15 @@ import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
 
 const Answer = (props) => {
-  const { index, body_markdown, is_accepted, owner, creation_date, link } =
-    props;
+  const {
+    index,
+    body_markdown,
+    is_accepted,
+    owner,
+    creation_date,
+    link,
+    up_vote_count
+  } = props;
   return (
     <Accordion.Item value={`answer${index}`}>
       <Accordion.Trigger
@@ -34,12 +41,31 @@ const Answer = (props) => {
               )}
             </XStack>
 
-            <Square
-              animation="quick"
-              rotate={open ? "180deg" : "0deg"}
-            >
-              <ChevronDown size="$1" />
-            </Square>
+            <XStack alignItems="center">
+              <XStack
+                alignItems="center"
+                backgroundColor="$backgroundPress"
+                paddingHorizontal={10}
+                paddingVertical={5}
+                borderRadius={5}
+                marginRight={10}
+              >
+                <TrendingUp size="$1" />
+                <Text
+                  marginLeft={10}
+                  fontSize={13}
+                >
+                  {up_vote_count}
+                </Text>
+              </XStack>
+
+              <Square
+                animation="quick"
+                rotate={open ? "180deg" : "0deg"}
+              >
+                <ChevronDown size="$1" />
+              </Square>
+            </XStack>
           </>
         )}
       </Accordion.Trigger>

@@ -1,4 +1,6 @@
 const questionsSortingOptions = ["activity", "creation", "votes", "relevance"];
-const questionsSortingOrders = ["desc", "asc"];
+const answersSortingOptions = ["activity", "creation", "votes"];
 
-export { questionsSortingOptions, questionsSortingOrders };
+const sortingOrders = ["desc", "asc"];
+
+export { answersSortingOptions, questionsSortingOptions, sortingOrders };

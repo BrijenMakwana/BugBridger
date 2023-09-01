@@ -3,10 +3,10 @@ import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { YStack } from "tamagui";
 
-import ArticleCard from "../../components/ArticleCard";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
+import Post from "../../components/Post";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
@@ -41,7 +41,8 @@ const Question = () => {
     <MyScroll>
       <GoBack />
 
-      <ArticleCard
+      <Post
+        type="article"
         {...article}
         isExternal
       />
