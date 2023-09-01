@@ -47,7 +47,8 @@ const Question = () => {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!6WPIomp-ebb*M",
+            filter: "!3vIo5M6G45qJ8_tw-",
+            pageSize: 100,
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
