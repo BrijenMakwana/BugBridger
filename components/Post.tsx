@@ -121,7 +121,7 @@ const Post = (props) => {
 
         <Card.Footer>
           <PostCreationInfo
-            type="question"
+            type={type}
             creationDate={creation_date}
             {...owner}
           />
