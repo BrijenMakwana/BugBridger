@@ -4,6 +4,7 @@ import CustomSelect from "./CustomSelect";
 
 const SortingOptions = (props) => {
   const { title, data, sort, setSort } = props;
+
   return (
     <XStack
       alignItems="center"

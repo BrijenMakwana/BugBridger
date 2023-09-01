@@ -1,10 +1,11 @@
 import { FlashList } from "@shopify/flash-list";
-import { ChevronDown, TrendingUp, Verified } from "@tamagui/lucide-icons";
+import { ChevronDown, TrendingUp } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, Text, XStack, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
 import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
+import VoteCount from "./VoteCount";
 
 const Answer = (props) => {
   const {
@@ -24,44 +25,18 @@ const Answer = (props) => {
       >
         {({ open }) => (
           <>
-            <XStack alignItems="center">
-              <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
-              {is_accepted && (
-                <>
-                  <Verified color="$green10Dark" />
-                  <Text
-                    fontSize="$4"
-                    fontWeight="bold"
-                    color="$green10Dark"
-                    marginLeft={5}
-                  >
-                    Accepted
-                  </Text>
-                </>
-              )}
-            </XStack>
+            <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
 
             <XStack alignItems="center">
-              <XStack
-                alignItems="center"
-                backgroundColor="$backgroundPress"
-                paddingHorizontal={10}
-                paddingVertical={5}
-                borderRadius={5}
-                marginRight={10}
-              >
-                <TrendingUp size="$1" />
-                <Text
-                  marginLeft={10}
-                  fontSize={13}
-                >
-                  {up_vote_count}
-                </Text>
-              </XStack>
+              <VoteCount
+                isAccepted={is_accepted}
+                vote={up_vote_count}
+              />
 
               <Square
                 animation="quick"
                 rotate={open ? "180deg" : "0deg"}
+                marginLeft={20}
               >
                 <ChevronDown size="$1" />
               </Square>

@@ -3,14 +3,23 @@ import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { H2 } from "tamagui";
+import { H2, XStack } from "tamagui";
 
+import {
+  featuredQuestionsSortingOptions,
+  sortingOrders
+} from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
+import SiteInfoButton from "../../components/SiteInfoButton";
+import SortingOptions from "../../components/SortingOptions";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+
+  const [sort, setSort] = useState(featuredQuestionsSortingOptions[0]);
+  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
   const getFeaturedQuestions = async () => {
     setIsSearching(true);
@@ -19,8 +28,8 @@ const Home = () => {
         "https://api.stackexchange.com/2.3/questions/featured?",
         {
           params: {
-            order: "desc",
-            sort: "activity",
+            order: sortingOrder,
+            sort: sort,
             site: "stackoverflow",
             filter: "!nNPvSNP4(R",
             key: process.env.EXPO_PUBLIC_API_KEY
@@ -38,17 +47,54 @@ const Home = () => {
 
   useEffect(() => {
     getFeaturedQuestions();
-  }, []);
+  }, [sort, sortingOrder]);
+
   return (
     <MyStack>
-      <H2
-        color="$green10Dark"
-        textTransform="capitalize"
+      <XStack
+        alignItems="center"
+        justifyContent="space-between"
         marginVertical={10}
-        marginLeft={5}
+        paddingHorizontal={5}
       >
-        Featured Questions
-      </H2>
+        <H2
+          color="$green10Dark"
+          textTransform="capitalize"
+          flex={1}
+        >
+          Featured Questions
+        </H2>
+
+        <SiteInfoButton />
+      </XStack>
+
+      {questions?.length > 0 && (
+        <XStack
+          gap={20}
+          alignItems="center"
+          justifyContent="space-between"
+          marginBottom={15}
+          marginHorizontal={10}
+          animation="quick"
+          enterStyle={{
+            scale: 0.5,
+            opacity: 0
+          }}
+        >
+          <SortingOptions
+            sort={sort}
+            setSort={setSort}
+            data={featuredQuestionsSortingOptions}
+            title="Sort"
+          />
+          <SortingOptions
+            sort={sortingOrder}
+            setSort={setSortingOrder}
+            data={sortingOrders}
+            title="Order"
+          />
+        </XStack>
+      )}
 
       <FlashList
         data={questions}

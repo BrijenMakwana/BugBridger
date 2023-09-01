@@ -71,7 +71,7 @@ const Search = () => {
           alignItems="center"
           justifyContent="space-between"
           marginVertical={15}
-          marginHorizontal={5}
+          marginHorizontal={10}
           animation="quick"
           enterStyle={{
             scale: 0.5,
