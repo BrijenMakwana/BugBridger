@@ -10,4 +10,19 @@ const formatNumber = (number) => {
   return number?.toLocaleString();
 };
 
-export { formatNumber };
+const formatText = (text) => {
+  let formattedText = "";
+
+  for (let char of text) {
+    if (char === "_") {
+      formattedText += " ";
+      continue;
+    }
+
+    formattedText += char;
+  }
+
+  return formattedText;
+};
+
+export { formatNumber, formatText };

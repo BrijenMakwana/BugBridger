@@ -11,6 +11,7 @@ import {
 } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
+import SiteInfoButton from "../../components/SiteInfoButton";
 import SortingOptions from "../../components/SortingOptions";
 
 const Home = () => {
@@ -50,14 +51,22 @@ const Home = () => {
 
   return (
     <MyStack>
-      <H2
-        color="$green10Dark"
-        textTransform="capitalize"
+      <XStack
+        alignItems="center"
+        justifyContent="space-between"
         marginVertical={10}
-        marginLeft={5}
+        paddingHorizontal={5}
       >
-        Featured Questions
-      </H2>
+        <H2
+          color="$green10Dark"
+          textTransform="capitalize"
+          flex={1}
+        >
+          Featured Questions
+        </H2>
+
+        <SiteInfoButton />
+      </XStack>
 
       {questions?.length > 0 && (
         <XStack
