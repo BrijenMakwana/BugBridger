@@ -54,10 +54,12 @@ const CustomSlider = (props) => {
   );
 };
 
-const SearchFiltersSheet = (props) => {
+const SearchFilterSheet = (props) => {
   const {
     open,
     setOpen,
+    onApply,
+    onClear,
     isAcceptedAnswer,
     setIsAcceptedAnswer,
     minAnswers,
@@ -106,7 +108,7 @@ const SearchFiltersSheet = (props) => {
               fontSize={16}
               flex={1}
             >
-              accepted answers only
+              accepted answers only (applied when on)
             </Label>
 
             <Switch
@@ -145,6 +147,7 @@ const SearchFiltersSheet = (props) => {
               icon={Delete}
               flex={1}
               scaleIcon={1.3}
+              onPress={onClear}
             >
               Clear
             </Button>
@@ -154,6 +157,7 @@ const SearchFiltersSheet = (props) => {
               icon={Check}
               flex={1}
               scaleIcon={1.3}
+              onPress={onApply}
             >
               Apply
             </Button>
@@ -164,4 +168,4 @@ const SearchFiltersSheet = (props) => {
   );
 };
 
-export default SearchFiltersSheet;
+export default SearchFilterSheet;

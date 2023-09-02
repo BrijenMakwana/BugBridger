@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
+import { Button, Text, YStack } from "tamagui";
 
 import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
-import SearchFiltersSheet from "../../components/SearchFiltersSheet";
+import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
 import TabHeading from "../../components/TabHeading";
 
@@ -20,11 +22,36 @@ const Search = () => {
   const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
   const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(true);
-  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState();
-  const [minAnswers, setMinAnswers] = useState();
-  const [minViews, setMinViews] = useState();
+  const [searchFilterIsApplied, setSearchFilterIsApplied] = useState(false);
+  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState(false);
+  const [minAnswers, setMinAnswers] = useState([10]);
+  const [minViews, setMinViews] = useState([10]);
+
+  const openSearchFilter = () => {
+    setSearchFilterIsOpen(true);
+  };
+
+  const applySearchFilter = () => {
+    setSearchFilterIsApplied(true);
+    setSearchFilterIsOpen(false);
+
+    if (questions?.length === 0) return;
+
+    getQuestions();
+  };
+
+  const clearSearchFilter = () => {
+    setSearchFilterIsApplied(false);
+    setSearchFilterIsOpen(false);
+
+    if (questions?.length === 0) return;
+
+    getQuestions();
+  };
 
   const getQuestions = async () => {
+    if (!searchQuestion) return;
+
     setIsSearching(true);
     try {
       const response = await axios.get(
@@ -37,7 +64,13 @@ const Search = () => {
             site: "stackoverflow",
             filter: "!nNPvSNP4(R",
             pageSize: 100,
-            key: process.env.EXPO_PUBLIC_API_KEY
+            key: process.env.EXPO_PUBLIC_API_KEY,
+
+            ...(searchFilterIsApplied && {
+              accepted: isAcceptedAnswer,
+              answers: minAnswers[0],
+              views: minViews[0]
+            })
           }
         }
       );
@@ -56,7 +89,7 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (!searchQuestion || questions?.length === 0) return;
+    if (questions?.length === 0) return;
 
     getQuestions();
   }, [sort, sortingOrder]);
@@ -74,13 +107,38 @@ const Search = () => {
         />
 
         {searchQuestion && (
-          <Sort
-            sort={sort}
-            setSort={setSort}
-            sortingOrder={sortingOrder}
-            setSortingOrder={setSortingOrder}
-            data={questionsSortingOptions}
-          />
+          <YStack
+            marginBottom={15}
+            marginTop={5}
+          >
+            <Sort
+              sort={sort}
+              setSort={setSort}
+              sortingOrder={sortingOrder}
+              setSortingOrder={setSortingOrder}
+              data={questionsSortingOptions}
+            />
+
+            <Button
+              theme="green"
+              icon={ListFilter}
+              onPress={openSearchFilter}
+              alignSelf="flex-start"
+              marginLeft={5}
+              marginTop={5}
+            >
+              Advance Search Filters
+            </Button>
+
+            {searchFilterIsApplied && (
+              <Text
+                marginLeft={5}
+                marginTop={15}
+              >
+                Search Filters Applied
+              </Text>
+            )}
+          </YStack>
         )}
 
         <FlashList
@@ -105,9 +163,11 @@ const Search = () => {
       </MyStack>
 
       {searchFilterIsOpen && (
-        <SearchFiltersSheet
+        <SearchFilterSheet
           open={searchFilterIsOpen}
           setOpen={setSearchFilterIsOpen}
+          onApply={applySearchFilter}
+          onClear={clearSearchFilter}
           isAcceptedAnswer={isAcceptedAnswer}
           setIsAcceptedAnswer={setIsAcceptedAnswer}
           minAnswers={minAnswers}
