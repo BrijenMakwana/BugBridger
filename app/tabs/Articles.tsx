@@ -3,12 +3,12 @@ import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { H2, XStack } from "tamagui";
+import { H2 } from "tamagui";
 
 import { articlesSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
-import SortingOptions from "../../components/SortingOptions";
+import Sort from "../../components/Sort";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -57,31 +57,13 @@ const Home = () => {
       </H2>
 
       {articles?.length > 0 && (
-        <XStack
-          gap={20}
-          alignItems="center"
-          justifyContent="space-between"
-          marginBottom={15}
-          marginHorizontal={10}
-          animation="quick"
-          enterStyle={{
-            scale: 0.5,
-            opacity: 0
-          }}
-        >
-          <SortingOptions
-            sort={sort}
-            setSort={setSort}
-            data={articlesSortingOptions}
-            title="Sort"
-          />
-          <SortingOptions
-            sort={sortingOrder}
-            setSort={setSortingOrder}
-            data={sortingOrders}
-            title="Order"
-          />
-        </XStack>
+        <Sort
+          sort={sort}
+          setSort={setSort}
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+          data={articlesSortingOptions}
+        />
       )}
 
       <FlashList

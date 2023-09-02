@@ -12,7 +12,7 @@ import {
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SiteInfoButton from "../../components/SiteInfoButton";
-import SortingOptions from "../../components/SortingOptions";
+import Sort from "../../components/Sort";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
@@ -69,31 +69,13 @@ const Home = () => {
       </XStack>
 
       {questions?.length > 0 && (
-        <XStack
-          gap={20}
-          alignItems="center"
-          justifyContent="space-between"
-          marginBottom={15}
-          marginHorizontal={10}
-          animation="quick"
-          enterStyle={{
-            scale: 0.5,
-            opacity: 0
-          }}
-        >
-          <SortingOptions
-            sort={sort}
-            setSort={setSort}
-            data={featuredQuestionsSortingOptions}
-            title="Sort"
-          />
-          <SortingOptions
-            sort={sortingOrder}
-            setSort={setSortingOrder}
-            data={sortingOrders}
-            title="Order"
-          />
-        </XStack>
+        <Sort
+          sort={sort}
+          setSort={setSort}
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+          data={featuredQuestionsSortingOptions}
+        />
       )}
 
       <FlashList

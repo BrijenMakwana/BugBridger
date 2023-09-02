@@ -3,13 +3,12 @@ import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { XStack } from "tamagui";
 
 import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
-import SortingOptions from "../../components/SortingOptions";
+import Sort from "../../components/Sort";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState("");
@@ -65,31 +64,13 @@ const Search = () => {
       />
 
       {searchQuestion && (
-        <XStack
-          gap={20}
-          alignItems="center"
-          justifyContent="space-between"
-          marginVertical={15}
-          marginHorizontal={10}
-          animation="quick"
-          enterStyle={{
-            scale: 0.5,
-            opacity: 0
-          }}
-        >
-          <SortingOptions
-            sort={sort}
-            setSort={setSort}
-            data={questionsSortingOptions}
-            title="Sort"
-          />
-          <SortingOptions
-            sort={sortingOrder}
-            setSort={setSortingOrder}
-            data={sortingOrders}
-            title="Order"
-          />
-        </XStack>
+        <Sort
+          sort={sort}
+          setSort={setSort}
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+          data={questionsSortingOptions}
+        />
       )}
 
       <FlashList
