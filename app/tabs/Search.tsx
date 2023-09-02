@@ -8,6 +8,7 @@ import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
+import SearchFiltersSheet from "../../components/SearchFiltersSheet";
 import Sort from "../../components/Sort";
 import TabHeading from "../../components/TabHeading";
 
@@ -17,6 +18,11 @@ const Search = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [sort, setSort] = useState(questionsSortingOptions[0]);
   const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
+
+  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(true);
+  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState();
+  const [minAnswers, setMinAnswers] = useState();
+  const [minViews, setMinViews] = useState();
 
   const getQuestions = async () => {
     setIsSearching(true);
@@ -56,46 +62,61 @@ const Search = () => {
   }, [sort, sortingOrder]);
 
   return (
-    <MyStack>
-      <TabHeading>ask question</TabHeading>
+    <>
+      <MyStack>
+        <TabHeading>ask question</TabHeading>
 
-      <SearchBar
-        setSearchQuestion={setSearchQuestion}
-        searchQuestion={searchQuestion}
-        onPress={getQuestions}
-        onClear={clearSearch}
-      />
-
-      {searchQuestion && (
-        <Sort
-          sort={sort}
-          setSort={setSort}
-          sortingOrder={sortingOrder}
-          setSortingOrder={setSortingOrder}
-          data={questionsSortingOptions}
+        <SearchBar
+          setSearchQuestion={setSearchQuestion}
+          searchQuestion={searchQuestion}
+          onPress={getQuestions}
+          onClear={clearSearch}
         />
-      )}
 
-      <FlashList
-        data={questions}
-        renderItem={({ item }) => (
-          <Post
-            type="question"
-            {...item}
-            isBody
+        {searchQuestion && (
+          <Sort
+            sort={sort}
+            setSort={setSort}
+            sortingOrder={sortingOrder}
+            setSortingOrder={setSortingOrder}
+            data={questionsSortingOptions}
           />
         )}
-        estimatedItemSize={50}
-        refreshControl={
-          <RefreshControl
-            refreshing={isSearching}
-            colors={[darkColors.green11]}
-            progressBackgroundColor={darkColors.gray5}
-            onRefresh={getQuestions}
-          />
-        }
-      />
-    </MyStack>
+
+        <FlashList
+          data={questions}
+          renderItem={({ item }) => (
+            <Post
+              type="question"
+              {...item}
+              isBody
+            />
+          )}
+          estimatedItemSize={50}
+          refreshControl={
+            <RefreshControl
+              refreshing={isSearching}
+              colors={[darkColors.green11]}
+              progressBackgroundColor={darkColors.gray5}
+              onRefresh={getQuestions}
+            />
+          }
+        />
+      </MyStack>
+
+      {searchFilterIsOpen && (
+        <SearchFiltersSheet
+          open={searchFilterIsOpen}
+          setOpen={setSearchFilterIsOpen}
+          isAcceptedAnswer={isAcceptedAnswer}
+          setIsAcceptedAnswer={setIsAcceptedAnswer}
+          minAnswers={minAnswers}
+          setMinAnswers={setMinAnswers}
+          minViews={minViews}
+          setMinViews={setMinViews}
+        />
+      )}
+    </>
   );
 };
 
