@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { ToastAndroid } from "react-native";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { YStack } from "tamagui";
@@ -26,10 +27,10 @@ const Question = () => {
           }
         }
       );
-      console.log(id);
+
       setArticle(response.data.items[0]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 

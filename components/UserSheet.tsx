@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ToastAndroid } from "react-native";
 import { Award } from "@tamagui/lucide-icons";
 import axios from "axios";
 import { decode } from "html-entities";
@@ -23,6 +24,7 @@ import ExternalButton from "./ExternalButton";
 
 const UserStat = (props) => {
   const { count, title } = props;
+
   return (
     <XGroup.Item>
       <ListItem
@@ -38,6 +40,7 @@ const UserStat = (props) => {
 
 const BadgeInfo = (props) => {
   const { badgeType, badgeCount, badgeColor } = props;
+
   return (
     <YGroup.Item>
       <ListItem
@@ -113,7 +116,7 @@ const UserSheet = (props) => {
 
       setUser(response.data.items[0]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 

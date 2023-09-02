@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { RefreshControl } from "react-native";
+import { RefreshControl, ToastAndroid } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { H2 } from "tamagui";
 
 import { articlesSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
@@ -20,6 +19,7 @@ const Home = () => {
 
   const getFeaturedArticles = async () => {
     setIsSearching(true);
+
     try {
       const response = await axios.get(
         "https://api.stackexchange.com/2.3/articles?",
@@ -36,7 +36,7 @@ const Home = () => {
 
       setArticles(response.data.items);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     } finally {
       setIsSearching(false);
     }
