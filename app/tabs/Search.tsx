@@ -135,6 +135,11 @@ const Search = () => {
               alignSelf="flex-start"
               marginLeft={5}
               marginTop={5}
+              animation="quick"
+              enterStyle={{
+                scale: 0.5,
+                opacity: 0
+              }}
             >
               Advance Search Filters
             </Button>
@@ -143,6 +148,11 @@ const Search = () => {
               <Text
                 marginLeft={5}
                 marginTop={15}
+                animation="quick"
+                enterStyle={{
+                  scale: 0.5,
+                  opacity: 0
+                }}
               >
                 Search Filters Applied
               </Text>
