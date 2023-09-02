@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RefreshControl } from "react-native";
+import { RefreshControl, ToastAndroid } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
@@ -27,24 +27,32 @@ const Search = () => {
   const [minAnswers, setMinAnswers] = useState([10]);
   const [minViews, setMinViews] = useState([10]);
 
+  const questionsAreEmpty = () => {
+    return questions?.length === 0;
+  };
+
   const openSearchFilter = () => {
     setSearchFilterIsOpen(true);
   };
 
+  const closeSearchFilter = () => {
+    setSearchFilterIsOpen(false);
+  };
+
   const applySearchFilter = () => {
     setSearchFilterIsApplied(true);
-    setSearchFilterIsOpen(false);
+    closeSearchFilter();
 
-    if (questions?.length === 0) return;
+    if (questionsAreEmpty()) return;
 
     getQuestions();
   };
 
   const clearSearchFilter = () => {
     setSearchFilterIsApplied(false);
-    setSearchFilterIsOpen(false);
+    closeSearchFilter();
 
-    if (questions?.length === 0) return;
+    if (questionsAreEmpty()) return;
 
     getQuestions();
   };
@@ -53,6 +61,7 @@ const Search = () => {
     if (!searchQuestion) return;
 
     setIsSearching(true);
+
     try {
       const response = await axios.get(
         "https://api.stackexchange.com/2.3/search/advanced",
@@ -77,7 +86,7 @@ const Search = () => {
 
       setQuestions(response.data.items);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     } finally {
       setIsSearching(false);
     }
@@ -89,7 +98,7 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (questions?.length === 0) return;
+    if (questionsAreEmpty()) return;
 
     getQuestions();
   }, [sort, sortingOrder]);

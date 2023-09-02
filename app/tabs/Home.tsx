@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { RefreshControl } from "react-native";
+import { RefreshControl, ToastAndroid } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { H2, XStack } from "tamagui";
+import { XStack } from "tamagui";
 
 import {
   featuredQuestionsSortingOptions,
@@ -24,6 +24,7 @@ const Home = () => {
 
   const getFeaturedQuestions = async () => {
     setIsSearching(true);
+
     try {
       const response = await axios.get(
         "https://api.stackexchange.com/2.3/questions/featured?",
@@ -40,7 +41,7 @@ const Home = () => {
 
       setQuestions(response.data.items);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     } finally {
       setIsSearching(false);
     }

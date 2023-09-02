@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ToastAndroid } from "react-native";
 import axios from "axios";
 import { H3, Sheet, Spinner, Text, XStack, YStack } from "tamagui";
 
@@ -49,7 +50,7 @@ const SiteInfoSheet = (props) => {
 
       setSiteInfo(response.data.items[0]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 

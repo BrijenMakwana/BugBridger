@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { ToastAndroid } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
@@ -36,10 +37,10 @@ const Question = () => {
           }
         }
       );
-      console.log(id);
+
       setQuestion(response.data.items[0]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 
@@ -61,7 +62,7 @@ const Question = () => {
 
       setAnswers(response.data.items);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 
@@ -82,7 +83,7 @@ const Question = () => {
 
       setRelatedQuestions(response.data.items);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 

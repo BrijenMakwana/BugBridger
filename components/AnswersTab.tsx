@@ -1,6 +1,6 @@
 import { FlashList } from "@shopify/flash-list";
-import { ChevronDown, TrendingUp } from "@tamagui/lucide-icons";
-import { Accordion, Paragraph, Square, Text, XStack, YStack } from "tamagui";
+import { ChevronDown } from "@tamagui/lucide-icons";
+import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
 import ExternalButton from "./ExternalButton";
