@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Tabs, XStack, YStack } from "tamagui";
+import { H5, Tabs, YStack } from "tamagui";
 
 import { answersSortingOptions, sortingOrders } from "../../assets/data";
 import AnswersTab from "../../components/AnswersTab";
@@ -11,7 +11,7 @@ import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import Post from "../../components/Post";
 import RelatedQuestion from "../../components/RelatedQuestion";
-import SortingOptions from "../../components/SortingOptions";
+import Sort from "../../components/Sort";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
@@ -149,31 +149,13 @@ const Question = () => {
           flex={1}
         >
           {answers?.length > 1 && (
-            <XStack
-              gap={20}
-              alignItems="center"
-              justifyContent="space-between"
-              marginVertical={15}
-              marginHorizontal={10}
-              animation="quick"
-              enterStyle={{
-                scale: 0.5,
-                opacity: 0
-              }}
-            >
-              <SortingOptions
-                sort={answerSort}
-                setSort={setAnswerSort}
-                data={answersSortingOptions}
-                title="Sort"
-              />
-              <SortingOptions
-                sort={sortingOrder}
-                setSort={setSortingOrder}
-                data={sortingOrders}
-                title="Order"
-              />
-            </XStack>
+            <Sort
+              sort={answerSort}
+              setSort={setAnswerSort}
+              sortingOrder={sortingOrder}
+              setSortingOrder={setSortingOrder}
+              data={answersSortingOptions}
+            />
           )}
 
           <AnswersTab answers={answers} />
