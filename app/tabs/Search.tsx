@@ -9,6 +9,7 @@ import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
 import Sort from "../../components/Sort";
+import TabHeading from "../../components/TabHeading";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState("");
@@ -56,6 +57,8 @@ const Search = () => {
 
   return (
     <MyStack>
+      <TabHeading>ask question</TabHeading>
+
       <SearchBar
         setSearchQuestion={setSearchQuestion}
         searchQuestion={searchQuestion}

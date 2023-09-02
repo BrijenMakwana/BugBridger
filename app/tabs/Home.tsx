@@ -13,6 +13,7 @@ import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SiteInfoButton from "../../components/SiteInfoButton";
 import Sort from "../../components/Sort";
+import TabHeading from "../../components/TabHeading";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
@@ -54,16 +55,9 @@ const Home = () => {
       <XStack
         alignItems="center"
         justifyContent="space-between"
-        marginVertical={10}
         paddingHorizontal={5}
       >
-        <H2
-          color="$green10Dark"
-          textTransform="capitalize"
-          flex={1}
-        >
-          Featured Questions
-        </H2>
+        <TabHeading>Featured Questions</TabHeading>
 
         <SiteInfoButton />
       </XStack>

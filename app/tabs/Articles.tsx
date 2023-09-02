@@ -9,6 +9,7 @@ import { articlesSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import Sort from "../../components/Sort";
+import TabHeading from "../../components/TabHeading";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -47,14 +48,7 @@ const Home = () => {
 
   return (
     <MyStack>
-      <H2
-        color="$green10Dark"
-        textTransform="capitalize"
-        marginVertical={10}
-        marginLeft={5}
-      >
-        Featured Articles
-      </H2>
+      <TabHeading>Featured Articles</TabHeading>
 
       {articles?.length > 0 && (
         <Sort
