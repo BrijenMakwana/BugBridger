@@ -37,7 +37,6 @@ const Search = () => {
       );
 
       setQuestions(response.data.items);
-      console.log(response.data.items.length);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -51,7 +50,7 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (!searchQuestion) return;
+    if (!searchQuestion || questions?.length === 0) return;
 
     getQuestions();
   }, [sort, sortingOrder]);
