@@ -10,9 +10,16 @@ const CustomMarkdown = ({ children }) => {
 export default CustomMarkdown;
 
 const styles = StyleSheet.create({
-  text: {
+  body: {
     color: "#fff",
     fontSize: 16
+  },
+  blockquote: {
+    fontSize: 15,
+    color: "#000",
+    backgroundColor: "#fff",
+    marginVertical: 15,
+    padding: 15
   },
   code_inline: {
     fontSize: 15,
