@@ -21,7 +21,7 @@ const Search = () => {
   const [sort, setSort] = useState(questionsSortingOptions[0]);
   const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
 
-  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(true);
+  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(false);
   const [searchFilterIsApplied, setSearchFilterIsApplied] = useState(false);
   const [isAcceptedAnswer, setIsAcceptedAnswer] = useState(false);
   const [minAnswers, setMinAnswers] = useState([10]);
