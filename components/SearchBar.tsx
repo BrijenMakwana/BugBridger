@@ -8,17 +8,14 @@ const SearchBar = (props) => {
       alignItems="center"
       justifyContent="space-between"
       marginHorizontal={5}
+      gap={10}
     >
       <Input
         size="$4"
         borderWidth={1}
         placeholder="Type your question here"
-        backgroundColor="$backgroundTransparent"
+        theme="green"
         flex={1}
-        borderColor="$gray10Dark"
-        focusStyle={{
-          borderColor: "$green10Dark"
-        }}
         value={searchQuestion}
         onChangeText={(text) => setSearchQuestion(text)}
         onSubmitEditing={onPress}
@@ -30,7 +27,6 @@ const SearchBar = (props) => {
             icon={Delete}
             size="$4"
             theme="red"
-            marginLeft={10}
             animation="quick"
             onPress={onClear}
             enterStyle={{
@@ -41,8 +37,7 @@ const SearchBar = (props) => {
           <Button
             icon={Search}
             size="$4"
-            backgroundColor="$green10Dark"
-            marginLeft={10}
+            theme="green"
             animation="quick"
             onPress={onPress}
             enterStyle={{
