@@ -29,7 +29,7 @@ const PostCreationInfo: FC<IPostCreationInfo> = (props) => {
     creationDate
   } = props;
 
-  const [userSheetIsOpen, setUserSheetIsOpen] = useState(false);
+  const [userSheetIsOpen, setUserSheetIsOpen] = useState<boolean>(false);
 
   return (
     <>

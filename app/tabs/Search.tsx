@@ -6,26 +6,30 @@ import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { Button, Text, YStack } from "tamagui";
 
-import { questionsSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
 import TabHeading from "../../components/TabHeading";
+import {
+  QUESTIONS_SORTING_OPTIONS,
+  SORTING_ORDERS
+} from "../../constants/sorting";
 
 const Search = () => {
-  const [searchQuestion, setSearchQuestion] = useState("");
+  const [searchQuestion, setSearchQuestion] = useState<string>("");
   const [questions, setQuestions] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [sort, setSort] = useState(questionsSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [sort, setSort] = useState<string>(QUESTIONS_SORTING_OPTIONS[0]);
+  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(false);
-  const [searchFilterIsApplied, setSearchFilterIsApplied] = useState(false);
-  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState(false);
-  const [minAnswers, setMinAnswers] = useState([10]);
-  const [minViews, setMinViews] = useState([10]);
+  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState<boolean>(false);
+  const [searchFilterIsApplied, setSearchFilterIsApplied] =
+    useState<boolean>(false);
+  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState<boolean>(false);
+  const [minAnswers, setMinAnswers] = useState<number[]>([10]);
+  const [minViews, setMinViews] = useState<number[]>([10]);
 
   const questionsAreEmpty = () => {
     return questions?.length === 0;
@@ -125,7 +129,7 @@ const Search = () => {
               setSort={setSort}
               sortingOrder={sortingOrder}
               setSortingOrder={setSortingOrder}
-              data={questionsSortingOptions}
+              data={QUESTIONS_SORTING_OPTIONS}
             />
 
             <Button

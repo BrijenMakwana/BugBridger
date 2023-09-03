@@ -4,18 +4,21 @@ import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 
-import { articlesSortingOptions, sortingOrders } from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import Sort from "../../components/Sort";
 import TabHeading from "../../components/TabHeading";
+import {
+  ARTICLES_SORTING_OPTIONS,
+  SORTING_ORDERS
+} from "../../constants/sorting";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const [sort, setSort] = useState(articlesSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
+  const [sort, setSort] = useState<string>(ARTICLES_SORTING_OPTIONS[0]);
+  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getFeaturedArticles = async () => {
     setIsSearching(true);
@@ -56,7 +59,7 @@ const Home = () => {
           setSort={setSort}
           sortingOrder={sortingOrder}
           setSortingOrder={setSortingOrder}
-          data={articlesSortingOptions}
+          data={ARTICLES_SORTING_OPTIONS}
         />
       )}
 

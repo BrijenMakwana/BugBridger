@@ -5,7 +5,8 @@ import { Button } from "tamagui";
 import SiteInfoSheet from "./SiteInfoSheet";
 
 const SiteInfoButton = () => {
-  const [siteInfoSheetIsOpen, setSiteInfoSheetIsOpen] = useState(false);
+  const [siteInfoSheetIsOpen, setSiteInfoSheetIsOpen] =
+    useState<boolean>(false);
 
   return (
     <>
