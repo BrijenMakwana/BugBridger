@@ -32,8 +32,8 @@ const Sort = (props) => {
         onValueChange={setSortingOrder}
         theme="green"
         flex={1}
+        size="$1.5"
         orientation="horizontal"
-        height="95%"
       >
         <ToggleGroup.Item
           value="asc"

@@ -9,6 +9,7 @@ const CustomSelect = (props) => {
       id={title}
       value={sort}
       onValueChange={setSort}
+      size="$3"
     >
       <Select.Trigger
         iconAfter={ChevronDown}
