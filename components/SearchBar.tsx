@@ -1,24 +1,30 @@
+import { Dispatch, FC, SetStateAction } from "react";
 import { Delete, Search } from "@tamagui/lucide-icons";
 import { Button, Input, XStack } from "tamagui";
 
-const SearchBar = (props) => {
+interface ISearchBar {
+  setSearchQuestion: Dispatch<SetStateAction<string>>;
+  searchQuestion: string;
+  onPress: () => void;
+  onClear: () => void;
+}
+
+const SearchBar: FC<ISearchBar> = (props) => {
   const { setSearchQuestion, searchQuestion, onPress, onClear } = props;
+
   return (
     <XStack
       alignItems="center"
       justifyContent="space-between"
       marginHorizontal={5}
+      gap={10}
     >
       <Input
         size="$4"
         borderWidth={1}
         placeholder="Type your question here"
-        backgroundColor="$backgroundTransparent"
+        theme="green"
         flex={1}
-        borderColor="$gray10Dark"
-        focusStyle={{
-          borderColor: "$green10Dark"
-        }}
         value={searchQuestion}
         onChangeText={(text) => setSearchQuestion(text)}
         onSubmitEditing={onPress}
@@ -30,7 +36,6 @@ const SearchBar = (props) => {
             icon={Delete}
             size="$4"
             theme="red"
-            marginLeft={10}
             animation="quick"
             onPress={onClear}
             enterStyle={{
@@ -41,8 +46,7 @@ const SearchBar = (props) => {
           <Button
             icon={Search}
             size="$4"
-            backgroundColor="$green10Dark"
-            marginLeft={10}
+            theme="green"
             animation="quick"
             onPress={onPress}
             enterStyle={{

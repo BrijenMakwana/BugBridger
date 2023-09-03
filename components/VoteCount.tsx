@@ -1,7 +1,13 @@
+import { FC } from "react";
 import { TrendingUp } from "@tamagui/lucide-icons";
 import { Text, XStack } from "tamagui";
 
-const VoteCount = (props) => {
+interface IVoteCount {
+  vote: number;
+  isAccepted: boolean;
+}
+
+const VoteCount: FC<IVoteCount> = (props) => {
   const { vote, isAccepted } = props;
 
   return (

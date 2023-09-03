@@ -1,10 +1,18 @@
+import { FC } from "react";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H6 } from "tamagui";
 
 import VoteCount from "./VoteCount";
 
-const RelatedQuestion = (props) => {
+interface IRelatedQuestion {
+  question_id: number;
+  up_vote_count: number;
+  title: string;
+  is_answered: boolean;
+}
+
+const RelatedQuestion: FC<IRelatedQuestion> = (props) => {
   const { question_id, up_vote_count, title, is_answered } = props;
 
   return (

@@ -1,9 +1,13 @@
+import { FC } from "react";
 import { StyleSheet } from "react-native";
 import Markdown from "react-native-markdown-display";
-import { darkColors } from "@tamagui/themes";
 import { decode } from "html-entities";
 
-const CustomMarkdown = ({ children }) => {
+interface ICustomMarkdown {
+  children: string;
+}
+
+const CustomMarkdown: FC<ICustomMarkdown> = ({ children }) => {
   return <Markdown style={styles}>{decode(children)}</Markdown>;
 };
 
@@ -31,8 +35,6 @@ const styles = StyleSheet.create({
     color: "#000",
     backgroundColor: "#fff",
     marginVertical: 15,
-    padding: 15,
-    borderWidth: 3,
-    borderColor: darkColors.green10
+    padding: 15
   }
 });

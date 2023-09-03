@@ -1,13 +1,29 @@
+import { FC } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
 import ExternalButton from "./ExternalButton";
+import { IOwner } from "./Post";
 import PostCreationInfo from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
-const Answer = (props) => {
+interface IAnswer {
+  index: number;
+  body_markdown: string;
+  is_accepted: boolean;
+  owner: IOwner;
+  creation_date: Date;
+  link: string;
+  up_vote_count: number;
+}
+
+interface IAnswersTab {
+  answers: IAnswer[];
+}
+
+const Answer: FC<IAnswer> = (props) => {
   const {
     index,
     body_markdown,
@@ -17,6 +33,7 @@ const Answer = (props) => {
     link,
     up_vote_count
   } = props;
+
   return (
     <Accordion.Item value={`answer${index}`}>
       <Accordion.Trigger
@@ -66,7 +83,7 @@ const Answer = (props) => {
   );
 };
 
-const AnswersTab = (props) => {
+const AnswersTab: FC<IAnswersTab> = (props) => {
   const { answers } = props;
 
   return (

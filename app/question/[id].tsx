@@ -5,7 +5,6 @@ import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { H5, Tabs, YStack } from "tamagui";
 
-import { answersSortingOptions, sortingOrders } from "../../assets/data";
 import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import GoBack from "../../components/GoBack";
@@ -13,6 +12,10 @@ import { MyScroll } from "../../components/MyScroll";
 import Post from "../../components/Post";
 import RelatedQuestion from "../../components/RelatedQuestion";
 import Sort from "../../components/Sort";
+import {
+  ANSWERS_SORTING_OPTIONS,
+  SORTING_ORDERS
+} from "../../constants/sorting";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
@@ -20,8 +23,10 @@ const Question = () => {
   const [answers, setAnswers] = useState([]);
   const [relatedQuestions, setRelatedQuestions] = useState([]);
 
-  const [answerSort, setAnswerSort] = useState(answersSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
+  const [answerSort, setAnswerSort] = useState<string>(
+    ANSWERS_SORTING_OPTIONS[0]
+  );
+  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getQuestion = async () => {
     try {
@@ -155,7 +160,7 @@ const Question = () => {
               setSort={setAnswerSort}
               sortingOrder={sortingOrder}
               setSortingOrder={setSortingOrder}
-              data={answersSortingOptions}
+              data={ANSWERS_SORTING_OPTIONS}
             />
           )}
 

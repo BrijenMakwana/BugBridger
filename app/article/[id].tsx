@@ -9,7 +9,7 @@ import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import Post from "../../components/Post";
 
-const Question = () => {
+const Article = () => {
   const { id } = useLocalSearchParams();
   const [article, setArticle] = useState({});
 
@@ -55,4 +55,4 @@ const Question = () => {
   );
 };
 
-export default Question;
+export default Article;

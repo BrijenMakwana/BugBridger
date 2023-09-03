@@ -5,22 +5,24 @@ import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 import { XStack } from "tamagui";
 
-import {
-  featuredQuestionsSortingOptions,
-  sortingOrders
-} from "../../assets/data";
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import SiteInfoButton from "../../components/SiteInfoButton";
 import Sort from "../../components/Sort";
 import TabHeading from "../../components/TabHeading";
+import {
+  FEATURED_QUESTIONS_SORTING_OPTIONS,
+  SORTING_ORDERS
+} from "../../constants/sorting";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const [sort, setSort] = useState(featuredQuestionsSortingOptions[0]);
-  const [sortingOrder, setSortingOrder] = useState(sortingOrders[0]);
+  const [sort, setSort] = useState<string>(
+    FEATURED_QUESTIONS_SORTING_OPTIONS[0]
+  );
+  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getFeaturedQuestions = async () => {
     setIsSearching(true);
@@ -69,7 +71,7 @@ const Home = () => {
           setSort={setSort}
           sortingOrder={sortingOrder}
           setSortingOrder={setSortingOrder}
-          data={featuredQuestionsSortingOptions}
+          data={FEATURED_QUESTIONS_SORTING_OPTIONS}
         />
       )}
 

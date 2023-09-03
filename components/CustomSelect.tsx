@@ -1,7 +1,10 @@
+import { FC } from "react";
 import { Check, ChevronDown } from "@tamagui/lucide-icons";
 import { Adapt, Select, Sheet } from "tamagui";
 
-const CustomSelect = (props) => {
+import { ISortingOptions } from "./SortingOptions";
+
+const CustomSelect: FC<ISortingOptions> = (props) => {
   const { title, data, sort, setSort } = props;
 
   return (
@@ -9,6 +12,7 @@ const CustomSelect = (props) => {
       id={title}
       value={sort}
       onValueChange={setSort}
+      size="$3"
     >
       <Select.Trigger
         iconAfter={ChevronDown}

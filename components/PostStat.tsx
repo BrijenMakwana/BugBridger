@@ -1,9 +1,17 @@
+import { FC, NamedExoticComponent } from "react";
 import { ListItem, YGroup } from "tamagui";
 
 import { formatNumber } from "../utils/utils";
 
-const PostStats = (props) => {
+interface IPostStat {
+  title: string;
+  icon: NamedExoticComponent<IconProps>;
+  count: number;
+}
+
+const PostStat: FC<IPostStat> = (props) => {
   const { title, icon, count } = props;
+
   return (
     <YGroup.Item>
       <ListItem
@@ -18,4 +26,4 @@ const PostStats = (props) => {
   );
 };
 
-export default PostStats;
+export default PostStat;

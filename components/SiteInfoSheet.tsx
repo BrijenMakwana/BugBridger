@@ -1,12 +1,23 @@
-import { useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { ToastAndroid } from "react-native";
 import axios from "axios";
 import { H3, Sheet, Spinner, Text, XStack, YStack } from "tamagui";
 
 import { formatNumber, formatText } from "../utils/utils";
 
-const InfoCard = (props) => {
+interface IInfoCard {
+  title: string;
+  value: number;
+}
+
+interface ISiteInfoSheet {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const InfoCard: FC<IInfoCard> = (props) => {
   const { title, value } = props;
+
   return (
     <XStack
       alignItems="center"
@@ -17,7 +28,7 @@ const InfoCard = (props) => {
         fontSize={15}
         textTransform="capitalize"
       >
-        {title}
+        {formatText(title)}
       </Text>
 
       <Text
@@ -25,13 +36,13 @@ const InfoCard = (props) => {
         color="$green10Dark"
         fontWeight="500"
       >
-        {value}
+        {formatNumber(value)}
       </Text>
     </XStack>
   );
 };
 
-const SiteInfoSheet = (props) => {
+const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
   const { open, setOpen } = props;
   const [siteInfo, setSiteInfo] = useState({});
 
@@ -91,8 +102,8 @@ const SiteInfoSheet = (props) => {
             {Object.keys(siteInfo).map((item, index) => (
               <InfoCard
                 key={index}
-                value={formatNumber(siteInfo[item])}
-                title={formatText(item)}
+                value={siteInfo[item]}
+                title={item}
               />
             ))}
           </YStack>

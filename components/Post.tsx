@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
@@ -5,8 +6,33 @@ import { Card, H5, Separator, Text, XStack, YGroup } from "tamagui";
 
 import ExternalButton from "./ExternalButton";
 import PostCreationInfo from "./PostCreationInfo";
-import PostStats from "./PostStats";
+import PostStat from "./PostStat";
 import Tag from "./Tag";
+
+export interface IOwner {
+  user_id: number;
+  display_name: string;
+  profile_image: string;
+  reputation: number;
+}
+
+interface IPost {
+  question_id: number;
+  title: string;
+  is_answered: boolean;
+  body_markdown: string;
+  tags: string[];
+  score: number;
+  view_count: number;
+  answer_count: number;
+  owner: IOwner;
+  creation_date: Date;
+  link: string;
+  isBody?: boolean;
+  isExternal?: boolean;
+  article_id: number;
+  type: "question" | "article";
+}
 
 const IsAnswered = () => {
   return (
@@ -30,7 +56,7 @@ const IsAnswered = () => {
   );
 };
 
-const Post = (props) => {
+const Post: FC<IPost> = (props) => {
   const {
     question_id,
     title,
@@ -98,21 +124,21 @@ const Post = (props) => {
           separator={<Separator />}
           marginTop={10}
         >
-          <PostStats
+          <PostStat
             title="Views"
             icon={Eye}
             count={view_count}
           />
 
           {type === "question" && (
-            <PostStats
+            <PostStat
               title="Answers"
               icon={Check}
               count={answer_count}
             />
           )}
 
-          <PostStats
+          <PostStat
             title="Votes"
             icon={TrendingUp}
             count={score}

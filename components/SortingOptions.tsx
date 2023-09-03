@@ -1,8 +1,16 @@
+import { Dispatch, FC, SetStateAction } from "react";
 import { Label, XStack } from "tamagui";
 
 import CustomSelect from "./CustomSelect";
 
-const SortingOptions = (props) => {
+export interface ISortingOptions {
+  title: string;
+  data: string[];
+  sort: string;
+  setSort: Dispatch<SetStateAction<string>>;
+}
+
+const SortingOptions: FC<ISortingOptions> = (props) => {
   const { title, data, sort, setSort } = props;
 
   return (
