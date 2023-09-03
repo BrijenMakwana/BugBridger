@@ -1,11 +1,11 @@
 {
   "expo": {
-    "scheme": "tamagui-app",
+    "scheme": "bug-bridger",
     "userInterfaceStyle": "dark",
     "splash": {
-      "backgroundColor": "#000",
+      "backgroundColor": "#000000",
       "image": "./assets/splash.png",
-      "resizeMode": "contain"
+      "resizeMode": "cover"
     },
     "icon": "./assets/icon.png",
     "name": "BugBridger",
