@@ -132,6 +132,7 @@ const Search = () => {
               theme="green"
               icon={ListFilter}
               onPress={openSearchFilter}
+              size="$3"
               alignSelf="flex-start"
               marginLeft={5}
               marginTop={5}
