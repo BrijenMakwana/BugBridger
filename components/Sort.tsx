@@ -1,9 +1,18 @@
+import { Dispatch, FC, SetStateAction } from "react";
 import { ArrowDown10, ArrowUp01 } from "@tamagui/lucide-icons";
 import { ToggleGroup, XStack } from "tamagui";
 
 import SortingOptions from "./SortingOptions";
 
-const Sort = (props) => {
+interface ISort {
+  data: string[];
+  sort: string;
+  setSort: Dispatch<SetStateAction<string>>;
+  sortingOrder: string;
+  setSortingOrder: Dispatch<SetStateAction<string>>;
+}
+
+const Sort: FC<ISort> = (props) => {
   const { sort, setSort, sortingOrder, setSortingOrder, data } = props;
 
   return (

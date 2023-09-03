@@ -1,9 +1,13 @@
+import { FC } from "react";
 import { StyleSheet } from "react-native";
 import Markdown from "react-native-markdown-display";
-import { darkColors } from "@tamagui/themes";
 import { decode } from "html-entities";
 
-const CustomMarkdown = ({ children }) => {
+interface ICustomMarkdown {
+  children: string;
+}
+
+const CustomMarkdown: FC<ICustomMarkdown> = ({ children }) => {
   return <Markdown style={styles}>{decode(children)}</Markdown>;
 };
 

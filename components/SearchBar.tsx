@@ -1,8 +1,17 @@
+import { Dispatch, FC, SetStateAction } from "react";
 import { Delete, Search } from "@tamagui/lucide-icons";
 import { Button, Input, XStack } from "tamagui";
 
-const SearchBar = (props) => {
+interface ISearchBar {
+  setSearchQuestion: Dispatch<SetStateAction<string>>;
+  searchQuestion: string;
+  onPress: () => void;
+  onClear: () => void;
+}
+
+const SearchBar: FC<ISearchBar> = (props) => {
   const { setSearchQuestion, searchQuestion, onPress, onClear } = props;
+
   return (
     <XStack
       alignItems="center"

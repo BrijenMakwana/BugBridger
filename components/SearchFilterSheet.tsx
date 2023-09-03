@@ -1,3 +1,4 @@
+import { Dispatch, FC, SetStateAction } from "react";
 import { Check, Delete } from "@tamagui/lucide-icons";
 import {
   Button,
@@ -11,8 +12,28 @@ import {
   YStack
 } from "tamagui";
 
-const CustomSlider = (props) => {
+interface ICustomSlider {
+  title: string;
+  value: number[];
+  setValue: Dispatch<SetStateAction<number[]>>;
+}
+
+interface ISearchFilterSheet {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  onApply: () => void;
+  onClear: () => void;
+  isAcceptedAnswer: boolean;
+  setIsAcceptedAnswer: Dispatch<SetStateAction<boolean>>;
+  minAnswers: number[];
+  setMinAnswers: Dispatch<SetStateAction<number[]>>;
+  minViews: number[];
+  setMinViews: Dispatch<SetStateAction<number[]>>;
+}
+
+const CustomSlider: FC<ICustomSlider> = (props) => {
   const { title, value, setValue } = props;
+
   return (
     <>
       <Text
@@ -54,7 +75,7 @@ const CustomSlider = (props) => {
   );
 };
 
-const SearchFilterSheet = (props) => {
+const SearchFilterSheet: FC<ISearchFilterSheet> = (props) => {
   const {
     open,
     setOpen,

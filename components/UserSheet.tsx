@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { ToastAndroid } from "react-native";
 import { Award } from "@tamagui/lucide-icons";
 import axios from "axios";
@@ -22,7 +22,30 @@ import { formatNumber } from "../utils/utils";
 
 import ExternalButton from "./ExternalButton";
 
-const UserStat = (props) => {
+interface IUserStat {
+  count: number;
+  title: string;
+}
+
+interface IBadgeInfo {
+  badgeType: "Gold" | "Silver" | "Bronze";
+  badgeCount: number;
+  badgeColor: string;
+}
+
+interface IUserCard {
+  displayName: string;
+  profileImage: string;
+  creationDate: Date;
+}
+
+interface IUserSheet {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  userID: number;
+}
+
+const UserStat: FC<IUserStat> = (props) => {
   const { count, title } = props;
 
   return (
@@ -38,7 +61,7 @@ const UserStat = (props) => {
   );
 };
 
-const BadgeInfo = (props) => {
+const BadgeInfo: FC<IBadgeInfo> = (props) => {
   const { badgeType, badgeCount, badgeColor } = props;
 
   return (
@@ -55,8 +78,9 @@ const BadgeInfo = (props) => {
   );
 };
 
-const UserCard = (props) => {
+const UserCard: FC<IUserCard> = (props) => {
   const { displayName, profileImage, creationDate } = props;
+
   return (
     <XStack
       justifyContent="space-between"
@@ -94,7 +118,7 @@ const UserCard = (props) => {
   );
 };
 
-const UserSheet = (props) => {
+const UserSheet: FC<IUserSheet> = (props) => {
   const { open, setOpen, userID } = props;
   const [user, setUser] = useState();
 

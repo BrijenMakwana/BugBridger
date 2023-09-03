@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Button, Text, YStack } from "tamagui";
 
 import { formatNumber } from "../utils/utils";
 
+import { IOwner } from "./Post";
 import UserSheet from "./UserSheet";
+
+interface IPostCreationInfo extends IOwner {
+  type: "question" | "answer" | "article";
+  creationDate: Date;
+}
 
 const postType = {
   question: "asked",
@@ -13,7 +19,7 @@ const postType = {
   article: "posted"
 };
 
-const PostCreationInfo = (props) => {
+const PostCreationInfo: FC<IPostCreationInfo> = (props) => {
   const {
     user_id,
     type,

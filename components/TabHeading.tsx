@@ -1,6 +1,11 @@
+import { FC } from "react";
 import { H2 } from "tamagui";
 
-const TabHeading = (props) => {
+interface ITabHeading {
+  children: string;
+}
+
+const TabHeading: FC<ITabHeading> = (props) => {
   const { children } = props;
 
   return (

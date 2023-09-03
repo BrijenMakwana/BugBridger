@@ -1,8 +1,13 @@
+import { FC } from "react";
 import { ExternalLink } from "@tamagui/lucide-icons";
 import * as Linking from "expo-linking";
 import { Button } from "tamagui";
 
-const ExternalButton = (props) => {
+interface IExternalButton {
+  link: string;
+}
+
+const ExternalButton: FC<IExternalButton> = (props) => {
   const { link } = props;
 
   const openInStackOverflow = () => {
