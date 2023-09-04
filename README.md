@@ -1,6 +1,6 @@
-<img src="./assets/icon.png" alt="app logo" width="300" height="300"/>
+<img src="./assets/icon.png" alt="app logo" width="350" height="350"/>
 
-# BugBridger : StackOverflow Mobile App
+# BugBridger(StackOverflow Mobile App)
 
 ## Table of contents
 
