@@ -18,6 +18,7 @@ const SearchBar: FC<ISearchBar> = (props) => {
       justifyContent="space-between"
       marginHorizontal={5}
       gap={10}
+      marginTop={10}
     >
       <Input
         size="$4"

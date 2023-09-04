@@ -55,16 +55,6 @@ const Home = () => {
 
   return (
     <MyStack>
-      <XStack
-        alignItems="center"
-        justifyContent="space-between"
-        paddingHorizontal={5}
-      >
-        <TabHeading>Featured Questions</TabHeading>
-
-        <SiteInfoButton />
-      </XStack>
-
       {questions?.length > 0 && (
         <Sort
           sort={sort}

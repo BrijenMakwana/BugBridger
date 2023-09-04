@@ -12,7 +12,6 @@ const TabHeading: FC<ITabHeading> = (props) => {
     <H2
       color="$green10Dark"
       textTransform="capitalize"
-      marginVertical={10}
       marginLeft={5}
     >
       {children}

@@ -51,8 +51,6 @@ const Home = () => {
 
   return (
     <MyStack>
-      <TabHeading>Featured Articles</TabHeading>
-
       {articles?.length > 0 && (
         <Sort
           sort={sort}

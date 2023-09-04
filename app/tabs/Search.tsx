@@ -110,8 +110,6 @@ const Search = () => {
   return (
     <>
       <MyStack>
-        <TabHeading>ask question</TabHeading>
-
         <SearchBar
           setSearchQuestion={setSearchQuestion}
           searchQuestion={searchQuestion}
