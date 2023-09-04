@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { RefreshControl, ToastAndroid } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { MasonryFlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
-import { XStack } from "tamagui";
 
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
-import SiteInfoButton from "../../components/SiteInfoButton";
 import Sort from "../../components/Sort";
-import TabHeading from "../../components/TabHeading";
 import {
   FEATURED_QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
+import { isTablet } from "../../utils/utils";
 
 const Home = () => {
   const [questions, setQuestions] = useState([]);
@@ -55,16 +53,6 @@ const Home = () => {
 
   return (
     <MyStack>
-      <XStack
-        alignItems="center"
-        justifyContent="space-between"
-        paddingHorizontal={5}
-      >
-        <TabHeading>Featured Questions</TabHeading>
-
-        <SiteInfoButton />
-      </XStack>
-
       {questions?.length > 0 && (
         <Sort
           sort={sort}
@@ -75,8 +63,9 @@ const Home = () => {
         />
       )}
 
-      <FlashList
+      <MasonryFlashList
         data={questions}
+        numColumns={isTablet ? 2 : 1}
         renderItem={({ item }) => (
           <Post
             type="question"

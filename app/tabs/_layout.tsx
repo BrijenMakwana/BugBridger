@@ -1,6 +1,10 @@
 import { Home, Newspaper, Search } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import { Tabs } from "expo-router";
+import { XStack } from "tamagui";
+
+import SiteInfoButton from "../../components/SiteInfoButton";
+import TabHeading from "../../components/TabHeading";
 
 export default function TabLayout() {
   return (
@@ -8,7 +12,6 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: darkColors.green10,
         tabBarInactiveTintColor: darkColors.gray11,
-        headerShown: false,
         tabBarStyle: {
           backgroundColor: darkColors.gray2
         },
@@ -26,6 +29,17 @@ export default function TabLayout() {
               size="$1.5"
               color={color}
             />
+          ),
+          header: () => (
+            <XStack
+              alignItems="center"
+              justifyContent="space-between"
+              paddingHorizontal={5}
+            >
+              <TabHeading>Featured Questions</TabHeading>
+
+              <SiteInfoButton />
+            </XStack>
           )
         }}
       />
@@ -38,7 +52,8 @@ export default function TabLayout() {
               size="$1.5"
               color={color}
             />
-          )
+          ),
+          header: () => <TabHeading>ask question</TabHeading>
         }}
       />
       <Tabs.Screen
@@ -50,7 +65,8 @@ export default function TabLayout() {
               size="$1.5"
               color={color}
             />
-          )
+          ),
+          header: () => <TabHeading>Featured Articles</TabHeading>
         }}
       />
     </Tabs>

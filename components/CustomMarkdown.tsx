@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16
   },
+  fence: {
+    fontSize: 15,
+    color: "#000",
+    backgroundColor: "#fff",
+    marginVertical: 15,
+    padding: 15
+  },
   blockquote: {
     fontSize: 15,
     color: "#000",

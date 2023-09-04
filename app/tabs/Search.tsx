@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RefreshControl, ToastAndroid } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { MasonryFlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
@@ -11,11 +11,11 @@ import Post from "../../components/Post";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
-import TabHeading from "../../components/TabHeading";
 import {
   QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
+import { isTablet } from "../../utils/utils";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState<string>("");
@@ -46,19 +46,11 @@ const Search = () => {
   const applySearchFilter = () => {
     setSearchFilterIsApplied(true);
     closeSearchFilter();
-
-    if (questionsAreEmpty()) return;
-
-    getQuestions();
   };
 
   const clearSearchFilter = () => {
     setSearchFilterIsApplied(false);
     closeSearchFilter();
-
-    if (questionsAreEmpty()) return;
-
-    getQuestions();
   };
 
   const getQuestions = async () => {
@@ -105,13 +97,11 @@ const Search = () => {
     if (questionsAreEmpty()) return;
 
     getQuestions();
-  }, [sort, sortingOrder]);
+  }, [sort, sortingOrder, searchFilterIsApplied]);
 
   return (
     <>
       <MyStack>
-        <TabHeading>ask question</TabHeading>
-
         <SearchBar
           setSearchQuestion={setSearchQuestion}
           searchQuestion={searchQuestion}
@@ -165,8 +155,9 @@ const Search = () => {
           </YStack>
         )}
 
-        <FlashList
+        <MasonryFlashList
           data={questions}
+          numColumns={isTablet ? 2 : 1}
           renderItem={({ item }) => (
             <Post
               type="question"
