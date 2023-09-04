@@ -35,7 +35,6 @@ const Sort: FC<ISort> = (props) => {
         sort={sort}
         setSort={setSort}
         data={data}
-        title="Sort"
       />
 
       <ToggleGroup
