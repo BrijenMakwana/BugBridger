@@ -16,7 +16,7 @@ const SearchBar: FC<ISearchBar> = (props) => {
     <XStack
       alignItems="center"
       justifyContent="space-between"
-      marginHorizontal={5}
+      paddingHorizontal={5}
       gap={10}
       marginTop={10}
     >

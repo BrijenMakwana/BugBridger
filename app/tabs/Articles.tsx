@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { RefreshControl, ToastAndroid } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { MasonryFlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 import axios from "axios";
 
 import { MyStack } from "../../components/MyStack";
 import Post from "../../components/Post";
 import Sort from "../../components/Sort";
-import TabHeading from "../../components/TabHeading";
 import {
   ARTICLES_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
+import { isTablet } from "../../utils/utils";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -61,8 +61,9 @@ const Home = () => {
         />
       )}
 
-      <FlashList
+      <MasonryFlashList
         data={articles}
+        numColumns={isTablet ? 2 : 1}
         renderItem={({ item }) => (
           <Post
             type="article"

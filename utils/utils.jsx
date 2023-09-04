@@ -1,3 +1,5 @@
+import * as Device from "expo-device";
+
 const formatNumber = (number) => {
   if (number >= 1000 && number < 1000000) {
     return (number / 1000).toFixed(1) + "k";
@@ -14,4 +16,6 @@ const formatText = (text) => {
   return text.replaceAll("_", " ");
 };
 
-export { formatNumber, formatText };
+const isTablet = Device.deviceType === 2;
+
+export { formatNumber, formatText, isTablet };

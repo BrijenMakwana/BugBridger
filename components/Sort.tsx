@@ -2,6 +2,8 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { ArrowDown10, ArrowUp01 } from "@tamagui/lucide-icons";
 import { ToggleGroup, XStack } from "tamagui";
 
+import { isTablet } from "../utils/utils";
+
 import SortingOptions from "./SortingOptions";
 
 interface ISort {
@@ -21,12 +23,13 @@ const Sort: FC<ISort> = (props) => {
       alignItems="center"
       justifyContent="space-between"
       marginVertical={15}
-      marginHorizontal={10}
+      paddingHorizontal={10}
       animation="quick"
       enterStyle={{
         scale: 0.5,
         opacity: 0
       }}
+      width={isTablet ? "50%" : "100%"}
     >
       <SortingOptions
         sort={sort}

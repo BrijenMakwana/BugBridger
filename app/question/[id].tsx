@@ -16,6 +16,7 @@ import {
   ANSWERS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
+import { isTablet } from "../../utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
@@ -115,7 +116,9 @@ const Question = () => {
         <Tabs.List
           theme="green"
           marginBottom={10}
-          marginHorizontal={5}
+          paddingHorizontal={5}
+          alignSelf="center"
+          width={isTablet ? "60%" : "100%"}
         >
           <Tabs.Tab value="tab1">
             <H5>Question</H5>
