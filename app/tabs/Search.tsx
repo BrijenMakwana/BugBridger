@@ -46,19 +46,11 @@ const Search = () => {
   const applySearchFilter = () => {
     setSearchFilterIsApplied(true);
     closeSearchFilter();
-
-    if (questionsAreEmpty()) return;
-
-    getQuestions();
   };
 
   const clearSearchFilter = () => {
     setSearchFilterIsApplied(false);
     closeSearchFilter();
-
-    if (questionsAreEmpty()) return;
-
-    getQuestions();
   };
 
   const getQuestions = async () => {
@@ -105,7 +97,7 @@ const Search = () => {
     if (questionsAreEmpty()) return;
 
     getQuestions();
-  }, [sort, sortingOrder]);
+  }, [sort, sortingOrder, searchFilterIsApplied]);
 
   return (
     <>
