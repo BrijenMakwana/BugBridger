@@ -10,6 +10,17 @@
     "icon": "./assets/icon.png",
     "name": "BugBridger",
     "slug": "BugBridger",
-    "plugins": ["expo-router"]
+    "plugins": ["expo-router"],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "540b9b65-4a01-4e0b-b118-bd9ad452726e"
+      }
+    },
+    "android": {
+      "package": "com.brijenmakwana.BugBridger"
+    }
   }
 }
