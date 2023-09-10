@@ -40,13 +40,13 @@ Clone this project and open it on any Code Editor or IDE.
 Then run this command.
 
 ```
-npm i
+yarn install
 ```
 
 It will install all the dependencies in your system. Then run this command to start the server.
 
 ```
-npm start
+yarn start
 ```
 
 Now you can view this app on your Android smartphone or Android Emulator
