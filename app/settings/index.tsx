@@ -100,6 +100,11 @@ const SettingsScreen = () => {
                 />
               }
               pressTheme
+              onPress={() =>
+                openURL(
+                  "https://github.com/BrijenMakwana/BugBridger/blob/main/PRIVACY.md"
+                )
+              }
             />
           </YGroup.Item>
 
