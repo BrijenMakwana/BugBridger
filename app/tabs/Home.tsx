@@ -5,6 +5,7 @@ import { darkColors } from "@tamagui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import Error from "../../components/Error";
 import { MyStack } from "../../components/MyStack";
 import QuestionCard, { IQuestion } from "../../components/QuestionCard";
 import Sort from "../../components/Sort";
@@ -49,6 +50,8 @@ const Home = () => {
     queryKey: ["questionsData", sort, sortingOrder],
     queryFn: getFeaturedQuestions
   });
+
+  if (error) return <Error />;
 
   return (
     <MyStack>
