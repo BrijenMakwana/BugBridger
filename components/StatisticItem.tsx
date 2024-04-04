@@ -20,7 +20,6 @@ const StatisticItem = (
   return (
     <XGroup.Item>
       <ListItem
-        size="$4"
         title={formatNumber(title)}
         subTitle={"subTitle" in props ? props.subTitle : null}
         backgroundColor="$backgroundTransparent"
