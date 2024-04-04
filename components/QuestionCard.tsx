@@ -6,7 +6,7 @@ import {
 } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import { Card, H5, Separator, Text, XStack } from "tamagui";
+import { Card, H5, Separator, Text, XStack, Paragraph } from "tamagui";
 import { XGroup } from "tamagui";
 
 import PostCreationInfo, { IOwner } from "./PostCreationInfo";
@@ -85,18 +85,16 @@ const QuestionCard = (props: IQuestion) => {
           {is_answered && <IsAnswered />}
 
           <H5>{decode(title)}</H5>
-
-          {isBody && (
-            <Text
-              numberOfLines={5}
-              fontSize="$4"
-              color="$gray11Dark"
-              marginTop={20}
-            >
-              {decode(body_markdown)}
-            </Text>
-          )}
         </Card.Header>
+
+        {isBody && (
+          <Paragraph
+            theme="alt1"
+            numberOfLines={5}
+          >
+            {decode(body_markdown)}
+          </Paragraph>
+        )}
 
         <XStack
           flexWrap="wrap"
