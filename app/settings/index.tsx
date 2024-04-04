@@ -119,6 +119,11 @@ const SettingsScreen = () => {
                 />
               }
               pressTheme
+              onPress={() =>
+                openURL(
+                  "https://github.com/BrijenMakwana/BugBridger/blob/main/TERMS.md"
+                )
+              }
             />
           </YGroup.Item>
         </YGroup>
