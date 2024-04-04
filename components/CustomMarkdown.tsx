@@ -15,29 +15,30 @@ export default CustomMarkdown;
 const styles = StyleSheet.create({
   body: {
     color: "#fff",
-    fontSize: 16
+    fontSize: 14,
+    lineHeight: 25
   },
   fence: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#000",
     backgroundColor: "#fff",
     marginVertical: 15,
     padding: 15
   },
   blockquote: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#000",
     backgroundColor: "#fff",
     marginVertical: 15,
     padding: 15
   },
   code_inline: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#000",
     backgroundColor: "#fff"
   },
   code_block: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#000",
     backgroundColor: "#fff",
     marginVertical: 15,
