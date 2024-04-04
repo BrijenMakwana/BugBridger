@@ -17,7 +17,7 @@ This service may include hyperlinks to external websites. If you choose to click
 
 **Changes**
 
-This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+This Privacy Policy may be updated from time to time for any reason. Brijen Makwana will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
 
 This privacy policy is effective as of 2024-04-04.
 
@@ -27,4 +27,4 @@ By using the Application, you are consenting to the processing of your informati
 
 **Contact Us**
 
-If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at brijenma@gmail.com.
+If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact Brijen Makwana via email at brijenma@gmail.com.
