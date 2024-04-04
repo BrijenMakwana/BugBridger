@@ -3,7 +3,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Spinner, Tabs, XStack, YStack } from "tamagui";
+import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AnswersTab, { IAnswer } from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
@@ -162,7 +162,7 @@ const Question = () => {
           width={isTablet ? "60%" : "100%"}
         >
           <Tabs.Tab value="tab1">
-            <H5>Question</H5>
+            <H6>Question</H6>
           </Tabs.Tab>
 
           <Tabs.Tab
@@ -171,15 +171,15 @@ const Question = () => {
             disabled={question?.answer_count === 0}
             opacity={question?.answer_count === 0 ? 0.5 : 1}
           >
-            <H5>
+            <H6>
               {question?.answer_count === 0
                 ? "No Answers"
                 : `Answers(${question?.answer_count})`}
-            </H5>
+            </H6>
           </Tabs.Tab>
 
           <Tabs.Tab value="tab3">
-            <H5>Related</H5>
+            <H6>Related</H6>
           </Tabs.Tab>
         </Tabs.List>
 
