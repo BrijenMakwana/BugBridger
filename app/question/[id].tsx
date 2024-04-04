@@ -3,7 +3,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Tabs, XStack, YStack } from "tamagui";
+import { H5, Tabs, XStack, YStack, Spinner } from "tamagui";
 
 import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
@@ -93,7 +93,7 @@ const Question = () => {
     }
   };
 
-  const { data: question } = useQuery({
+  const { data: question, isPending } = useQuery({
     queryKey: ["questionData"],
     queryFn: getQuestion
   });
@@ -107,6 +107,14 @@ const Question = () => {
     queryKey: ["relatedQuestionsData"],
     queryFn: getRelatedQuestions
   });
+
+  if (isPending)
+    return (
+      <Spinner
+        size="large"
+        color="$green10"
+      />
+    );
 
   return (
     <>
