@@ -6,7 +6,7 @@ import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo, { IOwner } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
-interface IAnswer {
+export interface IAnswer {
   index: number;
   body_markdown: string;
   is_accepted: boolean;

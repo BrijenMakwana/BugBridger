@@ -13,7 +13,6 @@ const GoBack = () => {
         opacity: 0
       }}
       onPress={() => router.back()}
-      alignSelf="flex-start"
     />
   );
 };
