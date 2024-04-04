@@ -164,16 +164,16 @@ const UserSheet = (props: IUserSheet) => {
               separator={<Separator vertical />}
             >
               <StatisticItem
-                count={user?.reputation}
-                title="Reputation"
+                title={user?.reputation}
+                subTitle="Reputation"
               />
               <StatisticItem
-                count={user?.answer_count}
-                title="Answers"
+                title={user?.answer_count}
+                subTitle="Answers"
               />
               <StatisticItem
-                count={user?.question_count}
-                title="Questions"
+                title={user?.question_count}
+                subTitle="Questions"
               />
             </XGroup>
 
