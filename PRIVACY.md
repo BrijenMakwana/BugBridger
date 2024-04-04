@@ -11,7 +11,7 @@ Please note that the Application utilizes third-party services that have their o
 
 The Service Provider may disclose User Provided and Automatically Collected Information.
 
-**External Website Links\***
+**External Website Links**
 
 This service may include hyperlinks to external websites. If you choose to click on a link redirecting to a third-party site, you will be directed away from this service. Please be aware that these external sites are independently operated and are not under our control. Thus, it is highly recommended that you carefully review the privacy policies of these websites. We do not have any authority over the content, privacy practices, or policies of these third-party sites or services and therefore cannot assume responsibility for them.
 
