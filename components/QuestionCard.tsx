@@ -6,7 +6,7 @@ import {
 } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import { Card, H5, Separator, Text, XStack, Paragraph } from "tamagui";
+import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
 
 import PostCreationInfo, { IOwner } from "./PostCreationInfo";
