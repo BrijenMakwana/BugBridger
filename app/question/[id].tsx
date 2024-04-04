@@ -149,8 +149,14 @@ const Question = () => {
           <Tabs.Tab
             value="tab2"
             flex={1}
+            disabled={question?.answer_count === 0}
+            opacity={question?.answer_count === 0 ? 0.5 : 1}
           >
-            <H5>Answers({question?.answer_count || 0})</H5>
+            <H5>
+              {question?.answer_count === 0
+                ? "No Answers"
+                : `Answers(${question?.answer_count})`}
+            </H5>
           </Tabs.Tab>
 
           <Tabs.Tab value="tab3">
