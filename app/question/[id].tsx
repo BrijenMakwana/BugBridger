@@ -3,7 +3,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Tabs, XStack, YStack, Spinner } from "tamagui";
+import { H5, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";

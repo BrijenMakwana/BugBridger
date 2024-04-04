@@ -1,4 +1,9 @@
-import { Verified } from "@tamagui/lucide-icons";
+import {
+  Eye,
+  MessagesSquare,
+  TrendingUp,
+  Verified
+} from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H5, Separator, Text, XStack } from "tamagui";
@@ -106,18 +111,18 @@ const QuestionCard = (props: IQuestion) => {
           marginTop={10}
         >
           <StatisticItem
-            title="View"
-            count={view_count}
+            title={view_count}
+            icon={<Eye />}
           />
 
           <StatisticItem
-            title={answer_count > 1 ? "Answers" : "Answer"}
-            count={answer_count}
+            title={answer_count}
+            icon={<MessagesSquare />}
           />
 
           <StatisticItem
-            title={score > 1 ? "Votes" : "Vote"}
-            count={score}
+            title={score}
+            icon={<TrendingUp />}
           />
         </XGroup>
 

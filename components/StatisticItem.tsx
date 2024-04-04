@@ -2,22 +2,31 @@ import { ListItem, XGroup } from "tamagui";
 
 import { formatNumber } from "../utils/utils";
 
-interface IStatisticItem {
-  title: string;
-  count: number;
+interface IStatisticItemWithSubTitle {
+  title: number;
+  subTitle: string;
 }
 
-const StatisticItem = (props: IStatisticItem) => {
-  const { title, count } = props;
+interface IStatisticItemWithIcon {
+  title: number;
+  icon: React.ReactNode;
+}
+
+const StatisticItem = (
+  props: IStatisticItemWithSubTitle | IStatisticItemWithIcon
+) => {
+  const { title } = props;
 
   return (
     <XGroup.Item>
       <ListItem
         size="$4"
-        title={formatNumber(count)}
-        subTitle={title}
+        title={formatNumber(title)}
+        subTitle={"subTitle" in props ? props.subTitle : null}
         backgroundColor="$backgroundTransparent"
         flex={1}
+        icon={"icon" in props ? props.icon : null}
+        scaleIcon={1.3}
       />
     </XGroup.Item>
   );
