@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { StyleSheet } from "react-native";
 import Markdown from "react-native-markdown-display";
 import { decode } from "html-entities";
@@ -7,7 +6,7 @@ interface ICustomMarkdown {
   children: string;
 }
 
-const CustomMarkdown: FC<ICustomMarkdown> = ({ children }) => {
+const CustomMarkdown = ({ children }: ICustomMarkdown) => {
   return <Markdown style={styles}>{decode(children)}</Markdown>;
 };
 

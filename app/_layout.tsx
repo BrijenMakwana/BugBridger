@@ -1,11 +1,19 @@
 import { Suspense, useEffect } from "react";
-import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import { useColorScheme } from "react-native";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider
+} from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { TamaguiProvider, Text, Theme } from "tamagui";
 
 import { MySafeAreaView } from "../components/MySafeAreaView";
 import config from "../tamagui.config";
+
+const queryClient = new QueryClient();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,25 +34,25 @@ export default function Layout() {
   return (
     <TamaguiProvider config={config}>
       <Suspense fallback={<Text>Loading...</Text>}>
-        <Theme name="dark">
-          <ThemeProvider value={DarkTheme}>
-            <MySafeAreaView>
-              <Stack
-                screenOptions={{
-                  headerShown: false
-                }}
-              >
-                <Stack.Screen name="tabs" />
-                <Stack.Screen
-                  getId={({ params }) => params.id}
-                  name="question/[id]"
-                />
-                <Stack.Screen
-                  getId={({ params }) => params.id}
-                  name="article/[id]"
-                />
-              </Stack>
-            </MySafeAreaView>
+        <Theme name={colorScheme}>
+          <ThemeProvider
+            value={colorScheme === "light" ? DefaultTheme : DarkTheme}
+          >
+            <QueryClientProvider client={queryClient}>
+              <MySafeAreaView>
+                <Stack
+                  screenOptions={{
+                    headerShown: false
+                  }}
+                >
+                  <Stack.Screen name="tabs" />
+                  <Stack.Screen
+                    getId={({ params }) => params.id}
+                    name="question/[id]"
+                  />
+                </Stack>
+              </MySafeAreaView>
+            </QueryClientProvider>
           </ThemeProvider>
         </Theme>
       </Suspense>

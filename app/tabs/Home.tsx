@@ -1,30 +1,25 @@
-import { useEffect, useState } from "react";
-import { RefreshControl, ToastAndroid } from "react-native";
-import { MasonryFlashList } from "@shopify/flash-list";
+import { useState } from "react";
+import { RefreshControl } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { MyStack } from "../../components/MyStack";
-import Post from "../../components/Post";
+import QuestionCard, { IQuestion } from "../../components/QuestionCard";
 import Sort from "../../components/Sort";
 import {
   FEATURED_QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
-import { isTablet } from "../../utils/utils";
 
 const Home = () => {
-  const [questions, setQuestions] = useState([]);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
-
   const [sort, setSort] = useState<string>(
     FEATURED_QUESTIONS_SORTING_OPTIONS[0]
   );
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getFeaturedQuestions = async () => {
-    setIsSearching(true);
-
     try {
       const response = await axios.get(
         "https://api.stackexchange.com/2.3/questions/featured?",
@@ -39,17 +34,21 @@ const Home = () => {
         }
       );
 
-      setQuestions(response.data.items);
+      return response.data.items;
     } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
-    } finally {
-      setIsSearching(false);
+      return error;
     }
   };
 
-  useEffect(() => {
-    getFeaturedQuestions();
-  }, [sort, sortingOrder]);
+  const {
+    isPending,
+    error,
+    refetch,
+    data: questions
+  } = useQuery({
+    queryKey: ["questionsData", sort, sortingOrder],
+    queryFn: getFeaturedQuestions
+  });
 
   return (
     <MyStack>
@@ -63,23 +62,24 @@ const Home = () => {
         />
       )}
 
-      <MasonryFlashList
-        data={questions}
-        numColumns={isTablet ? 2 : 1}
+      <FlashList
+        data={questions as IQuestion[]}
         renderItem={({ item }) => (
-          <Post
-            type="question"
+          <QuestionCard
             {...item}
             isBody
           />
         )}
-        estimatedItemSize={50}
+        estimatedItemSize={5}
+        contentContainerStyle={{
+          paddingHorizontal: 10
+        }}
         refreshControl={
           <RefreshControl
-            refreshing={isSearching}
+            refreshing={isPending}
             colors={[darkColors.green11]}
             progressBackgroundColor={darkColors.gray5}
-            onRefresh={getFeaturedQuestions}
+            onRefresh={refetch}
           />
         }
       />

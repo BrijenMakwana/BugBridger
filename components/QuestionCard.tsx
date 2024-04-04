@@ -1,22 +1,14 @@
-import { FC } from "react";
-import { Check, Eye, TrendingUp, Verified } from "@tamagui/lucide-icons";
+import { Verified } from "@tamagui/lucide-icons";
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import { Card, H5, Separator, Text, XStack, YGroup } from "tamagui";
+import { Card, H5, Separator, Text, XStack } from "tamagui";
+import { XGroup } from "tamagui";
 
-import ExternalButton from "./ExternalButton";
-import PostCreationInfo from "./PostCreationInfo";
-import PostStat from "./PostStat";
+import PostCreationInfo, { IOwner } from "./PostCreationInfo";
+import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
 
-export interface IOwner {
-  user_id: number;
-  display_name: string;
-  profile_image: string;
-  reputation: number;
-}
-
-interface IPost {
+export interface IQuestion {
   question_id: number;
   title: string;
   is_answered: boolean;
@@ -29,9 +21,6 @@ interface IPost {
   creation_date: Date;
   link: string;
   isBody?: boolean;
-  isExternal?: boolean;
-  article_id: number;
-  type: "question" | "article";
 }
 
 const IsAnswered = () => {
@@ -56,7 +45,7 @@ const IsAnswered = () => {
   );
 };
 
-const Post: FC<IPost> = (props) => {
+const QuestionCard = (props: IQuestion) => {
   const {
     question_id,
     title,
@@ -68,26 +57,17 @@ const Post: FC<IPost> = (props) => {
     answer_count,
     owner,
     creation_date,
-    link,
-    isBody = false,
-    isExternal = false,
-    article_id,
-    type
+    isBody = false
   } = props;
 
   return (
     <Link
-      href={
-        type === "question"
-          ? `/question/${question_id}`
-          : `/article/${article_id}`
-      }
+      href={`/question/${question_id}`}
       asChild
     >
       <Card
-        padding={20}
+        padding={15}
         gap={13}
-        marginHorizontal={5}
         marginVertical={10}
         animation="quick"
         pressStyle={{ scale: 0.95, backgroundColor: "$green10Dark" }}
@@ -98,6 +78,7 @@ const Post: FC<IPost> = (props) => {
       >
         <Card.Header padding={0}>
           {is_answered && <IsAnswered />}
+
           <H5>{decode(title)}</H5>
 
           {isBody && (
@@ -119,44 +100,37 @@ const Post: FC<IPost> = (props) => {
           {tags?.map((item, index) => <Tag key={index}>{item}</Tag>)}
         </XStack>
 
-        <YGroup
+        <XGroup
           bordered
-          separator={<Separator />}
+          separator={<Separator vertical />}
           marginTop={10}
         >
-          <PostStat
-            title="Views"
-            icon={Eye}
+          <StatisticItem
+            title="View"
             count={view_count}
           />
 
-          {type === "question" && (
-            <PostStat
-              title="Answers"
-              icon={Check}
-              count={answer_count}
-            />
-          )}
+          <StatisticItem
+            title={answer_count > 1 ? "Answers" : "Answer"}
+            count={answer_count}
+          />
 
-          <PostStat
-            title="Votes"
-            icon={TrendingUp}
+          <StatisticItem
+            title={score > 1 ? "Votes" : "Vote"}
             count={score}
           />
-        </YGroup>
+        </XGroup>
 
         <Card.Footer>
           <PostCreationInfo
-            type={type}
+            type="question"
             creationDate={creation_date}
             {...owner}
           />
         </Card.Footer>
-
-        {isExternal && <ExternalButton link={link} />}
       </Card>
     </Link>
   );
 };
 
-export default Post;
+export default QuestionCard;

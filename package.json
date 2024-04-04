@@ -16,6 +16,7 @@
     "@tamagui/font-inter": "^1.59.0",
     "@tamagui/lucide-icons": "^1.59.0",
     "@tamagui/themes": "^1.59.0",
+    "@tanstack/react-query": "^5.28.9",
     "axios": "^1.4.0",
     "expo": "49.0.9",
     "expo-constants": "~14.4.2",

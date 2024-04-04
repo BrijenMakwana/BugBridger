@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Delete, Search } from "@tamagui/lucide-icons";
 import { Button, Input, XStack } from "tamagui";
 
@@ -9,7 +9,7 @@ interface ISearchBar {
   onClear: () => void;
 }
 
-const SearchBar: FC<ISearchBar> = (props) => {
+const SearchBar = (props: ISearchBar) => {
   const { setSearchQuestion, searchQuestion, onPress, onClear } = props;
 
   return (
@@ -27,7 +27,7 @@ const SearchBar: FC<ISearchBar> = (props) => {
         theme="green"
         flex={1}
         value={searchQuestion}
-        onChangeText={(text) => setSearchQuestion(text)}
+        onChangeText={setSearchQuestion}
         onSubmitEditing={onPress}
       />
 
