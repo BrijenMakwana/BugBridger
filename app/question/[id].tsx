@@ -3,7 +3,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Spinner, Tabs, XStack, YStack } from "tamagui";
+import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AnswersTab, { IAnswer } from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
@@ -21,7 +21,6 @@ import {
   SORTING_ORDERS
 } from "../../constants/sorting";
 import { isTablet } from "../../utils/utils";
-import { H6 } from "tamagui";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
