@@ -1,5 +1,6 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ToastAndroid } from "react-native";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { H3, Sheet, Spinner, Text, XStack, YStack } from "tamagui";
 
@@ -15,7 +16,7 @@ interface ISiteInfoSheet {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const InfoCard: FC<IInfoCard> = (props) => {
+const InfoItem = (props: IInfoCard) => {
   const { title, value } = props;
 
   return (
@@ -42,15 +43,13 @@ const InfoCard: FC<IInfoCard> = (props) => {
   );
 };
 
-const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
+const SiteInfoSheet = (props: ISiteInfoSheet) => {
   const { open, setOpen } = props;
-  const [siteInfo, setSiteInfo] = useState({});
 
   const getSiteInfo = async () => {
     try {
       const response = await axios.get(
         `https://api.stackexchange.com/2.3/info?`,
-
         {
           params: {
             site: "stackoverflow",
@@ -59,15 +58,16 @@ const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
         }
       );
 
-      setSiteInfo(response.data.items[0]);
+      return response.data.items[0];
     } catch (error) {
       ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 
-  useEffect(() => {
-    getSiteInfo();
-  }, []);
+  const { isPending, data: siteInfo } = useQuery({
+    queryKey: ["siteData"],
+    queryFn: getSiteInfo
+  });
 
   return (
     <Sheet
@@ -77,7 +77,7 @@ const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
       onOpenChange={setOpen}
       dismissOnSnapToBottom
       zIndex={100_000}
-      animation="bouncy"
+      animation="quick"
     >
       <Sheet.Overlay
         animation="lazy"
@@ -86,7 +86,7 @@ const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {!siteInfo ? (
+        {isPending ? (
           <Spinner
             size="large"
             color="$green10Dark"
@@ -100,7 +100,7 @@ const SiteInfoSheet: FC<ISiteInfoSheet> = (props) => {
             <H3 textTransform="capitalize">stackoveflow statistics</H3>
 
             {Object.keys(siteInfo).map((item, index) => (
-              <InfoCard
+              <InfoItem
                 key={index}
                 value={siteInfo[item]}
                 title={item}

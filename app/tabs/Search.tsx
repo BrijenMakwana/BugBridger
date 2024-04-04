@@ -7,7 +7,7 @@ import axios from "axios";
 import { Button, Text, YStack } from "tamagui";
 
 import { MyStack } from "../../components/MyStack";
-import Post from "../../components/Post";
+import QuestionCard from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
@@ -159,13 +159,16 @@ const Search = () => {
           data={questions}
           numColumns={isTablet ? 2 : 1}
           renderItem={({ item }) => (
-            <Post
+            <QuestionCard
               type="question"
               {...item}
               isBody
             />
           )}
           estimatedItemSize={50}
+          contentContainerStyle={{
+            paddingHorizontal: 10
+          }}
           refreshControl={
             <RefreshControl
               refreshing={isSearching}

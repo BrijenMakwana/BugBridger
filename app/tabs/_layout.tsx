@@ -1,9 +1,8 @@
-import { Home, Newspaper, Search } from "@tamagui/lucide-icons";
+import { Home, Search, Settings } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
-import { Tabs } from "expo-router";
-import { XStack } from "tamagui";
+import { Link, Tabs } from "expo-router";
+import { Button, XStack } from "tamagui";
 
-import SiteInfoButton from "../../components/SiteInfoButton";
 import TabHeading from "../../components/TabHeading";
 
 export default function TabLayout() {
@@ -13,7 +12,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: darkColors.green10,
         tabBarInactiveTintColor: darkColors.gray11,
         tabBarStyle: {
-          backgroundColor: darkColors.gray2
+          backgroundColor: darkColors.gray2,
+          height: 60,
+          paddingBottom: 10
         },
         tabBarLabelStyle: {
           textTransform: "capitalize"
@@ -35,10 +36,16 @@ export default function TabLayout() {
               alignItems="center"
               justifyContent="space-between"
               paddingHorizontal={5}
+              backgroundColor="$backgroundStrong"
             >
               <TabHeading>Featured Questions</TabHeading>
 
-              <SiteInfoButton />
+              <Link
+                href="/settings"
+                asChild
+              >
+                <Button icon={Settings} />
+              </Link>
             </XStack>
           )
         }}
@@ -54,19 +61,6 @@ export default function TabLayout() {
             />
           ),
           header: () => <TabHeading>ask question</TabHeading>
-        }}
-      />
-      <Tabs.Screen
-        name="Articles"
-        options={{
-          title: "Articles",
-          tabBarIcon: ({ color }) => (
-            <Newspaper
-              size="$1.5"
-              color={color}
-            />
-          ),
-          header: () => <TabHeading>Featured Articles</TabHeading>
         }}
       />
     </Tabs>

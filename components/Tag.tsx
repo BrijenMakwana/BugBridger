@@ -1,11 +1,10 @@
-import { FC } from "react";
 import { Text } from "tamagui";
 
 interface ITag {
   children: string;
 }
 
-const Tag: FC<ITag> = ({ children }) => {
+const Tag = ({ children }: ITag) => {
   return (
     <Text
       fontSize="$4"

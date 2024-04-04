@@ -1,12 +1,9 @@
-import { FC } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
-import ExternalButton from "./ExternalButton";
-import { IOwner } from "./Post";
-import PostCreationInfo from "./PostCreationInfo";
+import PostCreationInfo, { IOwner } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
 interface IAnswer {
@@ -23,14 +20,13 @@ interface IAnswersTab {
   answers: IAnswer[];
 }
 
-const Answer: FC<IAnswer> = (props) => {
+const Answer = (props: IAnswer) => {
   const {
     index,
     body_markdown,
     is_accepted,
     owner,
     creation_date,
-    link,
     up_vote_count
   } = props;
 
@@ -64,7 +60,7 @@ const Answer: FC<IAnswer> = (props) => {
 
       <Accordion.Content unstyled>
         <YStack
-          padding={10}
+          paddingVertical={10}
           gap={10}
           marginBottom={10}
         >
@@ -75,15 +71,13 @@ const Answer: FC<IAnswer> = (props) => {
             creationDate={creation_date}
             {...owner}
           />
-
-          <ExternalButton link={link} />
         </YStack>
       </Accordion.Content>
     </Accordion.Item>
   );
 };
 
-const AnswersTab: FC<IAnswersTab> = (props) => {
+const AnswersTab = (props: IAnswersTab) => {
   const { answers } = props;
 
   return (
@@ -91,7 +85,7 @@ const AnswersTab: FC<IAnswersTab> = (props) => {
       overflow="hidden"
       type="multiple"
       marginTop={15}
-      paddingHorizontal={10}
+      paddingHorizontal={5}
       animation="quick"
       enterStyle={{
         scale: 0.5,
@@ -107,7 +101,7 @@ const AnswersTab: FC<IAnswersTab> = (props) => {
             {...item}
           />
         )}
-        estimatedItemSize={30}
+        estimatedItemSize={20}
         showsVerticalScrollIndicator={false}
       />
     </Accordion>

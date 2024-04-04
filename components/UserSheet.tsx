@@ -1,6 +1,7 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ToastAndroid } from "react-native";
 import { Award } from "@tamagui/lucide-icons";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { decode } from "html-entities";
 import moment from "moment";
@@ -18,13 +19,18 @@ import {
   YStack
 } from "tamagui";
 
-import { formatNumber } from "../utils/utils";
+import StatisticItem from "./StatisticItem";
 
-import ExternalButton from "./ExternalButton";
+interface IUserSheet {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  userID: number;
+}
 
-interface IUserStat {
-  count: number;
-  title: string;
+interface IUserInfo {
+  displayName: string;
+  profileImage: string;
+  creationDate: Date;
 }
 
 interface IBadgeInfo {
@@ -33,35 +39,7 @@ interface IBadgeInfo {
   badgeColor: string;
 }
 
-interface IUserCard {
-  displayName: string;
-  profileImage: string;
-  creationDate: Date;
-}
-
-interface IUserSheet {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  userID: number;
-}
-
-const UserStat: FC<IUserStat> = (props) => {
-  const { count, title } = props;
-
-  return (
-    <XGroup.Item>
-      <ListItem
-        size="$4"
-        title={formatNumber(count)}
-        subTitle={title}
-        flex={1}
-        backgroundColor="$backgroundTransparent"
-      />
-    </XGroup.Item>
-  );
-};
-
-const BadgeInfo: FC<IBadgeInfo> = (props) => {
+const BadgeInfo = (props: IBadgeInfo) => {
   const { badgeType, badgeCount, badgeColor } = props;
 
   return (
@@ -78,13 +56,14 @@ const BadgeInfo: FC<IBadgeInfo> = (props) => {
   );
 };
 
-const UserCard: FC<IUserCard> = (props) => {
+const UserInfo = (props: IUserInfo) => {
   const { displayName, profileImage, creationDate } = props;
 
   return (
     <XStack
       justifyContent="space-between"
       alignItems="center"
+      gap={20}
     >
       <Avatar
         circular
@@ -94,10 +73,7 @@ const UserCard: FC<IUserCard> = (props) => {
         <Avatar.Fallback bc="$green10Dark" />
       </Avatar>
 
-      <YStack
-        flex={1}
-        paddingLeft={20}
-      >
+      <YStack flex={1}>
         <Text
           color="$green10Dark"
           fontSize={30}
@@ -118,9 +94,8 @@ const UserCard: FC<IUserCard> = (props) => {
   );
 };
 
-const UserSheet: FC<IUserSheet> = (props) => {
+const UserSheet = (props: IUserSheet) => {
   const { open, setOpen, userID } = props;
-  const [user, setUser] = useState();
 
   const getUser = async () => {
     try {
@@ -138,15 +113,16 @@ const UserSheet: FC<IUserSheet> = (props) => {
         }
       );
 
-      setUser(response.data.items[0]);
+      return response.data.items[0];
     } catch (error) {
       ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
+  const { isPending, data: user } = useQuery({
+    queryKey: ["userData"],
+    queryFn: getUser
+  });
 
   return (
     <Sheet
@@ -165,7 +141,7 @@ const UserSheet: FC<IUserSheet> = (props) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {!user ? (
+        {isPending ? (
           <Spinner
             size="large"
             color="$green10Dark"
@@ -176,7 +152,7 @@ const UserSheet: FC<IUserSheet> = (props) => {
             padding={20}
             flex={1}
           >
-            <UserCard
+            <UserInfo
               displayName={user?.display_name}
               profileImage={user?.profile_image}
               creationDate={user?.creation_date}
@@ -187,15 +163,15 @@ const UserSheet: FC<IUserSheet> = (props) => {
               bordered
               separator={<Separator vertical />}
             >
-              <UserStat
+              <StatisticItem
                 count={user?.reputation}
                 title="Reputation"
               />
-              <UserStat
+              <StatisticItem
                 count={user?.answer_count}
                 title="Answers"
               />
-              <UserStat
+              <StatisticItem
                 count={user?.question_count}
                 title="Questions"
               />
@@ -222,8 +198,6 @@ const UserSheet: FC<IUserSheet> = (props) => {
                 badgeColor="#CD7F32"
               />
             </YGroup>
-
-            <ExternalButton link={user?.link} />
           </YStack>
         )}
       </Sheet.Frame>

@@ -5,12 +5,15 @@ import {
   DefaultTheme,
   ThemeProvider
 } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { TamaguiProvider, Text, Theme } from "tamagui";
 
 import { MySafeAreaView } from "../components/MySafeAreaView";
 import config from "../tamagui.config";
+
+const queryClient = new QueryClient();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,23 +40,21 @@ export default function Layout() {
           <ThemeProvider
             value={colorScheme === "light" ? DefaultTheme : DarkTheme}
           >
-            <MySafeAreaView>
-              <Stack
-                screenOptions={{
-                  headerShown: false
-                }}
-              >
-                <Stack.Screen name="tabs" />
-                <Stack.Screen
-                  getId={({ params }) => params.id}
-                  name="question/[id]"
-                />
-                <Stack.Screen
-                  getId={({ params }) => params.id}
-                  name="article/[id]"
-                />
-              </Stack>
-            </MySafeAreaView>
+            <QueryClientProvider client={queryClient}>
+              <MySafeAreaView>
+                <Stack
+                  screenOptions={{
+                    headerShown: false
+                  }}
+                >
+                  <Stack.Screen name="tabs" />
+                  <Stack.Screen
+                    getId={({ params }) => params.id}
+                    name="question/[id]"
+                  />
+                </Stack>
+              </MySafeAreaView>
+            </QueryClientProvider>
           </ThemeProvider>
         </Theme>
       </Suspense>

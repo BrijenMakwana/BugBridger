@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
-import { ToastAndroid } from "react-native";
+import { useState } from "react";
 import { FlashList } from "@shopify/flash-list";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H5, Tabs, YStack } from "tamagui";
+import { H5, Tabs, XStack, YStack } from "tamagui";
 
 import AnswersTab from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
-import Post from "../../components/Post";
-import RelatedQuestion from "../../components/RelatedQuestion";
+import QuestionCard from "../../components/QuestionCard";
+import RelatedQuestion, {
+  IRelatedQuestion
+} from "../../components/RelatedQuestion";
+import ShareButtonGroup from "../../components/ShareButtonGroup";
 import Sort from "../../components/Sort";
 import {
   ANSWERS_SORTING_OPTIONS,
@@ -20,9 +23,6 @@ import { isTablet } from "../../utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
-  const [question, setQuestion] = useState({});
-  const [answers, setAnswers] = useState([]);
-  const [relatedQuestions, setRelatedQuestions] = useState([]);
 
   const [answerSort, setAnswerSort] = useState<string>(
     ANSWERS_SORTING_OPTIONS[0]
@@ -44,9 +44,9 @@ const Question = () => {
         }
       );
 
-      setQuestion(response.data.items[0]);
+      return response.data.items[0];
     } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
+      return error;
     }
   };
 
@@ -66,9 +66,9 @@ const Question = () => {
         }
       );
 
-      setAnswers(response.data.items);
+      return response.data.items;
     } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
+      return error;
     }
   };
 
@@ -87,36 +87,50 @@ const Question = () => {
         }
       );
 
-      setRelatedQuestions(response.data.items);
+      return response.data.items;
     } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
+      return error;
     }
   };
 
-  useEffect(() => {
-    getQuestion();
-    getAnswers();
-    getRelatedQuestions();
-  }, []);
+  const { data: question } = useQuery({
+    queryKey: ["questionData"],
+    queryFn: getQuestion
+  });
 
-  useEffect(() => {
-    getAnswers();
-  }, [answerSort, sortingOrder]);
+  const { data: answers } = useQuery({
+    queryKey: ["answersData", answerSort, sortingOrder],
+    queryFn: getAnswers
+  });
+
+  const { data: relatedQuestions } = useQuery({
+    queryKey: ["relatedQuestionsData"],
+    queryFn: getRelatedQuestions
+  });
 
   return (
     <>
-      <GoBack />
+      <XStack
+        alignItems="center"
+        justifyContent="space-between"
+        marginTop={5}
+        paddingHorizontal={10}
+      >
+        <GoBack />
+
+        <ShareButtonGroup link={question?.link} />
+      </XStack>
 
       <Tabs
         defaultValue="tab1"
         flex={1}
         flexDirection="column"
         marginTop={20}
+        paddingHorizontal={10}
       >
         <Tabs.List
           theme="green"
           marginBottom={10}
-          paddingHorizontal={5}
           alignSelf="center"
           width={isTablet ? "60%" : "100%"}
         >
@@ -141,13 +155,12 @@ const Question = () => {
           flex={1}
         >
           <MyScroll>
-            <Post
+            <QuestionCard
               type="question"
               {...question}
-              isExternal
             />
 
-            <YStack paddingHorizontal={15}>
+            <YStack>
               <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
             </YStack>
           </MyScroll>
@@ -175,9 +188,9 @@ const Question = () => {
           flex={1}
         >
           <FlashList
-            data={relatedQuestions}
+            data={relatedQuestions as IRelatedQuestion[]}
             renderItem={({ item }) => <RelatedQuestion {...item} />}
-            estimatedItemSize={50}
+            estimatedItemSize={20}
           />
         </Tabs.Content>
       </Tabs>

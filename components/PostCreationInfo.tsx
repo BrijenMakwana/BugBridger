@@ -1,25 +1,30 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Button, Text, YStack } from "tamagui";
 
 import { formatNumber } from "../utils/utils";
 
-import { IOwner } from "./Post";
 import UserSheet from "./UserSheet";
 
 interface IPostCreationInfo extends IOwner {
-  type: "question" | "answer" | "article";
+  type: "question" | "answer";
   creationDate: Date;
+}
+
+export interface IOwner {
+  user_id: number;
+  display_name: string;
+  profile_image: string;
+  reputation: number;
 }
 
 const postType = {
   question: "asked",
-  answer: "answered",
-  article: "posted"
+  answer: "answered"
 };
 
-const PostCreationInfo: FC<IPostCreationInfo> = (props) => {
+const PostCreationInfo = (props: IPostCreationInfo) => {
   const {
     user_id,
     type,
@@ -29,7 +34,7 @@ const PostCreationInfo: FC<IPostCreationInfo> = (props) => {
     creationDate
   } = props;
 
-  const [userSheetIsOpen, setUserSheetIsOpen] = useState<boolean>(false);
+  const [userSheetIsOpen, setUserSheetIsOpen] = useState(false);
 
   return (
     <>
