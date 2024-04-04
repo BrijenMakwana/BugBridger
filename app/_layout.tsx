@@ -1,10 +1,5 @@
 import { Suspense, useEffect } from "react";
-import { useColorScheme } from "react-native";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider
-} from "@react-navigation/native";
+import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
@@ -34,10 +29,8 @@ export default function Layout() {
   return (
     <TamaguiProvider config={config}>
       <Suspense fallback={<Text>Loading...</Text>}>
-        <Theme name={colorScheme}>
-          <ThemeProvider
-            value={colorScheme === "light" ? DefaultTheme : DarkTheme}
-          >
+        <Theme name="dark">
+          <ThemeProvider value={DarkTheme}>
             <QueryClientProvider client={queryClient}>
               <MySafeAreaView>
                 <Stack
