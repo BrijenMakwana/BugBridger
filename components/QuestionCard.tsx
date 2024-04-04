@@ -25,6 +25,9 @@ export interface IQuestion {
   owner: IOwner;
   creation_date: Date;
   link: string;
+}
+
+interface IQuestionCard extends IQuestion {
   isBody?: boolean;
 }
 
@@ -50,7 +53,7 @@ const IsAnswered = () => {
   );
 };
 
-const QuestionCard = (props: IQuestion) => {
+const QuestionCard = (props: IQuestionCard) => {
   const {
     question_id,
     title,

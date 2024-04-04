@@ -5,11 +5,12 @@ import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { H5, Spinner, Tabs, XStack, YStack } from "tamagui";
 
-import AnswersTab from "../../components/AnswersTab";
+import AnswersTab, { IAnswer } from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
+import Error from "../../components/Error";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
-import QuestionCard from "../../components/QuestionCard";
+import QuestionCard, { IQuestion } from "../../components/QuestionCard";
 import RelatedQuestion, {
   IRelatedQuestion
 } from "../../components/RelatedQuestion";
@@ -93,17 +94,33 @@ const Question = () => {
     }
   };
 
-  const { data: question, isPending } = useQuery({
+  const {
+    data: question,
+    isPending,
+    error
+  }: {
+    data: IQuestion;
+    isPending: boolean;
+    error: Error;
+  } = useQuery({
     queryKey: ["questionData"],
     queryFn: getQuestion
   });
 
-  const { data: answers } = useQuery({
+  const {
+    data: answers
+  }: {
+    data: IAnswer[];
+  } = useQuery({
     queryKey: ["answersData", answerSort, sortingOrder],
     queryFn: getAnswers
   });
 
-  const { data: relatedQuestions } = useQuery({
+  const {
+    data: relatedQuestions
+  }: {
+    data: IRelatedQuestion[];
+  } = useQuery({
     queryKey: ["relatedQuestionsData"],
     queryFn: getRelatedQuestions
   });
@@ -115,6 +132,8 @@ const Question = () => {
         color="$green10"
       />
     );
+
+  if (error) return <Error />;
 
   return (
     <>
@@ -169,10 +188,7 @@ const Question = () => {
           flex={1}
         >
           <MyScroll>
-            <QuestionCard
-              type="question"
-              {...question}
-            />
+            <QuestionCard {...question} />
 
             <YStack>
               <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
@@ -202,7 +218,7 @@ const Question = () => {
           flex={1}
         >
           <FlashList
-            data={relatedQuestions as IRelatedQuestion[]}
+            data={relatedQuestions}
             renderItem={({ item }) => <RelatedQuestion {...item} />}
             estimatedItemSize={20}
           />
