@@ -38,7 +38,7 @@ export default function TabLayout() {
               paddingHorizontal={5}
               backgroundColor="$backgroundStrong"
             >
-              <TabHeading>Featured Questions</TabHeading>
+              <TabHeading>Featured</TabHeading>
 
               <Link
                 href="/settings"

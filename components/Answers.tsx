@@ -2,11 +2,14 @@ import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
+import { IComment } from "./CommentCard";
+import CommentsButton from "./CommentsSheet";
 import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo, { IOwner } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
 export interface IAnswer {
+  answer_id: number;
   index: number;
   body_markdown: string;
   is_accepted: boolean;
@@ -14,9 +17,10 @@ export interface IAnswer {
   creation_date: Date;
   link: string;
   up_vote_count: number;
+  comments: IComment[];
 }
 
-interface IAnswersTab {
+interface IAnswers {
   answers: IAnswer[];
 }
 
@@ -27,7 +31,8 @@ const Answer = (props: IAnswer) => {
     is_accepted,
     owner,
     creation_date,
-    up_vote_count
+    up_vote_count,
+    comments
   } = props;
 
   return (
@@ -71,13 +76,15 @@ const Answer = (props: IAnswer) => {
             creationDate={creation_date}
             {...owner}
           />
+
+          <CommentsButton comments={comments} />
         </YStack>
       </Accordion.Content>
     </Accordion.Item>
   );
 };
 
-const AnswersTab = (props: IAnswersTab) => {
+const Answers = (props: IAnswers) => {
   const { answers } = props;
 
   return (
@@ -108,4 +115,4 @@ const AnswersTab = (props: IAnswersTab) => {
   );
 };
 
-export default AnswersTab;
+export default Answers;

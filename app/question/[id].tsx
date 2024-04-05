@@ -6,7 +6,8 @@ import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
-import AnswersTab, { IAnswer } from "../../components/AnswersTab";
+import Answers, { IAnswer } from "../../components/Answers";
+import CommentsButton from "../../components/CommentsSheet";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import Error from "../../components/Error";
 import GoBack from "../../components/GoBack";
@@ -40,7 +41,7 @@ const Question = () => {
             order: "desc",
             sort: "activity",
             site: "stackoverflow",
-            filter: "!nNPvSNP4(R",
+            filter: "!)REHRBwR2pEm6mZ7MSV8Im_0",
             key: process.env.EXPO_PUBLIC_API_KEY
           }
         }
@@ -61,7 +62,7 @@ const Question = () => {
             order: sortingOrder,
             sort: answerSort,
             site: "stackoverflow",
-            filter: "!3vIo5M6G45qJ8_tw-",
+            filter: "!*Mg4Pjg85cypgfAY",
             pageSize: 100,
             key: process.env.EXPO_PUBLIC_API_KEY
           }
@@ -190,6 +191,8 @@ const Question = () => {
             <QuestionCard {...question} />
 
             <YStack>
+              <CommentsButton comments={question?.comments} />
+
               <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
             </YStack>
           </MyScroll>
@@ -212,7 +215,7 @@ const Question = () => {
           {answers?.length === 0 ? (
             <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
           ) : (
-            <AnswersTab answers={answers} />
+            <Answers answers={answers} />
           )}
         </Tabs.Content>
 

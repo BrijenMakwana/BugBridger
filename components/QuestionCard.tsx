@@ -9,6 +9,7 @@ import { decode } from "html-entities";
 import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
 
+import { IComment } from "./CommentCard";
 import PostCreationInfo, { IOwner } from "./PostCreationInfo";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
@@ -25,6 +26,7 @@ export interface IQuestion {
   owner: IOwner;
   creation_date: Date;
   link: string;
+  comments: IComment[];
 }
 
 interface IQuestionCard extends IQuestion {
