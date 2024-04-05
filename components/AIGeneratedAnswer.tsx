@@ -60,7 +60,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
     isFetching: boolean;
     error: Error;
   } = useQuery({
-    queryKey: ["answerData"],
+    queryKey: ["aiAnswerData"],
     queryFn: generateAnswer
   });
 
