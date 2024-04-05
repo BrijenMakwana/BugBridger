@@ -5,6 +5,7 @@ import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
+import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
 import AnswersTab, { IAnswer } from "../../components/AnswersTab";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import Error from "../../components/Error";
@@ -96,11 +97,11 @@ const Question = () => {
 
   const {
     data: question,
-    isPending,
+    isFetching,
     error
   }: {
     data: IQuestion;
-    isPending: boolean;
+    isFetching: boolean;
     error: Error;
   } = useQuery({
     queryKey: ["questionData"],
@@ -125,7 +126,7 @@ const Question = () => {
     queryFn: getRelatedQuestions
   });
 
-  if (isPending)
+  if (isFetching)
     return (
       <Spinner
         size="large"
@@ -168,12 +169,10 @@ const Question = () => {
           <Tabs.Tab
             value="tab2"
             flex={1}
-            disabled={question?.answer_count === 0}
-            opacity={question?.answer_count === 0 ? 0.5 : 1}
           >
             <H6>
               {question?.answer_count === 0
-                ? "No Answers"
+                ? "AI Gen Answer"
                 : `Answers(${question?.answer_count})`}
             </H6>
           </Tabs.Tab>
@@ -210,7 +209,11 @@ const Question = () => {
             />
           )}
 
-          <AnswersTab answers={answers} />
+          {answers?.length === 0 ? (
+            <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
+          ) : (
+            <AnswersTab answers={answers} />
+          )}
         </Tabs.Content>
 
         <Tabs.Content
