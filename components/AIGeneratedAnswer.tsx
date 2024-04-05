@@ -79,7 +79,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
       <YStack
         paddingHorizontal={10}
         paddingVertical={15}
-        gap={10}
+        gap={15}
       >
         <AIDisclaimer />
 
