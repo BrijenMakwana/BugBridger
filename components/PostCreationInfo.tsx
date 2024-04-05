@@ -10,6 +10,7 @@ import UserSheet from "./UserSheet";
 interface IPostCreationInfo extends IOwner {
   type: "question" | "answer";
   creationDate: Date;
+  isPressable?: boolean;
 }
 
 export interface IOwner {
@@ -31,7 +32,8 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
     display_name,
     profile_image,
     reputation,
-    creationDate
+    creationDate,
+    isPressable = true
   } = props;
 
   const [userSheetIsOpen, setUserSheetIsOpen] = useState(false);
@@ -48,7 +50,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
-          onPress={() => setUserSheetIsOpen(true)}
+          onPress={isPressable ? () => setUserSheetIsOpen(true) : undefined}
         >
           <Avatar
             circular

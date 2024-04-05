@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   code_inline: {
     fontSize: 14,
     color: "#3CBA82",
-    backgroundColor: "#000"
+    backgroundColor: "transparent"
   },
   code_block: {
     fontSize: 14,
