@@ -3,7 +3,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
-import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
+import { H6, Spinner, Tabs, XStack } from "tamagui";
 
 import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
 import Answers from "../../components/Answers";
@@ -12,6 +12,7 @@ import CustomMarkdown from "../../components/CustomMarkdown";
 import Error from "../../components/Error";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
+import PostNotice from "../../components/PostNotice";
 import QuestionCard, { IQuestion } from "../../components/QuestionCard";
 import RelatedQuestion, {
   IRelatedQuestion
@@ -40,7 +41,7 @@ const Question = () => {
           order: "desc",
           sort: "activity",
           site: "stackoverflow",
-          filter: "!u.*0Ven9AaxQs(87(eFpgI(sjhuUNV-",
+          filter: "!7vXVX*mzcfem2OT0*5LAwQdhdFSw1HC7_f",
           key: process.env.EXPO_PUBLIC_API_KEY
         }
       }
@@ -149,13 +150,13 @@ const Question = () => {
           flex={1}
         >
           <MyScroll>
+            <PostNotice {...question?.notice} />
+
             <QuestionCard {...question} />
 
-            <YStack>
-              <CommentsButton comments={question?.comments} />
+            <CommentsButton comments={question?.comments} />
 
-              <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
-            </YStack>
+            <CustomMarkdown>{question?.body_markdown}</CustomMarkdown>
           </MyScroll>
         </Tabs.Content>
 
@@ -163,7 +164,7 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
-          {question?.answers?.length > 1 && (
+          {question?.answer_count > 1 && (
             <Sort
               sort={answerSort}
               setSort={setAnswerSort}
@@ -173,7 +174,7 @@ const Question = () => {
             />
           )}
 
-          {question?.answers?.length === 0 ? (
+          {question?.answer_count === 0 ? (
             <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
           ) : (
             <Answers answers={question?.answers} />

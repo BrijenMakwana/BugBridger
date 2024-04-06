@@ -12,6 +12,7 @@ import { XGroup } from "tamagui";
 import { IAnswer } from "./Answers";
 import { IComment } from "./CommentCard";
 import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
+import { IPostNotice } from "./PostNotice";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
 
@@ -27,6 +28,7 @@ export interface IQuestion {
   owner: IOwner;
   creation_date: Date;
   link: string;
+  notice: IPostNotice;
   answers: IAnswer[];
   comments: IComment[];
 }

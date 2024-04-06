@@ -1,42 +1,21 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Info } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Spinner, Text, YStack } from "tamagui";
+import { Spinner, YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
 import Error from "./Error";
 import { MyScroll } from "./MyScroll";
+import PostNotice from "./PostNotice";
 
 interface IAIGeneratedAnswer {
   questionMarkdown: string;
 }
 
-const AIDisclaimer = () => {
-  return (
-    <Card
-      flexDirection="row"
-      alignItems="center"
-      justifyContent="space-between"
-      gap={10}
-      theme="pink"
-      padding={15}
-    >
-      <Info />
-
-      <Text
-        fontSize={15}
-        flex={1}
-        lineHeight={22}
-      >
-        The following answer is AI-generated and may not be entirely accurate.
-        Please use discretion when interpreting the information.
-      </Text>
-    </Card>
-  );
-};
-
 const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
   const { questionMarkdown } = props;
+
+  const disclaimer =
+    "The following answer is AI-generated and may not be entirely accurate. Please use discretion when interpreting the information.";
 
   const genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -81,7 +60,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
         paddingVertical={15}
         gap={15}
       >
-        <AIDisclaimer />
+        <PostNotice body={disclaimer} />
 
         <CustomMarkdown>{answer}</CustomMarkdown>
       </YStack>
