@@ -151,10 +151,7 @@ const Question = () => {
           alignSelf="center"
           width={isTablet ? "60%" : "100%"}
         >
-          <Tabs.Tab
-            value="tab1"
-            flex={1}
-          >
+          <Tabs.Tab value="tab1">
             <H6>Question</H6>
           </Tabs.Tab>
 
@@ -169,10 +166,7 @@ const Question = () => {
             </H6>
           </Tabs.Tab>
 
-          <Tabs.Tab
-            value="tab3"
-            flex={1}
-          >
+          <Tabs.Tab value="tab3">
             <H6>Related</H6>
           </Tabs.Tab>
         </Tabs.List>
