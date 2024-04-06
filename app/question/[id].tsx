@@ -150,7 +150,7 @@ const Question = () => {
           flex={1}
         >
           <MyScroll>
-            <PostNotice {...question?.notice} />
+            {question?.notice && <PostNotice {...question?.notice} />}
 
             <QuestionCard {...question} />
 
