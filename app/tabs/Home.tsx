@@ -21,24 +21,20 @@ const Home = () => {
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getFeaturedQuestions = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.stackexchange.com/2.3/questions/featured?",
-        {
-          params: {
-            order: sortingOrder,
-            sort: sort,
-            site: "stackoverflow",
-            filter: "!nNPvSNP4(R",
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
+    const response = await axios.get(
+      "https://api.stackexchange.com/2.3/questions/featured?",
+      {
+        params: {
+          order: sortingOrder,
+          sort: sort,
+          site: "stackoverflow",
+          filter: "!nNPvSNP4(R",
+          key: process.env.EXPO_PUBLIC_API_KEY
         }
-      );
+      }
+    );
 
-      return response.data.items;
-    } catch (error) {
-      return error;
-    }
+    return response.data.items;
   };
 
   const {

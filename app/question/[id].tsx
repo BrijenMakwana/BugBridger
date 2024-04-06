@@ -33,67 +33,55 @@ const Question = () => {
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getQuestion = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.stackexchange.com/2.3/questions/${id}?`,
-        {
-          params: {
-            order: "desc",
-            sort: "activity",
-            site: "stackoverflow",
-            filter: "!)REHRBwR2pEm6mZ7MSV8Im_0",
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
+    const response = await axios.get(
+      `https://api.stackexchange.com/2.3/questions/${id}?`,
+      {
+        params: {
+          order: "desc",
+          sort: "activity",
+          site: "stackoverflow",
+          filter: "!)REHRBwR2pEm6mZ7MSV8Im_0",
+          key: process.env.EXPO_PUBLIC_API_KEY
         }
-      );
+      }
+    );
 
-      return response.data.items[0];
-    } catch (error) {
-      return error;
-    }
+    return response.data.items[0];
   };
 
   const getAnswers = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.stackexchange.com/2.3/questions/${id}/answers?`,
-        {
-          params: {
-            order: sortingOrder,
-            sort: answerSort,
-            site: "stackoverflow",
-            filter: "!*Mg4Pjg85cypgfAY",
-            pageSize: 100,
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
+    const response = await axios.get(
+      `https://api.stackexchange.com/2.3/questions/${id}/answers?`,
+      {
+        params: {
+          order: sortingOrder,
+          sort: answerSort,
+          site: "stackoverflow",
+          filter: "!*Mg4Pjg85cypgfAY",
+          pageSize: 100,
+          key: process.env.EXPO_PUBLIC_API_KEY
         }
-      );
+      }
+    );
 
-      return response.data.items;
-    } catch (error) {
-      return error;
-    }
+    return response.data.items;
   };
 
   const getRelatedQuestions = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.stackexchange.com/2.3/questions/${id}/related?`,
-        {
-          params: {
-            order: "desc",
-            sort: "activity",
-            site: "stackoverflow",
-            filter: "!szz-rpK9Axv5zb.Gmodt6fEhGVd-MSW",
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
+    const response = await axios.get(
+      `https://api.stackexchange.com/2.3/questions/${id}/related?`,
+      {
+        params: {
+          order: "desc",
+          sort: "activity",
+          site: "stackoverflow",
+          filter: "!szz-rpK9Axv5zb.Gmodt6fEhGVd-MSW",
+          key: process.env.EXPO_PUBLIC_API_KEY
         }
-      );
+      }
+    );
 
-      return response.data.items;
-    } catch (error) {
-      return error;
-    }
+    return response.data.items;
   };
 
   const {

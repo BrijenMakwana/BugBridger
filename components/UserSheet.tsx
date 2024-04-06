@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { ToastAndroid } from "react-native";
 import { Award } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -98,28 +97,24 @@ const UserSheet = (props: IUserSheet) => {
   const { open, setOpen, userID } = props;
 
   const getUser = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.stackexchange.com/2.3/users/${userID}?`,
+    const response = await axios.get(
+      `https://api.stackexchange.com/2.3/users/${userID}?`,
 
-        {
-          params: {
-            order: "desc",
-            sort: "reputation",
-            site: "stackoverflow",
-            filter: "!)scV0Xk0jsmonefL_TsZ",
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
+      {
+        params: {
+          order: "desc",
+          sort: "reputation",
+          site: "stackoverflow",
+          filter: "!)scV0Xk0jsmonefL_TsZ",
+          key: process.env.EXPO_PUBLIC_API_KEY
         }
-      );
+      }
+    );
 
-      return response.data.items[0];
-    } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
-    }
+    return response.data.items[0];
   };
 
-  const { isPending, data: user } = useQuery({
+  const { isFetching, data: user } = useQuery({
     queryKey: ["userData"],
     queryFn: getUser
   });
@@ -141,7 +136,7 @@ const UserSheet = (props: IUserSheet) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {isPending ? (
+        {isFetching ? (
           <Spinner
             size="large"
             color="$green10Dark"
