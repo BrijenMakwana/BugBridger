@@ -7,7 +7,7 @@ import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
 import Answers, { IAnswer } from "../../components/Answers";
-import CommentsButton from "../../components/CommentsSheet";
+import CommentsButton from "../../components/CommentsButton";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import Error from "../../components/Error";
 import GoBack from "../../components/GoBack";
@@ -163,7 +163,10 @@ const Question = () => {
           alignSelf="center"
           width={isTablet ? "60%" : "100%"}
         >
-          <Tabs.Tab value="tab1">
+          <Tabs.Tab
+            value="tab1"
+            flex={1}
+          >
             <H6>Question</H6>
           </Tabs.Tab>
 
@@ -173,12 +176,15 @@ const Question = () => {
           >
             <H6>
               {question?.answer_count === 0
-                ? "AI Gen Answer"
+                ? "AI Answer"
                 : `Answers(${question?.answer_count})`}
             </H6>
           </Tabs.Tab>
 
-          <Tabs.Tab value="tab3">
+          <Tabs.Tab
+            value="tab3"
+            flex={1}
+          >
             <H6>Related</H6>
           </Tabs.Tab>
         </Tabs.List>

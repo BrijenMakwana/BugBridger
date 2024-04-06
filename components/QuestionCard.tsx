@@ -10,7 +10,7 @@ import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
 
 import { IComment } from "./CommentCard";
-import PostCreationInfo, { IOwner } from "./PostCreationInfo";
+import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
 
@@ -131,7 +131,7 @@ const QuestionCard = (props: IQuestionCard) => {
 
         <Card.Footer>
           <PostCreationInfo
-            type="question"
+            type={POST_TYPE.QUESTION}
             creationDate={creation_date}
             {...owner}
           />

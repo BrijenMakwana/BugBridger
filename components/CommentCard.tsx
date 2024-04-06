@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, YStack } from "tamagui";
+import { YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { IOwner } from "./PostCreationInfo";
+import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
 
 export interface IComment {
   body_markdown: string;
@@ -26,7 +26,7 @@ const CommentCard = (props: IComment) => {
       <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
       <PostCreationInfo
-        type="question"
+        type={POST_TYPE.COMMENT}
         creationDate={creation_date}
         isPressable={false}
         {...owner}
