@@ -6,7 +6,7 @@ import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack, YStack } from "tamagui";
 
 import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
-import Answers, { IAnswer } from "../../components/Answers";
+import Answers from "../../components/Answers";
 import CommentsButton from "../../components/CommentsButton";
 import CustomMarkdown from "../../components/CustomMarkdown";
 import Error from "../../components/Error";
@@ -40,31 +40,13 @@ const Question = () => {
           order: "desc",
           sort: "activity",
           site: "stackoverflow",
-          filter: "!)REHRBwR2pEm6mZ7MSV8Im_0",
+          filter: "!u.*0Ven9AaxQs(87(eFpgI(sjhuUNV-",
           key: process.env.EXPO_PUBLIC_API_KEY
         }
       }
     );
 
     return response.data.items[0];
-  };
-
-  const getAnswers = async () => {
-    const response = await axios.get(
-      `https://api.stackexchange.com/2.3/questions/${id}/answers?`,
-      {
-        params: {
-          order: sortingOrder,
-          sort: answerSort,
-          site: "stackoverflow",
-          filter: "!T3Audpn-7Cxj-GvpKT",
-          pageSize: 100,
-          key: process.env.EXPO_PUBLIC_API_KEY
-        }
-      }
-    );
-
-    return response.data.items;
   };
 
   const getRelatedQuestions = async () => {
@@ -95,15 +77,6 @@ const Question = () => {
   } = useQuery({
     queryKey: ["questionData"],
     queryFn: getQuestion
-  });
-
-  const {
-    data: answers
-  }: {
-    data: IAnswer[];
-  } = useQuery({
-    queryKey: ["answersData", answerSort, sortingOrder],
-    queryFn: getAnswers
   });
 
   const {
@@ -190,7 +163,7 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
-          {answers?.length > 1 && (
+          {question?.answers?.length > 1 && (
             <Sort
               sort={answerSort}
               setSort={setAnswerSort}
@@ -200,10 +173,10 @@ const Question = () => {
             />
           )}
 
-          {answers?.length === 0 ? (
+          {question?.answers?.length === 0 ? (
             <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
           ) : (
-            <Answers answers={answers} />
+            <Answers answers={question?.answers} />
           )}
         </Tabs.Content>
 
