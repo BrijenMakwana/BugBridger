@@ -57,7 +57,7 @@ const Question = () => {
           order: sortingOrder,
           sort: answerSort,
           site: "stackoverflow",
-          filter: "!*Mg4Pjg85cypgfAY",
+          filter: "!T3Audpn-7Cxj-GvpKT",
           pageSize: 100,
           key: process.env.EXPO_PUBLIC_API_KEY
         }
