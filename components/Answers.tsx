@@ -3,9 +3,9 @@ import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
 import { IComment } from "./CommentCard";
-import CommentsButton from "./CommentsSheet";
+import CommentsButton from "./CommentsButton";
 import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { IOwner } from "./PostCreationInfo";
+import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
 export interface IAnswer {
@@ -72,7 +72,7 @@ const Answer = (props: IAnswer) => {
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
           <PostCreationInfo
-            type="answer"
+            type={POST_TYPE.ANSWER}
             creationDate={creation_date}
             {...owner}
           />

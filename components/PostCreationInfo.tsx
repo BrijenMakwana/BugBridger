@@ -8,7 +8,7 @@ import { formatNumber } from "../utils/utils";
 import UserSheet from "./UserSheet";
 
 interface IPostCreationInfo extends IOwner {
-  type: "question" | "answer";
+  type: POST_TYPE;
   creationDate: Date;
   isPressable?: boolean;
 }
@@ -20,10 +20,11 @@ export interface IOwner {
   reputation: number;
 }
 
-const postType = {
-  question: "asked",
-  answer: "answered"
-};
+export enum POST_TYPE {
+  QUESTION = "asked",
+  ANSWER = "answered",
+  COMMENT = "commented"
+}
 
 const PostCreationInfo = (props: IPostCreationInfo) => {
   const {
@@ -81,7 +82,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           fontSize="$2"
           color="$gray11Dark"
         >
-          {postType[type]} on {moment(moment.unix(creationDate)).format("lll")}
+          {type} on {moment(moment.unix(creationDate)).format("lll")}
         </Text>
       </YStack>
 

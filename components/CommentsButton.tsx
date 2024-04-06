@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { MessageCircle } from "@tamagui/lucide-icons";
-import { Button, H2, Separator, Sheet, Text } from "tamagui";
+import { Button, H2, Separator, Sheet } from "tamagui";
 
 import CommentCard, { IComment } from "./CommentCard";
 
@@ -43,7 +43,7 @@ const CommmentsSheet = (props: ICommmentsSheet) => {
             paddingHorizontal: 15,
             paddingVertical: 20
           }}
-          ListHeaderComponent={() => <H2 color="$green10Dark">Comments</H2>}
+          ListHeaderComponent={() => <H2>Comments</H2>}
           ItemSeparatorComponent={() => <Separator />}
         />
       </Sheet.Frame>
@@ -56,18 +56,21 @@ const CommentsButton = (props: ICommentsButton) => {
 
   const [commentsSheetIsOpen, setCommentsSheetIsOpen] = useState(false);
 
+  const commentsAvailable = comments?.length > 0;
+
   return (
     <>
       <Button
         onPress={
-          comments?.length > 0 ? () => setCommentsSheetIsOpen(true) : undefined
+          commentsAvailable ? () => setCommentsSheetIsOpen(true) : undefined
         }
         icon={<MessageCircle />}
         scaleIcon={1.2}
         alignSelf="flex-end"
-        opacity={comments?.length > 0 ? 1 : 0.5}
+        opacity={commentsAvailable ? 1 : 0.5}
+        chromeless
       >
-        {(comments?.length || 0) + " Comments"}
+        {commentsAvailable ? `${comments?.length} Comments` : "No Comments"}
       </Button>
 
       {commentsSheetIsOpen && (
