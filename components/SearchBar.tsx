@@ -19,6 +19,11 @@ const SearchBar = (props: ISearchBar) => {
       paddingHorizontal={5}
       gap={10}
       marginTop={10}
+      animation="quick"
+      enterStyle={{
+        scale: 0.5,
+        opacity: 0
+      }}
     >
       <Input
         size="$4"
@@ -31,32 +36,18 @@ const SearchBar = (props: ISearchBar) => {
         onSubmitEditing={onPress}
       />
 
-      {searchQuestion && (
-        <>
-          <Button
-            icon={Delete}
-            size="$4"
-            theme="red"
-            animation="quick"
-            onPress={onClear}
-            enterStyle={{
-              scale: 0.5,
-              opacity: 0
-            }}
-          />
-          <Button
-            icon={Search}
-            size="$4"
-            theme="green"
-            animation="quick"
-            onPress={onPress}
-            enterStyle={{
-              scale: 0.5,
-              opacity: 0
-            }}
-          />
-        </>
-      )}
+      <Button
+        icon={Delete}
+        size="$4"
+        theme="red"
+        onPress={onClear}
+      />
+      <Button
+        icon={Search}
+        size="$4"
+        theme="green"
+        onPress={onPress}
+      />
     </XStack>
   );
 };

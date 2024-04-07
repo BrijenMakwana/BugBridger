@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import { RefreshControl, ToastAndroid } from "react-native";
+import { useState } from "react";
+import { RefreshControl } from "react-native";
 import { MasonryFlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Text, YStack } from "tamagui";
 
+import Error from "../../components/Error";
 import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
+import QuestionCard, { IQuestion } from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
@@ -18,22 +20,15 @@ import {
 import { isTablet } from "../../utils/utils";
 
 const Search = () => {
-  const [searchQuestion, setSearchQuestion] = useState<string>("");
-  const [questions, setQuestions] = useState([]);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [searchQuestion, setSearchQuestion] = useState("");
   const [sort, setSort] = useState<string>(QUESTIONS_SORTING_OPTIONS[0]);
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState<boolean>(false);
-  const [searchFilterIsApplied, setSearchFilterIsApplied] =
-    useState<boolean>(false);
-  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState<boolean>(false);
+  const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(false);
+  const [searchFilterIsApplied, setSearchFilterIsApplied] = useState(false);
+  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState(false);
   const [minAnswers, setMinAnswers] = useState<number[]>([10]);
   const [minViews, setMinViews] = useState<number[]>([10]);
-
-  const questionsAreEmpty = () => {
-    return questions?.length === 0;
-  };
 
   const openSearchFilter = () => {
     setSearchFilterIsOpen(true);
@@ -53,51 +48,52 @@ const Search = () => {
     closeSearchFilter();
   };
 
-  const getQuestions = async () => {
-    if (!searchQuestion) return;
+  const searchQuestions = async () => {
+    if (!searchQuestion) return [];
 
-    setIsSearching(true);
+    const response = await axios.get(
+      "https://api.stackexchange.com/2.3/search/advanced",
+      {
+        params: {
+          q: searchQuestion,
+          order: sortingOrder,
+          sort: sort,
+          site: "stackoverflow",
+          filter: "!7vXVX*mzcfem2OT0*5LAwQdhdFSw1HC7_f",
+          pageSize: 100,
+          key: process.env.EXPO_PUBLIC_API_KEY,
 
-    try {
-      const response = await axios.get(
-        "https://api.stackexchange.com/2.3/search/advanced",
-        {
-          params: {
-            q: searchQuestion,
-            order: sortingOrder,
-            sort: sort,
-            site: "stackoverflow",
-            filter: "!nNPvSNP4(R",
-            pageSize: 100,
-            key: process.env.EXPO_PUBLIC_API_KEY,
-
-            ...(searchFilterIsApplied && {
-              accepted: isAcceptedAnswer,
-              answers: minAnswers[0],
-              views: minViews[0]
-            })
-          }
+          ...(searchFilterIsApplied && {
+            accepted: isAcceptedAnswer,
+            answers: minAnswers[0],
+            views: minViews[0]
+          })
         }
-      );
+      }
+    );
 
-      setQuestions(response.data.items);
-    } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
-    } finally {
-      setIsSearching(false);
-    }
+    return response.data.items;
   };
+
+  const {
+    isFetching,
+    error,
+    refetch,
+    data: questions
+  } = useQuery({
+    queryKey: [
+      "searchQuestionsData",
+      sort,
+      sortingOrder,
+      searchFilterIsApplied
+    ],
+    queryFn: searchQuestions
+  });
 
   const clearSearch = () => {
     setSearchQuestion("");
-    setQuestions([]);
+    clearSearchFilter();
   };
-
-  useEffect(() => {
-    if (questionsAreEmpty()) return;
-
-    getQuestions();
-  }, [sort, sortingOrder, searchFilterIsApplied]);
 
   return (
     <>
@@ -105,9 +101,11 @@ const Search = () => {
         <SearchBar
           setSearchQuestion={setSearchQuestion}
           searchQuestion={searchQuestion}
-          onPress={getQuestions}
+          onPress={refetch}
           onClear={clearSearch}
         />
+
+        {error && <Error />}
 
         {searchQuestion && (
           <YStack
@@ -136,7 +134,7 @@ const Search = () => {
                 opacity: 0
               }}
             >
-              Advance Search Filters
+              Advanced Search Filters
             </Button>
 
             {searchFilterIsApplied && (
@@ -156,25 +154,24 @@ const Search = () => {
         )}
 
         <MasonryFlashList
-          data={questions}
+          data={searchQuestion ? (questions as IQuestion[]) : []}
           numColumns={isTablet ? 2 : 1}
           renderItem={({ item }) => (
             <QuestionCard
-              type="question"
               {...item}
               isBody
             />
           )}
-          estimatedItemSize={50}
+          estimatedItemSize={5}
           contentContainerStyle={{
             paddingHorizontal: 10
           }}
           refreshControl={
             <RefreshControl
-              refreshing={isSearching}
+              refreshing={isFetching}
               colors={[darkColors.green11]}
               progressBackgroundColor={darkColors.gray5}
-              onRefresh={getQuestions}
+              onRefresh={refetch}
             />
           }
         />
