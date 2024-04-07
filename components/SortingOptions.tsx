@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Check, ChevronDown } from "@tamagui/lucide-icons";
 import { Adapt, Label, Select, Sheet, XStack } from "tamagui";
 
@@ -8,7 +8,7 @@ export interface ISortingOptions {
   setSort: Dispatch<SetStateAction<string>>;
 }
 
-const CustomSelect: FC<ISortingOptions> = (props) => {
+const CustomSelect = (props: ISortingOptions) => {
   const { data, sort, setSort } = props;
 
   return (
@@ -84,7 +84,7 @@ const CustomSelect: FC<ISortingOptions> = (props) => {
   );
 };
 
-const SortingOptions: FC<ISortingOptions> = (props) => {
+const SortingOptions = (props: ISortingOptions) => {
   const { data, sort, setSort } = props;
 
   return (
