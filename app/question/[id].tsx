@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -18,20 +17,10 @@ import RelatedQuestion, {
   IRelatedQuestion
 } from "../../components/RelatedQuestion";
 import ShareButtonGroup from "../../components/ShareButtonGroup";
-import Sort from "../../components/Sort";
-import {
-  ANSWERS_SORTING_OPTIONS,
-  SORTING_ORDERS
-} from "../../constants/sorting";
 import { isTablet } from "../../utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
-
-  const [answerSort, setAnswerSort] = useState<string>(
-    ANSWERS_SORTING_OPTIONS[0]
-  );
-  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
   const getQuestion = async () => {
     const response = await axios.get(
@@ -70,11 +59,13 @@ const Question = () => {
   const {
     data: question,
     isFetching,
-    error
+    error,
+    refetch
   }: {
     data: IQuestion;
     isFetching: boolean;
     error: Error;
+    refetch: () => void;
   } = useQuery({
     queryKey: ["questionData"],
     queryFn: getQuestion
@@ -97,7 +88,7 @@ const Question = () => {
       />
     );
 
-  if (error) return <Error />;
+  if (error) return <Error refetch={refetch} />;
 
   return (
     <>
@@ -164,16 +155,6 @@ const Question = () => {
           value="tab2"
           flex={1}
         >
-          {question?.answer_count > 1 && (
-            <Sort
-              sort={answerSort}
-              setSort={setAnswerSort}
-              sortingOrder={sortingOrder}
-              setSortingOrder={setSortingOrder}
-              data={ANSWERS_SORTING_OPTIONS}
-            />
-          )}
-
           {question?.answer_count === 0 ? (
             <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
           ) : (

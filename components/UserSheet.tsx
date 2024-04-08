@@ -18,6 +18,7 @@ import {
   YStack
 } from "tamagui";
 
+import Error from "./Error";
 import StatisticItem from "./StatisticItem";
 
 interface IUserSheet {
@@ -114,7 +115,12 @@ const UserSheet = (props: IUserSheet) => {
     return response.data.items[0];
   };
 
-  const { isFetching, data: user } = useQuery({
+  const {
+    isFetching,
+    data: user,
+    error,
+    refetch
+  } = useQuery({
     queryKey: ["userData"],
     queryFn: getUser
   });
@@ -136,12 +142,16 @@ const UserSheet = (props: IUserSheet) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {isFetching ? (
+        {isFetching && (
           <Spinner
             size="large"
             color="$green10Dark"
           />
-        ) : (
+        )}
+
+        {!isFetching && error && <Error refetch={refetch} />}
+
+        {!isFetching && !error && (
           <YStack
             gap={20}
             padding={20}

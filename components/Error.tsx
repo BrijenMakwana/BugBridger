@@ -1,8 +1,13 @@
-import { Text, YStack } from "tamagui";
+import { RefreshCcw } from "@tamagui/lucide-icons";
+import { Button, Text, YStack } from "tamagui";
 
-import GoBack from "./GoBack";
+interface IError {
+  refetch: () => void;
+}
 
-const Error = () => {
+const Error = (props: IError) => {
+  const { refetch } = props;
+
   return (
     <YStack
       alignItems="center"
@@ -20,7 +25,13 @@ const Error = () => {
         something went wrong!
       </Text>
 
-      <GoBack />
+      <Button
+        icon={RefreshCcw}
+        scaleIcon={1.3}
+        onPress={refetch}
+      >
+        Retry
+      </Button>
     </YStack>
   );
 };
