@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RefreshControl } from "react-native";
-import { MasonryFlashList } from "@shopify/flash-list";
+import { FlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import { useQuery } from "@tanstack/react-query";
@@ -17,7 +17,6 @@ import {
   QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
-import { isTablet } from "../../utils/utils";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState("");
@@ -46,6 +45,11 @@ const Search = () => {
   const clearSearchFilter = () => {
     setSearchFilterIsApplied(false);
     closeSearchFilter();
+  };
+
+  const clearSearch = () => {
+    setSearchQuestion("");
+    clearSearchFilter();
   };
 
   const searchQuestions = async () => {
@@ -80,6 +84,11 @@ const Search = () => {
     error,
     refetch,
     data: questions
+  }: {
+    isFetching: boolean;
+    error: Error;
+    refetch: () => void;
+    data: IQuestion[];
   } = useQuery({
     queryKey: [
       "searchQuestionsData",
@@ -90,11 +99,6 @@ const Search = () => {
     queryFn: searchQuestions
   });
 
-  const clearSearch = () => {
-    setSearchQuestion("");
-    clearSearchFilter();
-  };
-
   return (
     <>
       <MyStack>
@@ -104,8 +108,6 @@ const Search = () => {
           onPress={refetch}
           onClear={clearSearch}
         />
-
-        {error && <Error />}
 
         {searchQuestion && (
           <YStack
@@ -153,28 +155,32 @@ const Search = () => {
           </YStack>
         )}
 
-        <MasonryFlashList
-          data={searchQuestion ? (questions as IQuestion[]) : []}
-          numColumns={isTablet ? 2 : 1}
-          renderItem={({ item }) => (
-            <QuestionCard
-              {...item}
-              isBody
-            />
-          )}
-          estimatedItemSize={5}
-          contentContainerStyle={{
-            paddingHorizontal: 10
-          }}
-          refreshControl={
-            <RefreshControl
-              refreshing={isFetching}
-              colors={[darkColors.green11]}
-              progressBackgroundColor={darkColors.gray5}
-              onRefresh={refetch}
-            />
-          }
-        />
+        {!isFetching && error && <Error refetch={refetch} />}
+
+        {searchQuestion && (
+          <FlashList
+            data={questions}
+            renderItem={({ item }) => (
+              <QuestionCard
+                {...item}
+                isBody
+              />
+            )}
+            keyExtractor={(item) => item.question_id.toString()}
+            estimatedItemSize={200}
+            contentContainerStyle={{
+              paddingHorizontal: 10
+            }}
+            refreshControl={
+              <RefreshControl
+                refreshing={isFetching}
+                colors={[darkColors.green11]}
+                progressBackgroundColor={darkColors.gray5}
+                onRefresh={refetch}
+              />
+            }
+          />
+        )}
       </MyStack>
 
       {searchFilterIsOpen && (

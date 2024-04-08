@@ -33,11 +33,13 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
   const {
     data: answer,
     isFetching,
-    error
+    error,
+    refetch
   }: {
     data: string;
     isFetching: boolean;
     error: Error;
+    refetch: () => void;
   } = useQuery({
     queryKey: ["aiAnswerData"],
     queryFn: generateAnswer
@@ -51,7 +53,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
       />
     );
 
-  if (error) return <Error />;
+  if (error) return <Error refetch={refetch} />;
 
   return (
     <MyScroll>

@@ -47,7 +47,7 @@ const Home = () => {
     queryFn: getFeaturedQuestions
   });
 
-  if (error) return <Error />;
+  if (error) return <Error refetch={refetch} />;
 
   return (
     <MyStack>
