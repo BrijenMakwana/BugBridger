@@ -8,7 +8,7 @@
       "resizeMode": "cover"
     },
     "icon": "./assets/icon.png",
-    "name": "BugBridger",
+    "name": "Bug Bridger",
     "slug": "BugBridger",
     "plugins": ["expo-router"],
     "extra": {
