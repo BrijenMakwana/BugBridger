@@ -10,6 +10,9 @@ export interface IPostNotice {
 
 const PostNotice = (props: IPostNotice) => {
   const { body } = props;
+
+  const bodyWithoutHTMLTags = body.replace(/<[^>]*>/g, "");
+
   return (
     <Card
       flexDirection="row"
@@ -26,7 +29,7 @@ const PostNotice = (props: IPostNotice) => {
         flex={1}
         lineHeight={22}
       >
-        {decode(body)}
+        {decode(bodyWithoutHTMLTags)}
       </Text>
     </Card>
   );
