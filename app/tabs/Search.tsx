@@ -81,12 +81,12 @@ const Search = () => {
 
   const {
     isFetching,
-    error,
+    isError,
     refetch,
     data: questions
   }: {
     isFetching: boolean;
-    error: Error;
+    isError: boolean;
     refetch: () => void;
     data: IQuestion[];
   } = useQuery({
@@ -155,7 +155,7 @@ const Search = () => {
           </YStack>
         )}
 
-        {!isFetching && error && <Error refetch={refetch} />}
+        {!isFetching && isError && <Error refetch={refetch} />}
 
         {searchQuestion && (
           <FlashList

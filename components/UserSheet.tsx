@@ -118,7 +118,7 @@ const UserSheet = (props: IUserSheet) => {
   const {
     isFetching,
     data: user,
-    error,
+    isError,
     refetch
   } = useQuery({
     queryKey: ["userData"],
@@ -149,9 +149,9 @@ const UserSheet = (props: IUserSheet) => {
           />
         )}
 
-        {!isFetching && error && <Error refetch={refetch} />}
+        {!isFetching && isError && <Error refetch={refetch} />}
 
-        {!isFetching && !error && (
+        {!isFetching && !isError && (
           <YStack
             gap={20}
             padding={20}

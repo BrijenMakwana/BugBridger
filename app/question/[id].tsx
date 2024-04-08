@@ -59,12 +59,12 @@ const Question = () => {
   const {
     data: question,
     isFetching,
-    error,
+    isError,
     refetch
   }: {
     data: IQuestion;
     isFetching: boolean;
-    error: Error;
+    isError: boolean;
     refetch: () => void;
   } = useQuery({
     queryKey: ["questionData"],
@@ -88,7 +88,7 @@ const Question = () => {
       />
     );
 
-  if (error) return <Error refetch={refetch} />;
+  if (isError) return <Error refetch={refetch} />;
 
   return (
     <>

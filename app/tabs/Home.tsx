@@ -39,7 +39,7 @@ const Home = () => {
 
   const {
     isPending,
-    error,
+    isError,
     refetch,
     data: questions
   } = useQuery({
@@ -47,7 +47,7 @@ const Home = () => {
     queryFn: getFeaturedQuestions
   });
 
-  if (error) return <Error refetch={refetch} />;
+  if (isError) return <Error refetch={refetch} />;
 
   return (
     <MyStack>
