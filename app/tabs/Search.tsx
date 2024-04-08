@@ -157,30 +157,28 @@ const Search = () => {
 
         {!isFetching && isError && <Error refetch={refetch} />}
 
-        {searchQuestion && (
-          <FlashList
-            data={questions}
-            renderItem={({ item }) => (
-              <QuestionCard
-                {...item}
-                isBody
-              />
-            )}
-            keyExtractor={(item) => item.question_id.toString()}
-            estimatedItemSize={200}
-            contentContainerStyle={{
-              paddingHorizontal: 10
-            }}
-            refreshControl={
-              <RefreshControl
-                refreshing={isFetching}
-                colors={[darkColors.green11]}
-                progressBackgroundColor={darkColors.gray5}
-                onRefresh={refetch}
-              />
-            }
-          />
-        )}
+        <FlashList
+          data={questions}
+          renderItem={({ item }) => (
+            <QuestionCard
+              {...item}
+              isBody
+            />
+          )}
+          keyExtractor={(item) => item.question_id.toString()}
+          estimatedItemSize={200}
+          contentContainerStyle={{
+            paddingHorizontal: 10
+          }}
+          refreshControl={
+            <RefreshControl
+              refreshing={isFetching}
+              colors={[darkColors.green11]}
+              progressBackgroundColor={darkColors.gray5}
+              onRefresh={refetch}
+            />
+          }
+        />
       </MyStack>
 
       {searchFilterIsOpen && (
