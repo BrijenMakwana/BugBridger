@@ -1,4 +1,4 @@
-<img src="./assets/icon.png" alt="app logo" width="350" height="350"/>
+<img src="./assets/icon.png" alt="bug bridger" width="350" height="350"/>
 
 # BugBridger (StackOverflow Mobile App)
 
@@ -18,18 +18,22 @@
 - Simply tap on any question card to access the dedicated question screen, offering comprehensive information about the question and all associated answers.
 - Enjoy proper code and text formatting with Markdown support, ensuring readability of coding blocks.
 - Quickly identify accepted answers for optimal problem-solving.
+- If a question lacks an answer, our AI feature generates solutions directly.
 - Explore the entire Stack Overflow repository, including both questions and answers, with a single button press.
-- Discover a collection of articles from Stack Overflow within the dedicated "Articles" tab, with the added convenience of sorting options.
 
 ## Screenshots
 
-<div>
-  <img src="./assets/images/Screenshots/preview_1.png" alt="Screenshot 1">
-  <img src="./assets/images/Screenshots/preview_2.png" alt="Screenshot 2">
-  <img src="./assets/images/Screenshots/preview_3.png" alt="Screenshot 3">
-  <img src="./assets/images/Screenshots/preview_4.png" alt="Screenshot 4">
-  <img src="./assets/images/Screenshots/preview_5.png" alt="Screenshot 5">
-  <img src="./assets/images/Screenshots/preview_6.png" alt="Screenshot 6">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+<img src="https://i.imgur.com/U3vB6FV.png" alt="screenshot 1" width="250"/>
+<img src="https://i.imgur.com/nQnbI51.png" alt="screenshot 2" width="250"/>
+<img src="https://i.imgur.com/HwDFeQZ.png" alt="screenshot 3" width="250"/>
+<img src="https://i.imgur.com/zc6TSlB.png" alt="screenshot 4" width="250"/>
+<img src="https://i.imgur.com/EFhpCUY.png" alt="screenshot 5" width="250"/>
+<img src="https://i.imgur.com/Fl1zh3p.png" alt="screenshot 6" width="250"/>
+<img src="https://i.imgur.com/WMdNGYQ.png" alt="screenshot 7" width="250"/>
+<img src="https://i.imgur.com/U3vB6FV.png" alt="screenshot 8" width="250"/>
+<img src="https://i.imgur.com/0KFoQit.png" alt="screenshot 9" width="250"/>
+<img src="https://i.imgur.com/oW1yz42.png" alt="screenshot 10" width="250"/>
 
 </div>
 
@@ -56,7 +60,7 @@ Now you can view this app on your Android smartphone or Android Emulator
 - React Native
 - Expo 49
 - Typescript
-- tamagui
+- [tamagui](https://tamagui.dev)
 - expo-router
 - [Stack Exchange API](https://api.stackexchange.com/docs)
-- Shopify Flashlist and MasonryFlashList
+- Shopify Flashlist
