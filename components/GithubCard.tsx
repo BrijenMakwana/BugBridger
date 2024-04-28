@@ -1,48 +1,23 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { ExternalLink } from "@tamagui/lucide-icons";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { openURL } from "expo-linking";
 import { Avatar, Button, Card, H2, H5, Paragraph, XStack } from "tamagui";
+
+import useContributors from "../hooks/useContributors";
+import useGitRepo from "../hooks/useGitRepo";
 
 import Tag from "./Tag";
 
 const GithubCard = () => {
-  const getGitRepo = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.github.com/repos/BrijenMakwana/BugBridger"
-      );
+  const { gitRepo, isError: isRepoError } = useGitRepo(
+    "https://api.github.com/repos/BrijenMakwana/BugBridger"
+  );
 
-      return response.data;
-    } catch (error) {
-      return error;
-    }
-  };
+  const { contributors, isError: isContributorsError } = useContributors(
+    "https://api.github.com/repos/BrijenMakwana/BugBridger"
+  );
 
-  const getContributors = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.github.com/repos/BrijenMakwana/BugBridger/contributors"
-      );
-
-      return response.data;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const { data: gitRepo, error: repoError } = useQuery({
-    queryKey: ["gitRepoData"],
-    queryFn: getGitRepo
-  });
-
-  const { data: contributors, error: contributorsError } = useQuery({
-    queryKey: ["contributorsData"],
-    queryFn: getContributors
-  });
-
-  if (repoError || contributorsError) return;
+  if (isRepoError || isContributorsError) return;
 
   return (
     <Card
