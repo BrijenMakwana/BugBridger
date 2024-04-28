@@ -1,6 +1,4 @@
 import { FlashList } from "@shopify/flash-list";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack } from "tamagui";
 
@@ -13,43 +11,18 @@ import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import PostNotice from "../../components/PostNotice";
 import QuestionCard from "../../components/QuestionCard";
-import RelatedQuestion, {
-  IRelatedQuestion
-} from "../../components/RelatedQuestion";
+import RelatedQuestion from "../../components/RelatedQuestion";
 import ShareButtonGroup from "../../components/ShareButtonGroup";
 import useQuestion from "../../hooks/useQuestion";
+import useRelatedQuestion from "../../hooks/useRelatedQuestion";
 import { isTablet } from "../../utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
 
-  const getRelatedQuestions = async () => {
-    const response = await axios.get(
-      `https://api.stackexchange.com/2.3/questions/${id}/related?`,
-      {
-        params: {
-          order: "desc",
-          sort: "activity",
-          site: "stackoverflow",
-          filter: "!szz-rpK9Axv5zb.Gmodt6fEhGVd-MSW",
-          key: process.env.EXPO_PUBLIC_API_KEY
-        }
-      }
-    );
-
-    return response.data.items;
-  };
-
   const { question, isFetching, isError, refetch } = useQuestion(id);
 
-  const {
-    data: relatedQuestions
-  }: {
-    data: IRelatedQuestion[];
-  } = useQuery({
-    queryKey: ["relatedQuestionsData"],
-    queryFn: getRelatedQuestions
-  });
+  const { relatedQuestions } = useRelatedQuestion(id);
 
   if (isFetching)
     return (
