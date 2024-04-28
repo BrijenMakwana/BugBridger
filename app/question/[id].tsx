@@ -12,32 +12,16 @@ import Error from "../../components/Error";
 import GoBack from "../../components/GoBack";
 import { MyScroll } from "../../components/MyScroll";
 import PostNotice from "../../components/PostNotice";
-import QuestionCard, { IQuestion } from "../../components/QuestionCard";
+import QuestionCard from "../../components/QuestionCard";
 import RelatedQuestion, {
   IRelatedQuestion
 } from "../../components/RelatedQuestion";
 import ShareButtonGroup from "../../components/ShareButtonGroup";
+import useQuestion from "../../hooks/useQuestion";
 import { isTablet } from "../../utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();
-
-  const getQuestion = async () => {
-    const response = await axios.get(
-      `https://api.stackexchange.com/2.3/questions/${id}?`,
-      {
-        params: {
-          order: "desc",
-          sort: "activity",
-          site: "stackoverflow",
-          filter: "!7vXVX*mzcfem2OT0*5LAwQdhdFSw1HC7_f",
-          key: process.env.EXPO_PUBLIC_API_KEY
-        }
-      }
-    );
-
-    return response.data.items[0];
-  };
 
   const getRelatedQuestions = async () => {
     const response = await axios.get(
@@ -56,20 +40,7 @@ const Question = () => {
     return response.data.items;
   };
 
-  const {
-    data: question,
-    isFetching,
-    isError,
-    refetch
-  }: {
-    data: IQuestion;
-    isFetching: boolean;
-    isError: boolean;
-    refetch: () => void;
-  } = useQuery({
-    queryKey: ["questionData"],
-    queryFn: getQuestion
-  });
+  const { question, isFetching, isError, refetch } = useQuestion(id);
 
   const {
     data: relatedQuestions
