@@ -9,29 +9,11 @@ import { decode } from "html-entities";
 import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
 
-import { IAnswer } from "./Answers";
-import { IComment } from "./CommentCard";
-import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
-import { IPostNotice } from "./PostNotice";
+import { IQuestion } from "../types";
+
+import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
-
-export interface IQuestion {
-  question_id: number;
-  title: string;
-  is_answered: boolean;
-  body_markdown: string;
-  tags: string[];
-  score: number;
-  view_count: number;
-  answer_count: number;
-  owner: IOwner;
-  creation_date: Date;
-  link: string;
-  notice: IPostNotice;
-  answers: IAnswer[];
-  comments: IComment[];
-}
 
 interface IQuestionCard extends IQuestion {
   isBody?: boolean;

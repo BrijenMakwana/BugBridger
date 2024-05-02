@@ -9,7 +9,7 @@ import { Button, Text, YStack } from "tamagui";
 
 import Error from "../../components/Error";
 import { MyStack } from "../../components/MyStack";
-import QuestionCard, { IQuestion } from "../../components/QuestionCard";
+import QuestionCard from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
@@ -17,6 +17,7 @@ import {
   QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
 } from "../../constants/sorting";
+import { IQuestion } from "../../types";
 
 const Search = () => {
   const [searchQuestion, setSearchQuestion] = useState("");

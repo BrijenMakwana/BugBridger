@@ -2,23 +2,12 @@ import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
-import { IComment } from "./CommentCard";
+import { IAnswer } from "../types";
+
 import CommentsButton from "./CommentsButton";
 import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
+import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
-
-export interface IAnswer {
-  answer_id: number;
-  index: number;
-  body_markdown: string;
-  is_accepted: boolean;
-  owner: IOwner;
-  creation_date: Date;
-  link: string;
-  up_vote_count: number;
-  comments: IComment[];
-}
 
 interface IAnswers {
   answers: IAnswer[];
