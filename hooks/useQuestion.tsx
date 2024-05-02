@@ -4,7 +4,7 @@ import axios from "axios";
 import { IQuestion } from "../components/QuestionCard";
 
 const useQuestion = (questionId: string | string[]) => {
-  const getQuestion = async () => {
+  const getQuestion = async (): Promise<IQuestion> => {
     const response = await axios.get(
       `https://api.stackexchange.com/2.3/questions/${questionId}?`,
       {
@@ -21,15 +21,7 @@ const useQuestion = (questionId: string | string[]) => {
     return response.data.items[0];
   };
 
-  const {
-    data,
-    ...rest
-  }: {
-    data: IQuestion;
-    isFetching: boolean;
-    isError: boolean;
-    refetch: () => void;
-  } = useQuery({
+  const { data, ...rest } = useQuery({
     queryKey: ["questionData"],
     queryFn: getQuestion
   });

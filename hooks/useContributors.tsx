@@ -3,13 +3,9 @@ import axios from "axios";
 
 const useContributors = (repoUrl: string) => {
   const getContributors = async () => {
-    try {
-      const response = await axios.get(`${repoUrl}/contributors`);
+    const response = await axios.get(`${repoUrl}/contributors`);
 
-      return response.data;
-    } catch (error) {
-      return error;
-    }
+    return response.data;
   };
 
   const { data, ...rest } = useQuery({

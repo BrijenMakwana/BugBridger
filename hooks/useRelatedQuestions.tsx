@@ -3,8 +3,8 @@ import axios from "axios";
 
 import { IRelatedQuestion } from "../components/RelatedQuestion";
 
-const useRelatedQuestion = (questionId: string | string[]) => {
-  const getRelatedQuestions = async () => {
+const useRelatedQuestions = (questionId: string | string[]) => {
+  const getRelatedQuestions = async (): Promise<IRelatedQuestion[]> => {
     const response = await axios.get(
       `https://api.stackexchange.com/2.3/questions/${questionId}/related?`,
       {
@@ -21,15 +21,7 @@ const useRelatedQuestion = (questionId: string | string[]) => {
     return response.data.items;
   };
 
-  const {
-    data,
-    ...rest
-  }: {
-    data: IRelatedQuestion[];
-    isFetching: boolean;
-    isError: boolean;
-    refetch: () => void;
-  } = useQuery({
+  const { data, ...rest } = useQuery({
     queryKey: ["relatedQuestionsData"],
     queryFn: getRelatedQuestions
   });
@@ -40,4 +32,4 @@ const useRelatedQuestion = (questionId: string | string[]) => {
   };
 };
 
-export default useRelatedQuestion;
+export default useRelatedQuestions;

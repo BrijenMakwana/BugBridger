@@ -5,7 +5,7 @@ import { darkColors } from "@tamagui/themes";
 
 import Error from "../../components/Error";
 import { MyStack } from "../../components/MyStack";
-import QuestionCard, { IQuestion } from "../../components/QuestionCard";
+import QuestionCard from "../../components/QuestionCard";
 import Sort from "../../components/Sort";
 import {
   FEATURED_QUESTIONS_SORTING_OPTIONS,
@@ -19,7 +19,7 @@ const Home = () => {
   );
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const { isPending, isError, refetch, questions } = useFeaturedQuestions(
+  const { questions, isPending, isError, refetch } = useFeaturedQuestions(
     sortingOrder,
     sort
   );
@@ -39,7 +39,7 @@ const Home = () => {
       )}
 
       <FlashList
-        data={questions as IQuestion[]}
+        data={questions}
         renderItem={({ item }) => (
           <QuestionCard
             {...item}

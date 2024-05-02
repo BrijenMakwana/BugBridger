@@ -14,7 +14,7 @@ import QuestionCard from "../../components/QuestionCard";
 import RelatedQuestion from "../../components/RelatedQuestion";
 import ShareButtonGroup from "../../components/ShareButtonGroup";
 import useQuestion from "../../hooks/useQuestion";
-import useRelatedQuestion from "../../hooks/useRelatedQuestion";
+import useRelatedQuestions from "../../hooks/useRelatedQuestions";
 import { isTablet } from "../../utils/utils";
 
 const Question = () => {
@@ -22,7 +22,7 @@ const Question = () => {
 
   const { question, isFetching, isError, refetch } = useQuestion(id);
 
-  const { relatedQuestions } = useRelatedQuestion(id);
+  const { relatedQuestions } = useRelatedQuestions(id);
 
   if (isFetching)
     return (
