@@ -3,13 +3,9 @@ import axios from "axios";
 
 const useGitRepo = (repoUrl: string) => {
   const getGitRepo = async () => {
-    try {
-      const response = await axios.get(repoUrl);
+    const response = await axios.get(repoUrl);
 
-      return response.data;
-    } catch (error) {
-      return error;
-    }
+    return response.data;
   };
 
   const { data, ...rest } = useQuery({

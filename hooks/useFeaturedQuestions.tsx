@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { IQuestion } from "../components/QuestionCard";
+
 const useFeaturedQuestions = (sortingOrder: string, sort: string) => {
-  const getFeaturedQuestions = async () => {
+  const getFeaturedQuestions = async (): Promise<IQuestion[]> => {
     const response = await axios.get(
       "https://api.stackexchange.com/2.3/questions/featured?",
       {
