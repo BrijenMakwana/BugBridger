@@ -1,14 +1,10 @@
 import React from "react";
 import { YStack } from "tamagui";
 
-import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { IOwner, POST_TYPE } from "./PostCreationInfo";
+import { IComment } from "../types";
 
-export interface IComment {
-  body_markdown: string;
-  owner: IOwner;
-  creation_date: Date;
-}
+import CustomMarkdown from "./CustomMarkdown";
+import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
 
 const CommentCard = (props: IComment) => {
   const { body_markdown, owner, creation_date } = props;
