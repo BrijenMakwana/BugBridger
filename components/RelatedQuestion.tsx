@@ -2,16 +2,11 @@ import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H6 } from "tamagui";
 
+import { IQuestion } from "../types";
+
 import VoteCount from "./VoteCount";
 
-export interface IRelatedQuestion {
-  question_id: number;
-  up_vote_count: number;
-  title: string;
-  is_answered: boolean;
-}
-
-const RelatedQuestion = (props: IRelatedQuestion) => {
+const RelatedQuestion = (props: IQuestion) => {
   const { question_id, up_vote_count, title, is_answered } = props;
 
   return (

@@ -13,6 +13,7 @@ export interface IQuestion {
   score: number;
   view_count: number;
   answer_count: number;
+  up_vote_count: number;
   owner: IOwner;
   creation_date: Date;
   link: string;
