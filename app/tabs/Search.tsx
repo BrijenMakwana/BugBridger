@@ -3,8 +3,6 @@ import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Button, Text, YStack } from "tamagui";
 
 import Error from "../../components/Error";
@@ -13,22 +11,32 @@ import QuestionCard from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
-import {
-  QUESTIONS_SORTING_OPTIONS,
-  SORTING_ORDERS
-} from "../../constants/sorting";
-import { IQuestion } from "../../types";
+import { QUESTIONS_SORTING_OPTIONS } from "../../constants/sorting";
+import useSearch from "../../hooks/useSearch";
 
 const Search = () => {
-  const [searchQuestion, setSearchQuestion] = useState("");
-  const [sort, setSort] = useState<string>(QUESTIONS_SORTING_OPTIONS[0]);
-  const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
-
   const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(false);
-  const [searchFilterIsApplied, setSearchFilterIsApplied] = useState(false);
-  const [isAcceptedAnswer, setIsAcceptedAnswer] = useState(false);
-  const [minAnswers, setMinAnswers] = useState<number[]>([10]);
-  const [minViews, setMinViews] = useState<number[]>([10]);
+
+  const {
+    isFetching,
+    isError,
+    refetch,
+    data: questions,
+    searchQuestion,
+    setSearchQuestion,
+    sort,
+    setSort,
+    sortingOrder,
+    setSortingOrder,
+    searchFilterIsApplied,
+    setSearchFilterIsApplied,
+    isAcceptedAnswer,
+    setIsAcceptedAnswer,
+    minAnswers,
+    setMinAnswers,
+    minViews,
+    setMinViews
+  } = useSearch();
 
   const openSearchFilter = () => {
     setSearchFilterIsOpen(true);
@@ -52,53 +60,6 @@ const Search = () => {
     setSearchQuestion("");
     clearSearchFilter();
   };
-
-  const searchQuestions = async () => {
-    if (!searchQuestion) return [];
-
-    const response = await axios.get(
-      "https://api.stackexchange.com/2.3/search/advanced",
-      {
-        params: {
-          q: searchQuestion,
-          order: sortingOrder,
-          sort: sort,
-          site: "stackoverflow",
-          filter: "!7vXVX*mzcfem2OT0*5LAwQdhdFSw1HC7_f",
-          pageSize: 100,
-          key: process.env.EXPO_PUBLIC_API_KEY,
-
-          ...(searchFilterIsApplied && {
-            accepted: isAcceptedAnswer,
-            answers: minAnswers[0],
-            views: minViews[0]
-          })
-        }
-      }
-    );
-
-    return response.data.items;
-  };
-
-  const {
-    isFetching,
-    isError,
-    refetch,
-    data: questions
-  }: {
-    isFetching: boolean;
-    isError: boolean;
-    refetch: () => void;
-    data: IQuestion[];
-  } = useQuery({
-    queryKey: [
-      "searchQuestionsData",
-      sort,
-      sortingOrder,
-      searchFilterIsApplied
-    ],
-    queryFn: searchQuestions
-  });
 
   return (
     <>
