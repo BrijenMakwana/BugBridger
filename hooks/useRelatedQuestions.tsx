@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { IRelatedQuestion } from "../components/RelatedQuestion";
+import { IQuestion } from "../types";
 
 const useRelatedQuestions = (questionId: string | string[]) => {
-  const getRelatedQuestions = async (): Promise<IRelatedQuestion[]> => {
+  const getRelatedQuestions = async (): Promise<IQuestion[]> => {
     const response = await axios.get(
       `https://api.stackexchange.com/2.3/questions/${questionId}/related?`,
       {

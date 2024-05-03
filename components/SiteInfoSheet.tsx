@@ -1,9 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { ToastAndroid } from "react-native";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { H3, Sheet, Spinner, Text, XStack, YStack } from "tamagui";
 
+import useStackOverflowSiteInfo from "../hooks/useStackOverflowSiteInfo";
 import { formatNumber, formatText } from "../utils/utils";
 
 interface IInfoCard {
@@ -46,28 +44,7 @@ const InfoItem = (props: IInfoCard) => {
 const SiteInfoSheet = (props: ISiteInfoSheet) => {
   const { open, setOpen } = props;
 
-  const getSiteInfo = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.stackexchange.com/2.3/info?`,
-        {
-          params: {
-            site: "stackoverflow",
-            key: process.env.EXPO_PUBLIC_API_KEY
-          }
-        }
-      );
-
-      return response.data.items[0];
-    } catch (error) {
-      ToastAndroid.show(error.message, ToastAndroid.SHORT);
-    }
-  };
-
-  const { isPending, data: siteInfo } = useQuery({
-    queryKey: ["siteData"],
-    queryFn: getSiteInfo
-  });
+  const { siteInfo, isFetching } = useStackOverflowSiteInfo();
 
   return (
     <Sheet
@@ -86,7 +63,7 @@ const SiteInfoSheet = (props: ISiteInfoSheet) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {isPending ? (
+        {isFetching ? (
           <Spinner
             size="large"
             color="$green10Dark"

@@ -1,8 +1,8 @@
-import { IOwner } from "../components/PostCreationInfo";
 import { IPostNotice } from "../components/PostNotice";
 
 import { IAnswer } from "./answer";
 import { IComment } from "./comment";
+import { IOwner } from "./owner";
 
 export interface IQuestion {
   question_id: number;
@@ -13,8 +13,9 @@ export interface IQuestion {
   score: number;
   view_count: number;
   answer_count: number;
+  up_vote_count: number;
   owner: IOwner;
-  creation_date: Date;
+  creation_date: number;
   link: string;
   notice: IPostNotice;
   answers: IAnswer[];
