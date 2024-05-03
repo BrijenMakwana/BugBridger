@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import { Award } from "@tamagui/lucide-icons";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { decode } from "html-entities";
 import moment from "moment";
 import {
@@ -18,13 +16,15 @@ import {
   YStack
 } from "tamagui";
 
+import useUser from "../hooks/useUser";
+
 import Error from "./Error";
 import StatisticItem from "./StatisticItem";
 
 interface IUserSheet {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  userID: number;
+  userId: number;
 }
 
 interface IUserInfo {
@@ -95,35 +95,9 @@ const UserInfo = (props: IUserInfo) => {
 };
 
 const UserSheet = (props: IUserSheet) => {
-  const { open, setOpen, userID } = props;
+  const { open, setOpen, userId } = props;
 
-  const getUser = async () => {
-    const response = await axios.get(
-      `https://api.stackexchange.com/2.3/users/${userID}?`,
-
-      {
-        params: {
-          order: "desc",
-          sort: "reputation",
-          site: "stackoverflow",
-          filter: "!)scV0Xk0jsmonefL_TsZ",
-          key: process.env.EXPO_PUBLIC_API_KEY
-        }
-      }
-    );
-
-    return response.data.items[0];
-  };
-
-  const {
-    isFetching,
-    data: user,
-    isError,
-    refetch
-  } = useQuery({
-    queryKey: ["userData"],
-    queryFn: getUser
-  });
+  const { user, isFetching, isError, refetch } = useUser(userId);
 
   return (
     <Sheet

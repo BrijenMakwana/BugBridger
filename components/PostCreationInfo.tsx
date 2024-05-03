@@ -10,7 +10,7 @@ import UserSheet from "./UserSheet";
 
 interface IPostCreationInfo extends IOwner {
   type: POST_TYPE;
-  creationDate: Date;
+  creationDate: number;
   isPressable?: boolean;
 }
 
@@ -84,7 +84,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
         <UserSheet
           open={userSheetIsOpen}
           setOpen={setUserSheetIsOpen}
-          userID={user_id}
+          userId={user_id}
         />
       )}
     </>
