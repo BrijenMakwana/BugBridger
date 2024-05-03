@@ -7,7 +7,7 @@ export interface IAnswer {
   body_markdown: string;
   is_accepted: boolean;
   owner: IOwner;
-  creation_date: Date;
+  creation_date: number;
   link: string;
   up_vote_count: number;
   comments: IComment[];

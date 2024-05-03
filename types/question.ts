@@ -15,7 +15,7 @@ export interface IQuestion {
   answer_count: number;
   up_vote_count: number;
   owner: IOwner;
-  creation_date: Date;
+  creation_date: number;
   link: string;
   notice: IPostNotice;
   answers: IAnswer[];
