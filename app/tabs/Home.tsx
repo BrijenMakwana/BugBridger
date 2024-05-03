@@ -19,7 +19,7 @@ const Home = () => {
   );
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const { questions, isPending, isError, refetch } = useFeaturedQuestions(
+  const { questions, isFetching, isError, refetch } = useFeaturedQuestions(
     sortingOrder,
     sort
   );
@@ -52,7 +52,7 @@ const Home = () => {
         }}
         refreshControl={
           <RefreshControl
-            refreshing={isPending}
+            refreshing={isFetching}
             colors={[darkColors.green11]}
             progressBackgroundColor={darkColors.gray5}
             onRefresh={refetch}
