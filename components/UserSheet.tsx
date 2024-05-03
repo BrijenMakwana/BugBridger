@@ -30,7 +30,7 @@ interface IUserSheet {
 interface IUserInfo {
   displayName: string;
   profileImage: string;
-  creationDate: Date;
+  creationDate: number;
 }
 
 interface IBadgeInfo {
