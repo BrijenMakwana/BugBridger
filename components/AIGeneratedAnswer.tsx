@@ -1,6 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { useQuery } from "@tanstack/react-query";
 import { Spinner, YStack } from "tamagui";
+
+import useAI from "../hooks/useAI";
 
 import CustomMarkdown from "./CustomMarkdown";
 import Error from "./Error";
@@ -17,33 +17,9 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
   const disclaimer =
     "The following answer is AI-generated and may not be entirely accurate. Please use discretion when interpreting the information.";
 
-  const genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const prompt = `You are an experienced developer tasked with generating an answer in markdown format based on a given question. Here is the prompt: '${questionMarkdown}'. Please proceed to generate the answer in markdown.`;
 
-  const generateAnswer = async () => {
-    const prompt = `You are an experienced developer tasked with generating an answer in markdown format based on a given question. Here is the prompt: '${questionMarkdown}'. Please proceed to generate the answer in markdown.`;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-
-    return text;
-  };
-
-  const {
-    data: answer,
-    isFetching,
-    error,
-    refetch
-  }: {
-    data: string;
-    isFetching: boolean;
-    error: Error;
-    refetch: () => void;
-  } = useQuery({
-    queryKey: ["aiAnswerData"],
-    queryFn: generateAnswer
-  });
+  const { data: answer, isFetching, isError, refetch } = useAI(prompt);
 
   if (isFetching)
     return (
@@ -53,7 +29,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
       />
     );
 
-  if (error) return <Error refetch={refetch} />;
+  if (isError) return <Error refetch={refetch} />;
 
   return (
     <MyScroll>
