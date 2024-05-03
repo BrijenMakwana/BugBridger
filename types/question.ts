@@ -1,8 +1,8 @@
-import { IOwner } from "../components/PostCreationInfo";
 import { IPostNotice } from "../components/PostNotice";
 
 import { IAnswer } from "./answer";
 import { IComment } from "./comment";
+import { IOwner } from "./owner";
 
 export interface IQuestion {
   question_id: number;

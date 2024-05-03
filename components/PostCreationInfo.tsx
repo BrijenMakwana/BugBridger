@@ -3,6 +3,7 @@ import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Button, Text, YStack } from "tamagui";
 
+import { IOwner } from "../types";
 import { formatNumber } from "../utils/utils";
 
 import UserSheet from "./UserSheet";
@@ -11,13 +12,6 @@ interface IPostCreationInfo extends IOwner {
   type: POST_TYPE;
   creationDate: Date;
   isPressable?: boolean;
-}
-
-export interface IOwner {
-  user_id: number;
-  display_name: string;
-  profile_image: string;
-  reputation: number;
 }
 
 export enum POST_TYPE {

@@ -1,6 +1,5 @@
-import { IOwner } from "../components/PostCreationInfo";
-
 import { IComment } from "./comment";
+import { IOwner } from "./owner";
 
 export interface IAnswer {
   answer_id: number;
