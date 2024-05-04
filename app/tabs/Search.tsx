@@ -11,7 +11,7 @@ import QuestionCard from "../../components/QuestionCard";
 import SearchBar from "../../components/SearchBar";
 import SearchFilterSheet from "../../components/SearchFilterSheet";
 import Sort from "../../components/Sort";
-import { QUESTIONS_SORTING_OPTIONS } from "../../constants/sorting";
+import { QUESTIONS_SORTING_OPTIONS } from "../../constants";
 import useSearch from "../../hooks/useSearch";
 
 const Search = () => {

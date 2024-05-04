@@ -10,7 +10,7 @@ import Sort from "../../components/Sort";
 import {
   FEATURED_QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
-} from "../../constants/sorting";
+} from "../../constants";
 import useFeaturedQuestions from "../../hooks/useFeaturedQuestions";
 
 const Home = () => {
