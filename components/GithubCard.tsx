@@ -8,14 +8,13 @@ import useGitRepo from "../hooks/useGitRepo";
 
 import Tag from "./Tag";
 
-const GithubCard = () => {
-  const { gitRepo, isError: isRepoError } = useGitRepo(
-    "https://api.github.com/repos/BrijenMakwana/BugBridger"
-  );
+const GITHUB_REPO = "https://api.github.com/repos/BrijenMakwana/BugBridger";
 
-  const { contributors, isError: isContributorsError } = useContributors(
-    "https://api.github.com/repos/BrijenMakwana/BugBridger"
-  );
+const GithubCard = () => {
+  const { gitRepo, isError: isRepoError } = useGitRepo(GITHUB_REPO);
+
+  const { contributors, isError: isContributorsError } =
+    useContributors(GITHUB_REPO);
 
   if (isRepoError || isContributorsError) return;
 
