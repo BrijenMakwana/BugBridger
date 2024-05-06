@@ -45,7 +45,7 @@ const CommmentsSheet = (props: ICommmentsSheet) => {
             paddingHorizontal: 15,
             paddingVertical: 20
           }}
-          ListHeaderComponent={() => <H2>Comments</H2>}
+          ListHeaderComponent={() => <H2>Comments ({comments.length})</H2>}
           ItemSeparatorComponent={() => <Separator />}
         />
       </Sheet.Frame>
