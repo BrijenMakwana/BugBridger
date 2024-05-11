@@ -1,11 +1,11 @@
 import { Suspense, useEffect } from "react";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import { TamaguiProvider, Text, Theme } from "tamagui";
+import { TamaguiProvider, Text } from "tamagui";
 
 import { MySafeAreaView } from "../components/MySafeAreaView";
+import useCustomFonts from "../hooks/useCustomFonts";
 import config from "../tamagui.config";
 
 const queryClient = new QueryClient();
@@ -13,41 +13,39 @@ const queryClient = new QueryClient();
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
-  const [loaded] = useFonts({
-    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
-    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf")
-  });
+  const { fontsLoaded, fontError } = useCustomFonts();
 
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded, fontError]);
 
-  if (!loaded) return null;
+  if (!fontsLoaded && !fontError) return null;
 
   return (
-    <TamaguiProvider config={config}>
+    <TamaguiProvider
+      config={config}
+      defaultTheme="dark"
+    >
       <Suspense fallback={<Text>Loading...</Text>}>
-        <Theme name="dark">
-          <ThemeProvider value={DarkTheme}>
-            <QueryClientProvider client={queryClient}>
-              <MySafeAreaView>
-                <Stack
-                  screenOptions={{
-                    headerShown: false
-                  }}
-                >
-                  <Stack.Screen name="tabs" />
-                  <Stack.Screen
-                    getId={({ params }) => params.id}
-                    name="question/[id]"
-                  />
-                </Stack>
-              </MySafeAreaView>
-            </QueryClientProvider>
-          </ThemeProvider>
-        </Theme>
+        <ThemeProvider value={DarkTheme}>
+          <QueryClientProvider client={queryClient}>
+            <MySafeAreaView>
+              <Stack
+                screenOptions={{
+                  headerShown: false
+                }}
+              >
+                <Stack.Screen name="tabs" />
+                <Stack.Screen
+                  getId={({ params }) => params.id}
+                  name="question/[id]"
+                />
+              </Stack>
+            </MySafeAreaView>
+          </QueryClientProvider>
+        </ThemeProvider>
       </Suspense>
     </TamaguiProvider>
   );
