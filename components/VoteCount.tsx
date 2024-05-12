@@ -15,9 +15,9 @@ const VoteCount = (props: IVoteCount) => {
       justifyContent="center"
       backgroundColor={isAccepted ? "$green10Dark" : "$backgroundPress"}
       paddingVertical={5}
-      paddingHorizontal={15}
       borderRadius={5}
       gap={10}
+      width={90}
     >
       <TrendingUp size="$1" />
       <Text fontSize={13}>{vote}</Text>
