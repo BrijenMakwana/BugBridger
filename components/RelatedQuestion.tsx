@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { decode } from "html-entities";
-import { Card, H6 } from "tamagui";
+import { H6, XStack } from "tamagui";
 
 import VoteCount from "./VoteCount";
 
@@ -14,32 +14,25 @@ const RelatedQuestion = (props: IQuestion) => {
       href={`/question/${question_id}`}
       asChild
     >
-      <Card
-        padding={10}
-        marginVertical={7}
+      <XStack
+        marginVertical={10}
+        gap={20}
+        alignItems="flex-start"
+        justifyContent="space-between"
         animation="quick"
         pressStyle={{ scale: 0.95, backgroundColor: "$backgroundHover" }}
         enterStyle={{
           scale: 0.5,
           opacity: 0
         }}
-        backgroundColor="$backgroundTransparent"
       >
-        <Card.Header
-          padding={0}
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          gap={25}
-        >
-          <VoteCount
-            isAccepted={is_answered}
-            vote={up_vote_count}
-          />
+        <VoteCount
+          isAccepted={is_answered}
+          vote={up_vote_count}
+        />
 
-          <H6 flex={1}>{decode(title)}</H6>
-        </Card.Header>
-      </Card>
+        <H6 flex={1}>{decode(title)}</H6>
+      </XStack>
     </Link>
   );
 };
