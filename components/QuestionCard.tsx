@@ -9,11 +9,11 @@ import { decode } from "html-entities";
 import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
 
-import { IQuestion } from "../types";
-
 import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
+
+import { IQuestion } from "@/types";
 
 interface IQuestionCard extends IQuestion {
   isBody?: boolean;

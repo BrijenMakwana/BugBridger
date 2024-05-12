@@ -5,14 +5,14 @@ import { ListFilter } from "@tamagui/lucide-icons";
 import { darkColors } from "@tamagui/themes";
 import { Button, Text, YStack } from "tamagui";
 
-import Error from "../../components/Error";
-import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
-import SearchBar from "../../components/SearchBar";
-import SearchFilterSheet from "../../components/SearchFilterSheet";
-import Sort from "../../components/Sort";
-import { QUESTIONS_SORTING_OPTIONS } from "../../constants";
-import useSearch from "../../hooks/useSearch";
+import Error from "@/components/Error";
+import { MyStack } from "@/components/MyStack";
+import QuestionCard from "@/components/QuestionCard";
+import SearchBar from "@/components/SearchBar";
+import SearchFilterSheet from "@/components/SearchFilterSheet";
+import Sort from "@/components/Sort";
+import { QUESTIONS_SORTING_OPTIONS } from "@/constants";
+import useSearch from "@/hooks/useSearch";
 
 const Search = () => {
   const [searchFilterIsOpen, setSearchFilterIsOpen] = useState(false);

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { H3, Sheet, Spinner, Text, XStack, YStack } from "tamagui";
 
-import useStackOverflowSiteInfo from "../hooks/useStackOverflowSiteInfo";
-import { formatNumber, formatText } from "../utils/utils";
+import useStackOverflowSiteInfo from "@/hooks/useStackOverflowSiteInfo";
+import { formatNumber, formatText } from "@/utils/utils";
 
 interface IInfoCard {
   title: string;

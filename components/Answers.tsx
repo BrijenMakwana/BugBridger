@@ -2,12 +2,12 @@ import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
-import { IAnswer } from "../types";
-
 import CommentsButton from "./CommentsButton";
 import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
+
+import { IAnswer } from "@/types";
 
 interface IAnswers {
   answers: IAnswer[];

@@ -4,9 +4,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SplashScreen, Stack } from "expo-router";
 import { TamaguiProvider, Text } from "tamagui";
 
-import { MySafeAreaView } from "../components/MySafeAreaView";
-import useCustomFonts from "../hooks/useCustomFonts";
-import config from "../tamagui.config";
+import { MySafeAreaView } from "@/components/MySafeAreaView";
+import useCustomFonts from "@/hooks/useCustomFonts";
+import config from "@/tamagui.config";
 
 const queryClient = new QueryClient();
 

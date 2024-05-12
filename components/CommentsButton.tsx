@@ -3,9 +3,9 @@ import { FlashList } from "@shopify/flash-list";
 import { MessageCircle } from "@tamagui/lucide-icons";
 import { Button, H2, Separator, Sheet } from "tamagui";
 
-import { IComment } from "../types";
-
 import Comment from "./Comment";
+
+import { IComment } from "@/types";
 
 interface ICommentsButton {
   comments: IComment[];

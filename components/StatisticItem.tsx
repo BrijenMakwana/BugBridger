@@ -1,6 +1,6 @@
 import { ListItem, XGroup } from "tamagui";
 
-import { formatNumber } from "../utils/utils";
+import { formatNumber } from "@/utils/utils";
 
 interface IStatisticItemWithSubTitle {
   title: number;

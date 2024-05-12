@@ -1,11 +1,11 @@
 import { Spinner, YStack } from "tamagui";
 
-import useAI from "../hooks/useAI";
-
 import CustomMarkdown from "./CustomMarkdown";
 import Error from "./Error";
 import { MyScroll } from "./MyScroll";
 import PostNotice from "./PostNotice";
+
+import useAI from "@/hooks/useAI";
 
 interface IAIGeneratedAnswer {
   questionMarkdown: string;

@@ -3,10 +3,10 @@ import { ExternalLink } from "@tamagui/lucide-icons";
 import { openURL } from "expo-linking";
 import { Avatar, Button, Card, H2, H5, Paragraph, XStack } from "tamagui";
 
-import useContributors from "../hooks/useContributors";
-import useGitRepo from "../hooks/useGitRepo";
-
 import Tag from "./Tag";
+
+import useContributors from "@/hooks/useContributors";
+import useGitRepo from "@/hooks/useGitRepo";
 
 const GITHUB_REPO = "https://api.github.com/repos/BrijenMakwana/BugBridger";
 

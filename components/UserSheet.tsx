@@ -16,10 +16,10 @@ import {
   YStack
 } from "tamagui";
 
-import useUser from "../hooks/useUser";
-
 import Error from "./Error";
 import StatisticItem from "./StatisticItem";
+
+import useUser from "@/hooks/useUser";
 
 interface IUserSheet {
   open: boolean;

@@ -3,15 +3,15 @@ import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { darkColors } from "@tamagui/themes";
 
-import Error from "../../components/Error";
-import { MyStack } from "../../components/MyStack";
-import QuestionCard from "../../components/QuestionCard";
-import Sort from "../../components/Sort";
+import Error from "@/components/Error";
+import { MyStack } from "@/components/MyStack";
+import QuestionCard from "@/components/QuestionCard";
+import Sort from "@/components/Sort";
 import {
   FEATURED_QUESTIONS_SORTING_OPTIONS,
   SORTING_ORDERS
-} from "../../constants";
-import useFeaturedQuestions from "../../hooks/useFeaturedQuestions";
+} from "@/constants";
+import useFeaturedQuestions from "@/hooks/useFeaturedQuestions";
 
 const Home = () => {
   const [sort, setSort] = useState<string>(
