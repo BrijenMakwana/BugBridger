@@ -3,10 +3,10 @@ import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Button, Text, YStack } from "tamagui";
 
-import { IOwner } from "../types";
-import { formatNumber } from "../utils/utils";
-
 import UserSheet from "./UserSheet";
+
+import { IOwner } from "@/types";
+import { formatNumber } from "@/utils/utils";
 
 interface IPostCreationInfo extends IOwner {
   type: POST_TYPE;

@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import { ArrowDown10, ArrowUp01 } from "@tamagui/lucide-icons";
 import { ToggleGroup, XStack } from "tamagui";
 
-import { isTablet } from "../utils/utils";
-
 import SortingOptions from "./SortingOptions";
+
+import { isTablet } from "@/utils/utils";
 
 interface ISort {
   data: string[];

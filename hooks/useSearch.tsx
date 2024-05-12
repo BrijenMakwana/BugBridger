@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { QUESTIONS_SORTING_OPTIONS, SORTING_ORDERS } from "../constants";
-import { IQuestion } from "../types";
+import { QUESTIONS_SORTING_OPTIONS, SORTING_ORDERS } from "@/constants";
+import { IQuestion } from "@/types";
 
 const useSearch = () => {
   const [searchQuestion, setSearchQuestion] = useState("");

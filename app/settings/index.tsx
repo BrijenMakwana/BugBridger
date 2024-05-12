@@ -7,11 +7,11 @@ import {
 import { openURL } from "expo-linking";
 import { ListItem, Separator, XStack, YGroup, YStack } from "tamagui";
 
-import GithubCard from "../../components/GithubCard";
-import GoBack from "../../components/GoBack";
-import { MyScroll } from "../../components/MyScroll";
-import SiteInfoSheet from "../../components/SiteInfoSheet";
-import TabHeading from "../../components/TabHeading";
+import GithubCard from "@/components/GithubCard";
+import GoBack from "@/components/GoBack";
+import { MyScroll } from "@/components/MyScroll";
+import SiteInfoSheet from "@/components/SiteInfoSheet";
+import TabHeading from "@/components/TabHeading";
 
 const SettingsScreen = () => {
   const [siteInfoSheetIsOpen, setSiteInfoSheetIsOpen] = useState(false);

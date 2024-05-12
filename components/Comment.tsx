@@ -1,10 +1,10 @@
 import React from "react";
 import { YStack } from "tamagui";
 
-import { IComment } from "../types";
-
 import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
+
+import { IComment } from "@/types";
 
 const Comment = (props: IComment) => {
   const { body_markdown, owner, creation_date } = props;

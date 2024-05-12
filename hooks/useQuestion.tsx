@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { IQuestion } from "../types";
+import { IQuestion } from "@/types";
 
 const useQuestion = (questionId: string | string[]) => {
   const getQuestion = async (): Promise<IQuestion> => {

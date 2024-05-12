@@ -2,20 +2,20 @@ import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack } from "tamagui";
 
-import AIGeneratedAnswer from "../../components/AIGeneratedAnswer";
-import Answers from "../../components/Answers";
-import CommentsButton from "../../components/CommentsButton";
-import CustomMarkdown from "../../components/CustomMarkdown";
-import Error from "../../components/Error";
-import GoBack from "../../components/GoBack";
-import { MyScroll } from "../../components/MyScroll";
-import PostNotice from "../../components/PostNotice";
-import QuestionCard from "../../components/QuestionCard";
-import RelatedQuestion from "../../components/RelatedQuestion";
-import ShareButtonGroup from "../../components/ShareButtonGroup";
-import useQuestion from "../../hooks/useQuestion";
-import useRelatedQuestions from "../../hooks/useRelatedQuestions";
-import { isTablet } from "../../utils/utils";
+import AIGeneratedAnswer from "@/components/AIGeneratedAnswer";
+import Answers from "@/components/Answers";
+import CommentsButton from "@/components/CommentsButton";
+import CustomMarkdown from "@/components/CustomMarkdown";
+import Error from "@/components/Error";
+import GoBack from "@/components/GoBack";
+import { MyScroll } from "@/components/MyScroll";
+import PostNotice from "@/components/PostNotice";
+import QuestionCard from "@/components/QuestionCard";
+import RelatedQuestion from "@/components/RelatedQuestion";
+import ShareButtonGroup from "@/components/ShareButtonGroup";
+import useQuestion from "@/hooks/useQuestion";
+import useRelatedQuestions from "@/hooks/useRelatedQuestions";
+import { isTablet } from "@/utils/utils";
 
 const Question = () => {
   const { id } = useLocalSearchParams();

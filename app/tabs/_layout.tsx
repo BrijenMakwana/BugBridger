@@ -3,7 +3,7 @@ import { darkColors } from "@tamagui/themes";
 import { Link, Tabs } from "expo-router";
 import { Button, XStack } from "tamagui";
 
-import TabHeading from "../../components/TabHeading";
+import TabHeading from "@/components/TabHeading";
 
 export default function TabLayout() {
   return (
