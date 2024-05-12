@@ -5,7 +5,7 @@ import { Button, H2, Separator, Sheet } from "tamagui";
 
 import { IComment } from "../types";
 
-import CommentCard from "./CommentCard";
+import Comment from "./Comment";
 
 interface ICommentsButton {
   comments: IComment[];
@@ -39,7 +39,7 @@ const CommmentsSheet = (props: ICommmentsSheet) => {
       <Sheet.Frame>
         <FlashList
           data={comments}
-          renderItem={({ item }) => <CommentCard {...item} />}
+          renderItem={({ item }) => <Comment {...item} />}
           estimatedItemSize={5}
           contentContainerStyle={{
             paddingHorizontal: 15,
