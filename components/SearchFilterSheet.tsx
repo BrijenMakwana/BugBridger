@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Check, Delete } from "@tamagui/lucide-icons";
 import {
   Button,
@@ -31,7 +31,7 @@ interface ISearchFilterSheet {
   setMinViews: Dispatch<SetStateAction<number[]>>;
 }
 
-const CustomSlider: FC<ICustomSlider> = (props) => {
+const CustomSlider = (props: ICustomSlider) => {
   const { title, value, setValue } = props;
 
   return (
@@ -75,7 +75,7 @@ const CustomSlider: FC<ICustomSlider> = (props) => {
   );
 };
 
-const SearchFilterSheet: FC<ISearchFilterSheet> = (props) => {
+const SearchFilterSheet = (props: ISearchFilterSheet) => {
   const {
     open,
     setOpen,
