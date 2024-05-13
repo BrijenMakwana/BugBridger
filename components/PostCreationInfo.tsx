@@ -9,21 +9,13 @@ import { IOwner } from "@/types";
 import { formatNumber } from "@/utils/utils";
 
 interface IPostCreationInfo extends IOwner {
-  type: POST_TYPE;
   creationDate: number;
   isPressable?: boolean;
-}
-
-export enum POST_TYPE {
-  QUESTION = "asked",
-  ANSWER = "answered",
-  COMMENT = "commented"
 }
 
 const PostCreationInfo = (props: IPostCreationInfo) => {
   const {
     user_id,
-    type,
     display_name,
     profile_image,
     reputation,
@@ -76,7 +68,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           fontSize="$2"
           color="$gray11Dark"
         >
-          {type} on {moment(moment.unix(creationDate)).format("lll")}
+          {moment(moment.unix(creationDate)).format("lll")}
         </Text>
       </YStack>
 

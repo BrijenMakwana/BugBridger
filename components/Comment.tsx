@@ -2,7 +2,7 @@ import React from "react";
 import { YStack } from "tamagui";
 
 import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
+import PostCreationInfo from "./PostCreationInfo";
 
 import { IComment } from "@/types";
 
@@ -22,7 +22,6 @@ const Comment = (props: IComment) => {
       <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
       <PostCreationInfo
-        type={POST_TYPE.COMMENT}
         creationDate={creation_date}
         isPressable={false}
         {...owner}
