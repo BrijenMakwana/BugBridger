@@ -37,7 +37,8 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
-          onPress={isPressable ? () => setUserSheetIsOpen(true) : undefined}
+          onPress={() => setUserSheetIsOpen(true)}
+          disabled={!isPressable}
         >
           <Avatar
             circular

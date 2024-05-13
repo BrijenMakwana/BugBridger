@@ -63,9 +63,8 @@ const CommentsButton = (props: ICommentsButton) => {
   return (
     <>
       <Button
-        onPress={
-          commentsAvailable ? () => setCommentsSheetIsOpen(true) : undefined
-        }
+        onPress={() => setCommentsSheetIsOpen(true)}
+        disabled={!commentsAvailable}
         icon={<MessageCircle />}
         scaleIcon={1.2}
         alignSelf="flex-end"
