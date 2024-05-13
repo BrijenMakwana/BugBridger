@@ -4,7 +4,7 @@ import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
 
 import CommentsButton from "./CommentsButton";
 import CustomMarkdown from "./CustomMarkdown";
-import PostCreationInfo, { POST_TYPE } from "./PostCreationInfo";
+import PostCreationInfo from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
 
 import { IAnswer } from "@/types";
@@ -61,7 +61,6 @@ const Answer = (props: IAnswer) => {
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
           <PostCreationInfo
-            type={POST_TYPE.ANSWER}
             creationDate={creation_date}
             {...owner}
           />
