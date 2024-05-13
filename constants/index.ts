@@ -1,9 +1,7 @@
 const FEATURED_QUESTIONS_SORTING_OPTIONS = ["activity", "creation", "votes"];
 
 const QUESTIONS_SORTING_OPTIONS = [
-  "activity",
-  "creation",
-  "votes",
+  ...FEATURED_QUESTIONS_SORTING_OPTIONS,
   "relevance"
 ];
 
