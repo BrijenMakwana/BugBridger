@@ -20,7 +20,7 @@ import { isTablet } from "@/utils/utils";
 const Question = () => {
   const { id } = useLocalSearchParams();
 
-  const { question, isFetching, isError, refetch } = useQuestion(id);
+  const { question, isFetching, isError, error, refetch } = useQuestion(id);
 
   const { relatedQuestions } = useRelatedQuestions(id);
 
@@ -32,7 +32,13 @@ const Question = () => {
       />
     );
 
-  if (isError) return <Error refetch={refetch} />;
+  if (isError)
+    return (
+      <Error
+        error={error}
+        refetch={refetch}
+      />
+    );
 
   return (
     <>

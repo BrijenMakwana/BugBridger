@@ -2,11 +2,12 @@ import { RefreshCcw } from "@tamagui/lucide-icons";
 import { Button, Text, YStack } from "tamagui";
 
 interface IError {
+  error: Error;
   refetch: () => void;
 }
 
 const Error = (props: IError) => {
-  const { refetch } = props;
+  const { error, refetch } = props;
 
   return (
     <YStack
@@ -22,7 +23,7 @@ const Error = (props: IError) => {
         textAlign="center"
         fontWeight={"500"}
       >
-        something went wrong!
+        {error.message}
       </Text>
 
       <Button

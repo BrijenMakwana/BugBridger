@@ -20,6 +20,7 @@ const Search = () => {
   const {
     isFetching,
     isError,
+    error,
     refetch,
     data: questions,
     searchQuestion,
@@ -117,7 +118,12 @@ const Search = () => {
           </YStack>
         )}
 
-        {!isFetching && isError && <Error refetch={refetch} />}
+        {!isFetching && isError && (
+          <Error
+            error={error}
+            refetch={refetch}
+          />
+        )}
 
         <FlashList
           data={questions}
