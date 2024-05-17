@@ -20,7 +20,7 @@ const SettingsScreen = () => {
     <MyScroll>
       <YStack
         gap={15}
-        marginHorizontal={15}
+        paddingHorizontal={15}
       >
         <XStack
           alignItems="center"

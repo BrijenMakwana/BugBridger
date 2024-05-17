@@ -19,7 +19,7 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
 
   const prompt = `You are an experienced developer tasked with generating an answer in markdown format based on a given question. Here is the prompt: '${questionMarkdown}'. Please proceed to generate the answer in markdown.`;
 
-  const { data: answer, isFetching, isError, refetch } = useAI(prompt);
+  const { data: answer, isFetching, isError, error, refetch } = useAI(prompt);
 
   if (isFetching)
     return (
@@ -29,7 +29,13 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
       />
     );
 
-  if (isError) return <Error refetch={refetch} />;
+  if (isError)
+    return (
+      <Error
+        error={error}
+        refetch={refetch}
+      />
+    );
 
   return (
     <MyScroll>

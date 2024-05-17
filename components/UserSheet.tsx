@@ -97,7 +97,7 @@ const UserInfo = (props: IUserInfo) => {
 const UserSheet = (props: IUserSheet) => {
   const { open, setOpen, userId } = props;
 
-  const { user, isFetching, isError, refetch } = useUser(userId);
+  const { user, isFetching, isError, error, refetch } = useUser(userId);
 
   return (
     <Sheet
@@ -123,7 +123,12 @@ const UserSheet = (props: IUserSheet) => {
           />
         )}
 
-        {!isFetching && isError && <Error refetch={refetch} />}
+        {!isFetching && isError && (
+          <Error
+            error={error}
+            refetch={refetch}
+          />
+        )}
 
         {!isFetching && !isError && (
           <YStack

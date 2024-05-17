@@ -19,12 +19,16 @@ const Home = () => {
   );
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const { questions, isFetching, isError, refetch } = useFeaturedQuestions(
-    sortingOrder,
-    sort
-  );
+  const { questions, isFetching, isError, refetch, error } =
+    useFeaturedQuestions(sortingOrder, sort);
 
-  if (isError) return <Error refetch={refetch} />;
+  if (isError)
+    return (
+      <Error
+        refetch={refetch}
+        error={error}
+      />
+    );
 
   return (
     <MyStack>
