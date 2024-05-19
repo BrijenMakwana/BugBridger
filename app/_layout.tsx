@@ -42,6 +42,10 @@ export default function Layout() {
                   getId={({ params }) => params.id}
                   name="question/[id]"
                 />
+                <Stack.Screen
+                  getId={({ params }) => params.tag}
+                  name="tagged-questions/[tag]"
+                />
               </Stack>
             </MySafeAreaView>
           </QueryClientProvider>
