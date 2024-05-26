@@ -66,7 +66,7 @@ const QuestionCard = (props: IQuestionCard) => {
         gap={13}
         marginVertical={10}
         animation="quick"
-        pressStyle={{ backgroundColor: "$backgroundPress" }}
+        pressTheme
         enterStyle={{
           scale: 0.5,
           opacity: 0
