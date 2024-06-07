@@ -7,14 +7,14 @@ import PostNotice from "./PostNotice";
 
 import useAI from "@/hooks/useAI";
 
-interface IAIGeneratedAnswer {
+interface IAIAnswer {
   questionMarkdown: string;
 }
 
 const DISCLAIMER =
   "The following answer is AI-generated and may not be entirely accurate. Please use discretion when interpreting the information.";
 
-const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
+const AIAnswer = (props: IAIAnswer) => {
   const { questionMarkdown } = props;
 
   const prompt = `You are an experienced developer tasked with generating an answer in markdown format based on a given question. Here is the prompt: '${questionMarkdown}'. Please proceed to generate the answer in markdown.`;
@@ -52,4 +52,4 @@ const AIGeneratedAnswer = (props: IAIGeneratedAnswer) => {
   );
 };
 
-export default AIGeneratedAnswer;
+export default AIAnswer;
