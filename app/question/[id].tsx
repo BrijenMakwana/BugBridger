@@ -2,7 +2,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack } from "tamagui";
 
-import AIGeneratedAnswer from "@/components/AIGeneratedAnswer";
+import AIAnswer from "@/components/AIAnswer";
 import Answers from "@/components/Answers";
 import CommentsButton from "@/components/CommentsButton";
 import CustomMarkdown from "@/components/CustomMarkdown";
@@ -106,7 +106,7 @@ const Question = () => {
           flex={1}
         >
           {question?.answer_count === 0 ? (
-            <AIGeneratedAnswer questionMarkdown={question?.body_markdown} />
+            <AIAnswer questionMarkdown={question?.body_markdown} />
           ) : (
             <Answers answers={question?.answers} />
           )}
