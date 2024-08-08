@@ -10,7 +10,10 @@
     "icon": "./assets/icon.png",
     "name": "Bug Bridger",
     "slug": "BugBridger",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
     "extra": {
       "router": {
         "origin": false
