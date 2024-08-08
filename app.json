@@ -10,10 +10,7 @@
     "icon": "./assets/icon.png",
     "name": "Bug Bridger",
     "slug": "BugBridger",
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "extra": {
       "router": {
         "origin": false
@@ -23,7 +20,10 @@
       }
     },
     "android": {
-      "package": "com.brijenmakwana.BugBridger"
+      "package": "com.brijenmakwana.BugBridger",
+      "compileSdkVersion": 35,
+      "targetSdkVersion": 35,
+      "buildToolsVersion": "35.0.0"
     }
   }
 }
