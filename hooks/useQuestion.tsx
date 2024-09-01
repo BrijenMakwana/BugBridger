@@ -22,7 +22,7 @@ const useQuestion = (questionId: string | string[]) => {
   };
 
   const { data, ...rest } = useQuery({
-    queryKey: ["questionData"],
+    queryKey: [questionId],
     queryFn: getQuestion
   });
 

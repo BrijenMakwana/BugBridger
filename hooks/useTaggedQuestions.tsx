@@ -23,7 +23,7 @@ const useTaggedQuestions = (tag: string | string[]) => {
   };
 
   const { data, ...rest } = useQuery({
-    queryKey: ["taggedQuestionsData"],
+    queryKey: [`${tag} questions`],
     queryFn: getTaggedQuestions
   });
 
