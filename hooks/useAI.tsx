@@ -14,7 +14,7 @@ const useAI = (prompt: string) => {
   };
 
   return useQuery({
-    queryKey: ["aiGeneratedContent"],
+    queryKey: [prompt],
     queryFn: generateContent
   });
 };

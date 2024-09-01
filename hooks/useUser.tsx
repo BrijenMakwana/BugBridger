@@ -21,7 +21,7 @@ const useUser = (userId: number) => {
   };
 
   const { data, ...rest } = useQuery({
-    queryKey: ["userData"],
+    queryKey: [userId],
     queryFn: getUser
   });
 
