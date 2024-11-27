@@ -1,3 +1,4 @@
+import React from "react";
 import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";

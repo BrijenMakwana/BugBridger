@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Check, Delete } from "@tamagui/lucide-icons";
 import {
   Button,
