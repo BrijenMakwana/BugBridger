@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { MessageCircle } from "@tamagui/lucide-icons";
 import { Button, H2, Separator, Sheet } from "tamagui";

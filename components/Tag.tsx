@@ -12,7 +12,6 @@ const Tag = ({ children }: ITag) => {
       asChild
     >
       <Text
-        fontSize="$4"
         backgroundColor="$backgroundPress"
         paddingHorizontal={15}
         paddingVertical={5}

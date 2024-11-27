@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";

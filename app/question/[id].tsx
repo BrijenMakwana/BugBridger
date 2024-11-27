@@ -1,3 +1,4 @@
+import React from "react";
 import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams } from "expo-router";
 import { H6, Spinner, Tabs, XStack } from "tamagui";
