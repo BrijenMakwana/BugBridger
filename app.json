@@ -2,6 +2,7 @@
   "expo": {
     "scheme": "bug-bridger",
     "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
     "splash": {
       "backgroundColor": "#000000",
       "image": "./assets/splash.png",

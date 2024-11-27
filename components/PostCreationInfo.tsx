@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { decode } from "html-entities";
 import moment from "moment";
 import { Avatar, Button, Text, YStack } from "tamagui";
@@ -49,7 +49,6 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           </Avatar>
 
           <Text
-            fontSize="$3"
             color="$green10Dark"
             fontWeight="500"
           >
@@ -57,7 +56,6 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           </Text>
 
           <Text
-            fontSize="$2"
             color="$gray11Dark"
             fontWeight="500"
           >
@@ -66,8 +64,8 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
         </Button>
 
         <Text
-          fontSize="$2"
           color="$gray11Dark"
+          fontSize="$3"
         >
           {moment(moment.unix(creationDate)).format("lll")}
         </Text>

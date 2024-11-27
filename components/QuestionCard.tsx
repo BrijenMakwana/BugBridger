@@ -27,10 +27,10 @@ const IsAnswered = () => {
     >
       <Verified
         color="$green10Dark"
-        size="$3"
+        size="$2"
       />
       <Text
-        fontSize="$5"
+        fontSize="$4"
         fontWeight="bold"
         color="$green10Dark"
         marginLeft={10}
