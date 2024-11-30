@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { decode } from "html-entities";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Avatar, Button, Text, YStack } from "tamagui";
 
 import UserSheet from "./UserSheet";
@@ -67,7 +67,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
           color="$gray11Dark"
           fontSize="$3"
         >
-          {moment(moment.unix(creationDate)).format("lll")}
+          {dayjs(creationDate * 1000).format("MMM D, YYYY h:mm A")}
         </Text>
       </YStack>
 

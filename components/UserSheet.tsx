@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { Award } from "@tamagui/lucide-icons";
 import { decode } from "html-entities";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 import {
   Avatar,
   H3,
@@ -59,6 +61,8 @@ const BadgeInfo = (props: IBadgeInfo) => {
 const UserInfo = (props: IUserInfo) => {
   const { displayName, profileImage, creationDate } = props;
 
+  dayjs.extend(relativeTime);
+
   return (
     <XStack
       justifyContent="space-between"
@@ -87,7 +91,7 @@ const UserInfo = (props: IUserInfo) => {
           marginTop={5}
           color="$gray11Dark"
         >
-          Joined {moment(moment.unix(creationDate), "YYYYMMDD").fromNow()}
+          Joined {dayjs(creationDate * 1000).fromNow()}
         </Text>
       </YStack>
     </XStack>
