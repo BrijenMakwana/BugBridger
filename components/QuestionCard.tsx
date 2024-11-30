@@ -65,12 +65,7 @@ const QuestionCard = (props: IQuestionCard) => {
         padding={15}
         gap={13}
         marginVertical={10}
-        animation="quick"
         pressTheme
-        enterStyle={{
-          scale: 0.5,
-          opacity: 0
-        }}
       >
         <Card.Header padding={0}>
           {is_answered && <IsAnswered />}

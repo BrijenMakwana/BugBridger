@@ -7,12 +7,7 @@ const GoBack = () => {
     <Button
       icon={ChevronLeft}
       scaleIcon={1.3}
-      animation="bouncy"
       alignSelf="flex-start"
-      enterStyle={{
-        scale: 0.5,
-        opacity: 0
-      }}
       onPress={() => router.back()}
     />
   );

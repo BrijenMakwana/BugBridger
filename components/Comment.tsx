@@ -13,11 +13,6 @@ const Comment = (props: IComment) => {
     <YStack
       padding={15}
       gap={13}
-      animation="quick"
-      enterStyle={{
-        scale: 0.5,
-        opacity: 0
-      }}
     >
       <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
