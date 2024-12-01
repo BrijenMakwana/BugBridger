@@ -2,18 +2,16 @@ import { FontAwesome } from "@expo/vector-icons";
 import { ExternalLink } from "@tamagui/lucide-icons";
 import { openURL } from "expo-linking";
 import { Avatar, Button, Card, H2, H5, Paragraph, XStack } from "tamagui";
-
 import Tag from "./Tag";
-
 import useContributors from "@/hooks/useContributors";
 import useGitRepo from "@/hooks/useGitRepo";
 
 const GITHUB_REPO = "https://api.github.com/repos/BrijenMakwana/BugBridger";
 
 const GithubCard = () => {
-  const { gitRepo, isError: isRepoError } = useGitRepo(GITHUB_REPO);
+  const { data: gitRepo, isError: isRepoError } = useGitRepo(GITHUB_REPO);
 
-  const { contributors, isError: isContributorsError } =
+  const { data: contributors, isError: isContributorsError } =
     useContributors(GITHUB_REPO);
 
   if (isRepoError || isContributorsError) return;
