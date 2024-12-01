@@ -14,7 +14,7 @@ const PostNotice = (props: IPostNotice) => {
       alignItems="center"
       justifyContent="space-between"
       gap={10}
-      theme="red"
+      theme="yellow_alt1"
       padding={15}
     >
       <Info />
