@@ -10,15 +10,10 @@ const useContributors = (repoUrl: string) => {
     return response.data;
   };
 
-  const { data, ...rest } = useQuery({
+  return useQuery({
     queryKey: [`${repoUrl} contributors`],
     queryFn: getContributors
   });
-
-  return {
-    contributors: data,
-    ...rest
-  };
 };
 
 export default useContributors;

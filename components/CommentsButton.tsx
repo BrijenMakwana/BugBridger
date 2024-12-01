@@ -2,9 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import { MessageCircle } from "@tamagui/lucide-icons";
 import { Button, H2, Separator, Sheet } from "tamagui";
-
 import Comment from "./Comment";
-
 import { IComment } from "@/types";
 
 interface ICommentsButton {
@@ -42,11 +40,11 @@ const CommmentsSheet = (props: ICommmentsSheet) => {
           renderItem={({ item }) => <Comment {...item} />}
           estimatedItemSize={5}
           contentContainerStyle={{
-            paddingHorizontal: 15,
-            paddingVertical: 20
+            paddingHorizontal: 10,
+            paddingVertical: 10
           }}
-          ListHeaderComponent={() => <H2>Comments ({comments.length})</H2>}
-          ItemSeparatorComponent={() => <Separator />}
+          ListHeaderComponent={<H2>Comments ({comments.length})</H2>}
+          ItemSeparatorComponent={Separator}
         />
       </Sheet.Frame>
     </Sheet>

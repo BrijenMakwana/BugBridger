@@ -21,15 +21,10 @@ const useFeaturedQuestions = (sortingOrder: string, sort: string) => {
     return response.data.items;
   };
 
-  const { data, ...rest } = useQuery({
+  return useQuery({
     queryKey: ["questionsData", sort, sortingOrder],
     queryFn: getFeaturedQuestions
   });
-
-  return {
-    questions: data,
-    ...rest
-  };
 };
 
 export default useFeaturedQuestions;

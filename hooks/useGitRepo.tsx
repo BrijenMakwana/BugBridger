@@ -10,15 +10,10 @@ const useGitRepo = (repoUrl: string) => {
     return response.data;
   };
 
-  const { data, ...rest } = useQuery({
+  return useQuery({
     queryKey: [`${repoUrl} repo`],
     queryFn: getGitRepo
   });
-
-  return {
-    gitRepo: data,
-    ...rest
-  };
 };
 
 export default useGitRepo;

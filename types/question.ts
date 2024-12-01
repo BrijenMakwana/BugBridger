@@ -1,5 +1,3 @@
-import { IPostNotice } from "../components/PostNotice";
-
 import { IAnswer } from "./answer";
 import { IComment } from "./comment";
 import { IOwner } from "./owner";
@@ -20,4 +18,8 @@ export interface IQuestion {
   notice: IPostNotice;
   answers: IAnswer[];
   comments: IComment[];
+}
+
+export interface IPostNotice {
+  body: string;
 }
