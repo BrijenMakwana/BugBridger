@@ -19,8 +19,13 @@ const Home = () => {
   );
   const [sortingOrder, setSortingOrder] = useState<string>(SORTING_ORDERS[0]);
 
-  const { questions, isFetching, isError, refetch, error } =
-    useFeaturedQuestions(sortingOrder, sort);
+  const {
+    data: questions,
+    isFetching,
+    isError,
+    refetch,
+    error
+  } = useFeaturedQuestions(sortingOrder, sort);
 
   if (isError)
     return (

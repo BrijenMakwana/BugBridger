@@ -1,12 +1,7 @@
 import { Info } from "@tamagui/lucide-icons";
 import { decode } from "html-entities";
 import { Card, Text } from "tamagui";
-
-export interface IPostNotice {
-  body: string;
-  creation_date?: Date;
-  owner_user_id?: number;
-}
+import { IPostNotice } from "@/types";
 
 const PostNotice = (props: IPostNotice) => {
   const { body } = props;
