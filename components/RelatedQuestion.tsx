@@ -1,9 +1,7 @@
 import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { H6, XStack } from "tamagui";
-
 import VoteCount from "./VoteCount";
-
 import { IQuestion } from "@/types";
 
 const RelatedQuestion = (props: IQuestion) => {
