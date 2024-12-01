@@ -2,12 +2,10 @@ import React from "react";
 import { FlashList } from "@shopify/flash-list";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { Accordion, Paragraph, Square, XStack, YStack } from "tamagui";
-
 import CommentsButton from "./CommentsButton";
 import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo from "./PostCreationInfo";
 import VoteCount from "./VoteCount";
-
 import { IAnswer } from "@/types";
 
 interface IAnswers {
@@ -33,9 +31,12 @@ const Answer = (props: IAnswer) => {
       >
         {({ open }) => (
           <>
-            <Paragraph marginRight={15}>Answer {index + 1}</Paragraph>
+            <Paragraph>Answer {index + 1}</Paragraph>
 
-            <XStack alignItems="center">
+            <XStack
+              alignItems="center"
+              gap={20}
+            >
               <VoteCount
                 isAccepted={is_accepted}
                 vote={up_vote_count}
@@ -44,7 +45,6 @@ const Answer = (props: IAnswer) => {
               <Square
                 animation="quick"
                 rotate={open ? "180deg" : "0deg"}
-                marginLeft={20}
               >
                 <ChevronDown size="$1" />
               </Square>
@@ -57,7 +57,6 @@ const Answer = (props: IAnswer) => {
         <YStack
           paddingVertical={10}
           gap={10}
-          marginBottom={10}
         >
           <CustomMarkdown>{body_markdown}</CustomMarkdown>
 
