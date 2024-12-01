@@ -8,11 +8,9 @@ import { Link } from "expo-router";
 import { decode } from "html-entities";
 import { Card, H5, Paragraph, Separator, Text, XStack } from "tamagui";
 import { XGroup } from "tamagui";
-
 import PostCreationInfo from "./PostCreationInfo";
 import StatisticItem from "./StatisticItem";
 import Tag from "./Tag";
-
 import { IQuestion } from "@/types";
 
 interface IQuestionCard extends IQuestion {
@@ -23,6 +21,7 @@ const IsAnswered = () => {
   return (
     <XStack
       alignItems="center"
+      gap={10}
       marginBottom={10}
     >
       <Verified
@@ -33,7 +32,6 @@ const IsAnswered = () => {
         fontSize="$4"
         fontWeight="bold"
         color="$green10Dark"
-        marginLeft={10}
       >
         Answered
       </Text>
