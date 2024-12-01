@@ -1,9 +1,7 @@
 import React from "react";
 import { YStack } from "tamagui";
-
 import CustomMarkdown from "./CustomMarkdown";
 import PostCreationInfo from "./PostCreationInfo";
-
 import { IComment } from "@/types";
 
 const Comment = (props: IComment) => {
