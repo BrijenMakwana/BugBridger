@@ -28,15 +28,13 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
   return (
     <>
       <YStack
-        alignItems="flex-end"
+        alignSelf="flex-end"
         gap={10}
-        flex={1}
       >
         <Button
           unstyled
           flexDirection="row"
           alignItems="center"
-          justifyContent="space-between"
           onPress={() => setUserSheetIsOpen(true)}
           disabled={!isPressable}
         >
@@ -66,6 +64,7 @@ const PostCreationInfo = (props: IPostCreationInfo) => {
         <Text
           color="$gray11Dark"
           fontSize="$3"
+          textAlign="right"
         >
           {dayjs(creationDate * 1000).format("MMM D, YYYY h:mm A")}
         </Text>

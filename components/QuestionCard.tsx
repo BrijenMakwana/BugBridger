@@ -110,7 +110,7 @@ const QuestionCard = (props: IQuestionCard) => {
           />
         </XGroup>
 
-        <Card.Footer>
+        <Card.Footer justifyContent="flex-end">
           <PostCreationInfo
             creationDate={creation_date}
             {...owner}
