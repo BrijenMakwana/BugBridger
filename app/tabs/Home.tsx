@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { darkColors } from "@tamagui/themes";
 
 import Error from "@/components/Error";
 import { MyStack } from "@/components/MyStack";
@@ -12,6 +10,7 @@ import {
   SORTING_ORDERS
 } from "@/constants";
 import useFeaturedQuestions from "@/hooks/useFeaturedQuestions";
+import { Spinner } from "tamagui";
 
 const Home = () => {
   const [sort, setSort] = useState<string>(
@@ -21,13 +20,12 @@ const Home = () => {
 
   const {
     data: questions,
-    isFetching,
-    isError,
+    isPending,
     refetch,
     error
   } = useFeaturedQuestions(sortingOrder, sort);
 
-  if (isError)
+  if (error)
     return (
       <Error
         refetch={refetch}
@@ -47,6 +45,13 @@ const Home = () => {
         />
       )}
 
+      {isPending && (
+        <Spinner
+          size="large"
+          color="$green10Dark"
+        />
+      )}
+
       <FlashList
         data={questions}
         renderItem={({ item }) => (
@@ -55,18 +60,10 @@ const Home = () => {
             isBody
           />
         )}
-        estimatedItemSize={5}
+        estimatedItemSize={150}
         contentContainerStyle={{
           paddingHorizontal: 10
         }}
-        refreshControl={
-          <RefreshControl
-            refreshing={isFetching}
-            colors={[darkColors.green11]}
-            progressBackgroundColor={darkColors.gray5}
-            onRefresh={refetch}
-          />
-        }
       />
     </MyStack>
   );

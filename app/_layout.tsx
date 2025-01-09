@@ -8,7 +8,13 @@ import { MySafeAreaView } from "@/components/MySafeAreaView";
 import useCustomFonts from "@/hooks/useCustomFonts";
 import config from "@/tamagui.config";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity
+    }
+  }
+});
 
 SplashScreen.preventAutoHideAsync();
 

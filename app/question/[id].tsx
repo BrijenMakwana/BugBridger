@@ -21,19 +21,19 @@ import { isTablet } from "@/utils/utils";
 const Question = () => {
   const { id } = useLocalSearchParams();
 
-  const { question, isFetching, isError, error, refetch } = useQuestion(id);
+  const { question, isPending, error, refetch } = useQuestion(id);
 
   const { relatedQuestions } = useRelatedQuestions(id);
 
-  if (isFetching)
+  if (isPending)
     return (
       <Spinner
         size="large"
-        color="$green10"
+        color="$green10Dark"
       />
     );
 
-  if (isError)
+  if (error)
     return (
       <Error
         error={error}

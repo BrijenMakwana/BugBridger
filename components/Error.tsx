@@ -17,7 +17,7 @@ const Error = (props: IError) => {
       gap={20}
     >
       <Text
-        color="$green10"
+        color="$red10Dark"
         fontSize={20}
         textTransform="capitalize"
         textAlign="center"

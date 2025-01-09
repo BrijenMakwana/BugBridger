@@ -19,17 +19,17 @@ const AIAnswer = (props: IAIAnswer) => {
 
   const prompt = `You are an experienced developer tasked with generating an answer in markdown format based on a given question. Here is the prompt: '${questionMarkdown}'. Please proceed to generate the answer in markdown.`;
 
-  const { data: answer, isFetching, isError, error, refetch } = useAI(prompt);
+  const { data: answer, isPending, error, refetch } = useAI(prompt);
 
-  if (isFetching)
+  if (isPending)
     return (
       <Spinner
         size="large"
-        color="$green10"
+        color="$green10Dark"
       />
     );
 
-  if (isError)
+  if (error)
     return (
       <Error
         error={error}
