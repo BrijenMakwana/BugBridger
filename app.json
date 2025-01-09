@@ -23,7 +23,8 @@
     },
     "android": {
       "package": "com.brijenmakwana.BugBridger",
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "versionCode": 3
     }
   }
 }
