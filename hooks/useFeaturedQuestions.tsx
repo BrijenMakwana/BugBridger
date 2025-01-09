@@ -22,7 +22,7 @@ const useFeaturedQuestions = (sortingOrder: string, sort: string) => {
   };
 
   return useQuery({
-    queryKey: ["questionsData", sort, sortingOrder],
+    queryKey: ["featuredQuestions", sort, sortingOrder],
     queryFn: getFeaturedQuestions
   });
 };

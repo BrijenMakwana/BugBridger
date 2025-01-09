@@ -43,13 +43,9 @@ const useSearch = () => {
   };
 
   const searchResult = useQuery({
-    queryKey: [
-      "searchQuestionsData",
-      sort,
-      sortingOrder,
-      searchFilterIsApplied
-    ],
-    queryFn: searchQuestions
+    queryKey: ["searchQuestions", sort, sortingOrder, searchFilterIsApplied],
+    queryFn: searchQuestions,
+    enabled: false
   });
 
   return {
