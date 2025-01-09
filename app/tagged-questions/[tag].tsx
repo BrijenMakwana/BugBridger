@@ -1,6 +1,5 @@
-import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { darkColors } from "@tamagui/themes";
+import { Spinner } from "tamagui";
 import { useLocalSearchParams } from "expo-router";
 import { XStack } from "tamagui";
 import { H3 } from "tamagui";
@@ -14,10 +13,9 @@ import useTaggedQuestions from "@/hooks/useTaggedQuestions";
 const TagQuestions = () => {
   const { tag } = useLocalSearchParams();
 
-  const { questions, isFetching, isError, error, refetch } =
-    useTaggedQuestions(tag);
+  const { questions, isPending, error, refetch } = useTaggedQuestions(tag);
 
-  if (isError)
+  if (error)
     return (
       <Error
         error={error}
@@ -37,6 +35,13 @@ const TagQuestions = () => {
 
         <H3>{tag}</H3>
       </XStack>
+
+      {isPending && (
+        <Spinner
+          size="large"
+          color="$green10Dark"
+        />
+      )}
       <FlashList
         data={questions}
         renderItem={({ item }) => (
@@ -49,14 +54,6 @@ const TagQuestions = () => {
         contentContainerStyle={{
           paddingHorizontal: 10
         }}
-        refreshControl={
-          <RefreshControl
-            refreshing={isFetching}
-            colors={[darkColors.green11]}
-            progressBackgroundColor={darkColors.gray5}
-            onRefresh={refetch}
-          />
-        }
       />
     </MyStack>
   );

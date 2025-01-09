@@ -101,7 +101,7 @@ const UserInfo = (props: IUserInfo) => {
 const UserSheet = (props: IUserSheet) => {
   const { open, setOpen, userId } = props;
 
-  const { user, isFetching, isError, error, refetch } = useUser(userId);
+  const { user, isPending, error, refetch } = useUser(userId);
 
   return (
     <Sheet
@@ -120,21 +120,21 @@ const UserSheet = (props: IUserSheet) => {
       />
       <Sheet.Handle />
       <Sheet.Frame>
-        {isFetching && (
+        {isPending && (
           <Spinner
             size="large"
             color="$green10Dark"
           />
         )}
 
-        {!isFetching && isError && (
+        {error && (
           <Error
             error={error}
             refetch={refetch}
           />
         )}
 
-        {!isFetching && !isError && (
+        {!isPending && !error && (
           <YStack
             gap={20}
             padding={20}
