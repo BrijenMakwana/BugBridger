@@ -22,7 +22,7 @@ const useRelatedQuestions = (questionId: string | string[]) => {
   };
 
   const { data, ...rest } = useQuery({
-    queryKey: [`${questionId} related questions`],
+    queryKey: ["relatedQuestions", questionId],
     queryFn: getRelatedQuestions
   });
 

@@ -11,7 +11,7 @@ const useContributors = (repoUrl: string) => {
   };
 
   return useQuery({
-    queryKey: [`${repoUrl} contributors`],
+    queryKey: ["contributors", repoUrl],
     queryFn: getContributors
   });
 };

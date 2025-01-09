@@ -11,7 +11,7 @@ const useGitRepo = (repoUrl: string) => {
   };
 
   return useQuery({
-    queryKey: [`${repoUrl} repo`],
+    queryKey: ["gitRepo", repoUrl],
     queryFn: getGitRepo
   });
 };
