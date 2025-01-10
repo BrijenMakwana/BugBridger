@@ -44,8 +44,7 @@ const useSearch = () => {
 
   const searchResult = useQuery({
     queryKey: ["searchQuestions", sort, sortingOrder, searchFilterIsApplied],
-    queryFn: searchQuestions,
-    enabled: false
+    queryFn: searchQuestions
   });
 
   return {

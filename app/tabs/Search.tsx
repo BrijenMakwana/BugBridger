@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { ListFilter } from "@tamagui/lucide-icons";
-import { darkColors } from "@tamagui/themes";
-import { Button, Text, YStack } from "tamagui";
-
+import { Button, Text, YStack, Spinner } from "tamagui";
 import Error from "@/components/Error";
 import { MyStack } from "@/components/MyStack";
 import QuestionCard from "@/components/QuestionCard";
@@ -39,22 +36,14 @@ const Search = () => {
     setMinViews
   } = useSearch();
 
-  const openSearchFilter = () => {
-    setSearchFilterIsOpen(true);
-  };
-
-  const closeSearchFilter = () => {
-    setSearchFilterIsOpen(false);
-  };
-
   const applySearchFilter = () => {
     setSearchFilterIsApplied(true);
-    closeSearchFilter();
+    setSearchFilterIsOpen(false);
   };
 
   const clearSearchFilter = () => {
     setSearchFilterIsApplied(false);
-    closeSearchFilter();
+    setSearchFilterIsOpen(false);
   };
 
   const clearSearch = () => {
@@ -88,7 +77,7 @@ const Search = () => {
             <Button
               theme="green"
               icon={ListFilter}
-              onPress={openSearchFilter}
+              onPress={() => setSearchFilterIsOpen(true)}
               size="$3"
               alignSelf="flex-start"
               marginLeft={5}
@@ -118,6 +107,13 @@ const Search = () => {
           </YStack>
         )}
 
+        {isFetching && (
+          <Spinner
+            size="large"
+            color="$green10Dark"
+          />
+        )}
+
         {!isFetching && isError && (
           <Error
             error={error}
@@ -138,14 +134,6 @@ const Search = () => {
           contentContainerStyle={{
             paddingHorizontal: 10
           }}
-          refreshControl={
-            <RefreshControl
-              refreshing={isFetching}
-              colors={[darkColors.green11]}
-              progressBackgroundColor={darkColors.gray5}
-              onRefresh={refetch}
-            />
-          }
         />
       </MyStack>
 
