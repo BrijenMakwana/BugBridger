@@ -11,7 +11,7 @@
     "icon": "./assets/icon.png",
     "name": "Bug Bridger",
     "slug": "BugBridger",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "plugins": ["expo-router", "expo-font"],
     "extra": {
       "router": {
@@ -24,7 +24,7 @@
     "android": {
       "package": "com.brijenmakwana.BugBridger",
       "softwareKeyboardLayoutMode": "pan",
-      "versionCode": 5
+      "versionCode": 6
     }
   }
 }
