@@ -1,19 +1,38 @@
 {
   "cli": {
-    "version": ">= 14.2.0"
+    "version": ">= 14.2.0",
+    "appVersionSource": "node"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "environment": "production"
+      "environment": "production",
+      "android": {
+        "image": "expo-sdk-53"
+      },
+      "ios": {
+        "image": "expo-sdk-53"
+      }
     },
     "preview": {
       "distribution": "internal",
-      "environment": "production"
+      "environment": "production",
+      "android": {
+        "image": "expo-sdk-53"
+      },
+      "ios": {
+        "image": "expo-sdk-53"
+      }
     },
     "production": {
-      "environment": "production"
+      "environment": "production",
+      "android": {
+        "image": "expo-sdk-53"
+      },
+      "ios": {
+        "image": "expo-sdk-53"
+      }
     }
   },
   "submit": {
