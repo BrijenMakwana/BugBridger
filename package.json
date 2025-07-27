@@ -2,6 +2,7 @@
   "name": "bugbridger",
   "main": "expo-router/entry",
   "version": "2.0.4",
+  "private": true,
   "scripts": {
     "start": "expo start -c",
     "start-web": "expo start -c",
@@ -57,12 +58,5 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "^3.4.1",
     "typescript": "~5.7.2"
-  },
-  "resolutions": {
-    "expo-font": "~12.0.5"
-  },
-  "overrides": {
-    "expo-font": "~12.0.5"
-  },
-  "private": true
+  }
 }
