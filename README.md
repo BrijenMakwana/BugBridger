@@ -2,6 +2,8 @@
 
 # Bug Bridger (Stack Overflow Mobile App)
 
+> **Note:** Bug Bridger was previously published on the Google Play Store and available for download. The app is no longer listed because the associated developer account is inactive. The source code, screenshots, and project documentation remain available in this repository.
+> 
 <a href='https://play.google.com/store/apps/details?id=com.brijenmakwana.BugBridger&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="300"/></a>
 
 ## Table of contents
